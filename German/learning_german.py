@@ -1,11 +1,16 @@
 """This script is for learning German."""
 #pylint: disable=multiple-statements
 
+from os.path import isfile, abspath, dirname
+from os import chdir
 from random import shuffle
 from collections import ChainMap
 from itertools import permutations
 from re import sub
 import tkinter as tk
+from time import sleep
+
+from playsound import playsound
 
 VERBS_DICT = {
     "dürfen": "to be allowed to (may)",
@@ -135,7 +140,7 @@ VERBS_DICT = {
     "sich verspäten": "to be late",
     "verschlafen": "to oversleep",
     "ankommen": "to arrive",
-    "abfaren": "to depart",
+    "abfahren": "to depart",
     "dauern": "to last (take time)",
     "überdauern": "to outlast",
     "reisen": "to travel",
@@ -234,7 +239,7 @@ ADVERBS_DICT = {
 
 ####################################################################################################
 
-def translate_word(dictionaries, direction):
+def translate_words(dictionaries, direction):
     # Setting up the window
     for widget in window.winfo_children():
         widget.destroy()
@@ -255,20 +260,24 @@ def translate_word(dictionaries, direction):
         button_ä.pack() ; button_ü.pack() ; button_ö.pack() ; button_ß.pack()
 
     for words in dictionaries:
-        if "/" not in words[0]:
-            right_answers = [words[0]]
-        else:
-            answer_pieces = words[0].split(" / ")
-            rearranged = permutations(answer_pieces, len(answer_pieces))
-            right_answers = [" / ".join(item) for item in rearranged]
-
+        # Complex as to deal with answers that contain more than two words, separated by "/".
+        answer_pieces = words[0].split(" / ")
+        rearranged = permutations(answer_pieces, len(answer_pieces))
+        right_answers = [" / ".join(item) for item in rearranged]
         prompt_label.configure(text=f"Translate '{words[1]}':\n")
+
         window.wait_variable(pause_var) # Wait until I press the Enter key
         answer = entry.get()
         if answer in right_answers:
             feedback_label.configure(text="Correct.")
         else:
             feedback_label.configure(text=f"Wrong - the right answer is '{words[0]}'")
+        for item in answer_pieces:
+            sound_name = abspath(f"vicki-{item.replace(' ', '_')}.mp3")
+            if isfile(sound_name):
+                playsound(sound_name)
+                sleep(0.25)
+
         window.wait_variable(pause_var)
         entry.delete(0, tk.END)
         feedback_label.configure(text="")
@@ -278,18 +287,33 @@ def translate_word(dictionaries, direction):
 ####################################################################################################
 
 if __name__ == "__main__":
+    chdir(dirname(abspath(__file__)))
     window = tk.Tk()
     window.geometry("500x400")
     welcome_label = tk.Label(text="Choose what to practice.")
     welcome_label.pack()
     ger_to_eng = tk.Button(text="German to English", command=lambda:
-                           translate_word([VERBS_DICT, ADVERBS_DICT], "german to english"))
+                           translate_words([VERBS_DICT, ADVERBS_DICT], "german to english"))
     ger_to_eng.pack()
     eng_to_ger = tk.Button(text="English to German", command=lambda:
-                           translate_word([VERBS_DICT, ADVERBS_DICT], "english to german"))
+                           translate_words([VERBS_DICT, ADVERBS_DICT], "english to german"))
     eng_to_ger.pack()
     pause_var = tk.StringVar()
     window.bind("<Return>", lambda event: pause_var.set(1))
     window.mainloop()
 
-#TODO: translate sentences, test verb conjugation and tenses, add pronunciation
+#TODO: translate sentences, test verb conjugation and tenses
+
+####################################################################################################
+
+    # Use https://freetts.com/Home/GermanTTS#ads for pronunciation sound files, Vicki voice
+    #from re import sub, search
+    #import tkinter as tk
+    #from os import rename
+    #from glob import glob
+    #all_files = glob("C:\\Users\\daiwe\\Downloads\\better_german-*.mp3")
+    #all_files = sorted(all_files, key=lambda x: int(search(r"german-(\d+)\.mp3", x).group(1)))
+    #names = iter(["empfehlen","abfahren","selten","dann","einladen","woher","fragen","hören","bleiben","erzählen","umlernen","statt","bauen","rufen","sich entspannen","verbieten","kaum","herunterladen","spenden","abhängen","riechen","wissen","mitnehmen","helfen","buchstabieren","wenn","als","genau","sich interessieren","warten","erklären","denken","spüren","werfen","sich freuen","manchmal","trinken","warum","wieso","versuchen","einschlafen","träumen","wegwerfen","sich treffen","laufen","also","wie","bieten","anbieten","fliegen","hoffen","wider","verraten","sich verspäten","verlieren","bekommen","sitzen","lesen","spannen","wollen","treffen","man","stehen","aussteigen","leben","verkaufen","lügen","was","arbeiten","wählen","auswählen","fast","dass","dürfen","aufwachen","sich erinnern","ob","schreiben","sich beeilen","erwarten","aufräumen","dort","schlafen","möchten","erkennen","ziehen","verlernen","achten","verspäten","einsteigen","aufladen","besonders","öffnen","wünschen","schauen","sehen","sollen","zählen","verschlafen","lernen","reden","holen","geben","weder noch","tun","sprechen","erleben","bezahlen","zeichnen","tragen","packen","stellen","dauern","können","erreichen","sofort","lösen","bestellen","sagen","umsteigen","beginnen","anfangen","waschen","wer","ohne","aufschließen","studieren","aber","bringen","aussehen","anschauen","sich ansehen","rennen","wieder","etwa","kosten","hängen","gehören","sich rasieren","suchen","immer","senden","schicken","oder","verstehen","etwas","sich fühlen","teilen","mögen","springen","bald","kochen","sich anziehen","sehr","nur","benutzen","anmachen","melden","machen","essen","gewinnen","ausgeben","einkaufen","versprechen","vorhaben","hochladen","wohnen","nie","niemals","vergleichen","brauchen","auch","vielleicht","hassen","anrufen","bereits","schon","wirklich","fahren","antworten","aufgeben","sich ausziehen","spielen","liegen","wann","trotz","beenden","besuchen","vergessen","kennen","laden","oft","üben","lehren","unterrichten","reinigen","verdienen","kommen","schließen","kaufen","reisen","müssen","ziemlich","beobachten","zeigen","ankommen","steigen","gehen","duschen","nehmen","wohin","wo","ausmachen","noch","jetzt","deshalb","deswegen","denn","weil","glauben","lieben","überdauern","probieren","eigentlich","schenken","losgehen","wiederholen","genug","zustimmen","bedeuten","obwohl","besitzen","erinnern"])
+    #for file in all_files:
+    #    part_name = "\\".join(file.split("\\")[:-1])
+    #    rename(file, f'{part_name}\\vicki-{next(names).replace(" ", "_")}.mp3')
