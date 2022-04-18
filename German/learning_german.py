@@ -5,7 +5,8 @@ from os.path import isfile, abspath, dirname
 from os import chdir, _exit
 from random import shuffle
 from collections import ChainMap, defaultdict
-from itertools import permutations
+from functools import partial
+from itertools import permutations, chain
 from datetime import datetime
 from re import sub
 import tkinter as tk
@@ -42,8 +43,29 @@ def conjugate_verb(verb):
     return conjugations
 
 
-def test_conjugation():
-    layout = Conjugate_layout(7)
+def test_conjugation(categories=("Präsens", "Präteritum", "Perfekt", "Imperativ")):
+    verbs = chain(*[key.split(" / ") for key in VERBS_DICT])
+    for verb in verbs:
+        conjugations = conjugate_verb(verb)
+        for category, right_answer in conjugations.items():
+            if category not in categories:
+                continue
+            layout = Conjugate_layout(7)
+            layout.prompt_label.configure(text=f"Conjugate '{verb}' in {category}")
+            window.wait_variable(layout.pause_var)
+
+            raw_answer = layout.answer.get("1.0", tk.END) # All text in the text box
+            # Splitting into rows and removing excess whitespace (including empty rows).
+            cleaned_answer = filter(bool, [row.strip() for row in raw_answer.split("\n")])
+            if set(cleaned_answer) == set(right_answer):
+                layout.feedback_label.configure(text="Correct.")
+            else:
+                layout.feedback_label.configure(text="Wrong - the right answer is:\n" +
+                                                "\n".join(right_answer))
+            layout.button_next.configure(text="Continue to next question.")
+            window.wait_variable(layout.pause_var)
+
+    layout.prompt_label.configure(text="All finished.")
 
 
 class Conjugate_layout():
@@ -52,13 +74,16 @@ class Conjugate_layout():
         # Clearing the previous layout
         for widget in window.winfo_children():
             widget.destroy()
-        self.answer = tk.Text(height=entry_fields)
-        self.answer.pack()
-        button_ä = tk.Button(text="ä", command=lambda: self.answer.insert(tk.END, "ä"))
-        button_ü = tk.Button(text="ü", command=lambda: self.answer.insert(tk.END, "ü"))
-        button_ö = tk.Button(text="ö", command=lambda: self.answer.insert(tk.END, "ö"))
-        button_ß = tk.Button(text="ß", command=lambda: self.answer.insert(tk.END, "ß"))
-        button_ä.pack() ; button_ü.pack() ; button_ö.pack() ; button_ß.pack()
+        self.answer = tk.Text(height=entry_fields, width=40)
+        self.prompt_label, self.feedback_label = tk.Label(), tk.Label()
+        self.prompt_label.pack() ; self.answer.pack() ; self.feedback_label.pack()
+        # Pressing a button to continue
+        self.pause_var = tk.StringVar()
+        self.button_next = tk.Button(text="Submit answer", command=lambda: self.pause_var.set(1))
+        self.button_next.pack()
+        for char in "äüöß":
+            # Need to use partial instead of lambda, to avoid the cell-var-from-loop problem.
+            tk.Button(text=char, command=partial(self.answer.insert, tk.INSERT, char)).pack()
 
 
 class Translate_layout():
@@ -70,12 +95,13 @@ class Translate_layout():
         self.prompt_label, self.feedback_label, self.answer = tk.Label(), tk.Label(), tk.Entry()
         self.prompt_label.pack() ; self.feedback_label.pack() ; self.answer.pack()
         self.answer.focus_set() # Moving the cursor to the answer box
+        # Pressing enter to continue
+        self.pause_var = tk.StringVar()
+        window.bind("<Return>", lambda _: self.pause_var.set(1))
         if direction == "english_to_german":
-            button_ä = tk.Button(text="ä", command=lambda: self.answer.insert(tk.END, "ä"))
-            button_ü = tk.Button(text="ü", command=lambda: self.answer.insert(tk.END, "ü"))
-            button_ö = tk.Button(text="ö", command=lambda: self.answer.insert(tk.END, "ö"))
-            button_ß = tk.Button(text="ß", command=lambda: self.answer.insert(tk.END, "ß"))
-            button_ä.pack() ; button_ü.pack() ; button_ö.pack() ; button_ß.pack()
+            for char in "äüöß":
+                # Need to use partial instead of lambda, to avoid the cell-var-from-loop problem.
+                tk.Button(text=char, command=partial(self.answer.insert, tk.INSERT, char)).pack()
 
 
 class Starting_layout():
@@ -128,7 +154,7 @@ def translate_words(vocab, direction):
         rearranged = permutations(answer_pieces, len(answer_pieces))
         right_answers = [" / ".join(item) for item in rearranged]
         layout.prompt_label.configure(text=f"Translate '{words[1]}':\n")
-        window.wait_variable(pause_var) # Wait until I press the Enter key
+        window.wait_variable(layout.pause_var) # Wait until I press the Enter key
 
         if layout.answer.get() in right_answers:
             layout.feedback_label.configure(text="Correct.")
@@ -140,20 +166,17 @@ def translate_words(vocab, direction):
             if isfile(sound_name):
                 playsound(sound_name)
                 sleep(0.25)
-        window.wait_variable(pause_var)
+        window.wait_variable(layout.pause_var)
 
     layout.prompt_label.configure(text="All finished.")
 
 ####################################################################################################
 
 if __name__ == "__main__":
-    #print(conjugate_verb("ausgeben"))
     chdir(dirname(abspath(__file__)))
     window = tk.Tk()
     window.geometry("500x400")
     Starting_layout()
-    pause_var = tk.StringVar()
-    window.bind("<Return>", lambda _: pause_var.set(1))
     window.mainloop()
 
 #TODO: translate sentences, useful knowledge
