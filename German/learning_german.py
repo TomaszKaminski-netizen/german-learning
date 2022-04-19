@@ -8,7 +8,8 @@ from collections import ChainMap, defaultdict
 from functools import partial
 from itertools import permutations, chain
 from datetime import datetime
-from re import sub
+from glob import glob
+from re import sub, match
 import tkinter as tk
 from time import sleep
 import json
@@ -78,6 +79,7 @@ class Starting_layout():
                   translate_words(all_vocab, "ger_to_eng")).pack()
         tk.Button(text="English to German", command=lambda:
                   translate_words(all_vocab, "eng_to_ger", tuple(self.cats))).pack()
+        tk.Button(text="Listening", command=test_listening).pack()
         tk.Button(text="Verb conjugation", command=lambda:
                   test_conjugation(tuple(self.cats))).pack()
         tk.Label(text="Toggle which verb conjugations to practice.").pack()
@@ -102,6 +104,29 @@ class Starting_layout():
         else:
             self.cats.append(cat)
             self.cat_buttons[cat].configure(bg="Green")
+
+
+class Listening_layout():
+    """The widget layout for the listening exercise."""
+    def __init__(self, audio):
+        """
+        Args:
+            audio (str): file path to the audio file with the word of interest
+        """
+        # Clearing the previous layout
+        for widget in window.winfo_children():
+            widget.destroy()
+        tk.Label(text="Write down the word you heard.").pack()
+        self.feedback_label, self.answer = tk.Label(), tk.Entry()
+        self.feedback_label.pack() ; self.answer.pack()
+        self.answer.focus_set() # Moving the cursor to the answer box
+        tk.Button(text="Click to hear the word again.", command=lambda: playsound(audio)).pack()
+        # Pressing enter to continue
+        self.pause_var = tk.BooleanVar()
+        window.bind("<Return>", lambda _: self.pause_var.set(1))
+        for char in "äüöß":
+            # Need to use partial instead of lambda, to avoid the cell-var-from-loop problem.
+            tk.Button(text=char, command=partial(self.answer.insert, tk.INSERT, char)).pack()
 
 ####################################################################################################
 
@@ -225,12 +250,39 @@ def translate_words(vocab, direction, conjugate=()):
 
     layout.prompt_label.configure(text="All finished.")
 
+
+def test_listening():
+    """_summary_
+    """
+    audio_files = glob("vicki-*.mp3")
+    shuffle(audio_files)
+    for audio_file in audio_files:
+        layout = Listening_layout(abspath(audio_file))
+        playsound(abspath(audio_file))
+        window.wait_variable(layout.pause_var)
+
+        right_answer = match(r"vicki-(.+).mp3", audio_file).group(1).replace("_", " ")
+        if layout.answer.get() == right_answer:
+            response = "Correct."
+        else:
+            response = f"Wrong - the right answer is '{right_answer}'"
+        all_vocab = ChainMap(VERBS_DICT, ADVERBS_DICT)
+        for ger, eng in all_vocab.items():
+            if right_answer in ger.split(" / "):
+                response += f"\nIt means '{eng}'"
+                break
+        layout.feedback_label.configure(text=response)
+        window.wait_variable(layout.pause_var)
+
+    layout.feedback_label.configure(text="All finished.")
+
 ####################################################################################################
 
 if __name__ == "__main__":
     chdir(dirname(abspath(__file__)))
     window = tk.Tk()
-    window.geometry("500x400")
+    window.geometry("700x700")
+    window.option_add("*font", "size 19") # Changing the default font size
     Starting_layout()
     window.mainloop()
 
