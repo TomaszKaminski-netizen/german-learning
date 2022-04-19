@@ -19,9 +19,101 @@ from bs4 import BeautifulSoup
 
 from german_language import VERBS_DICT, ADVERBS_DICT
 
+CONJUGATION_CATEGORIES = ["Präsens", "Präteritum", "Perfekt", "Plusquamperfekt", "Futur I",
+                          "Futur II", "Imperativ"]
+
+####################################################################################################
+
+class Conjugate_layout():
+    """The widget layout for conjugating German verbs."""
+    def __init__(self, entry_fields):
+        """
+        Args:
+            entry_fields (int): how many rows the answer text box should have
+        """
+        # Clearing the previous layout
+        for widget in window.winfo_children():
+            widget.destroy()
+        self.answer = tk.Text(height=entry_fields, width=40)
+        self.prompt_label, self.feedback_label = tk.Label(), tk.Label()
+        self.prompt_label.pack() ; self.answer.pack() ; self.feedback_label.pack()
+        # Pressing a button to continue
+        self.pause_var = tk.BooleanVar()
+        self.button_next = tk.Button(text="Submit answer", command=lambda: self.pause_var.set(1))
+        self.button_next.pack()
+        for char in "äüöß":
+            # Need to use partial instead of lambda, to avoid the cell-var-from-loop problem.
+            tk.Button(text=char, command=partial(self.answer.insert, tk.INSERT, char)).pack()
+
+
+class Translate_layout():
+    """The widget layout for single verb translations."""
+    def __init__(self, direction):
+        """
+        Args:
+            direction (str): Which language to translate from/to. Either
+                    "eng_to_ger" or "ger_to_eng".
+        """
+        # Clearing the previous layout
+        for widget in window.winfo_children():
+            widget.destroy()
+        self.prompt_label, self.feedback_label, self.answer = tk.Label(), tk.Label(), tk.Entry()
+        self.prompt_label.pack() ; self.feedback_label.pack() ; self.answer.pack()
+        self.answer.focus_set() # Moving the cursor to the answer box
+        # Pressing enter to continue
+        self.pause_var = tk.BooleanVar()
+        window.bind("<Return>", lambda _: self.pause_var.set(1))
+        if direction == "eng_to_ger":
+            for char in "äüöß":
+                # Need to use partial instead of lambda, to avoid the cell-var-from-loop problem.
+                tk.Button(text=char, command=partial(self.answer.insert, tk.INSERT, char)).pack()
+
+
+class Starting_layout():
+    """The widget layout for the main menu."""
+    def __init__(self):
+        all_vocab = [VERBS_DICT, ADVERBS_DICT]
+        tk.Label(text="Choose what to practice.").pack()
+        tk.Button(text="German to English", command=lambda:
+                  translate_words(all_vocab, "ger_to_eng")).pack()
+        tk.Button(text="English to German", command=lambda:
+                  translate_words(all_vocab, "eng_to_ger", tuple(self.cats))).pack()
+        tk.Button(text="Verb conjugation", command=lambda:
+                  test_conjugation(tuple(self.cats))).pack()
+        tk.Label(text="Toggle which verb conjugations to practice.").pack()
+
+        self.cats, self.cat_buttons = list(), dict()
+        for cat in CONJUGATION_CATEGORIES:
+            self.cat_buttons[cat] = tk.Button(text=cat, bg="Red",
+                                              command=partial(self.toggle_category, cat))
+            self.cat_buttons[cat].pack()
+        # These for categories are enabled by default.
+        for cat in CONJUGATION_CATEGORIES[:3] + CONJUGATION_CATEGORIES[-1:]:
+            self.toggle_category(cat)
+
+    def toggle_category(self, cat):
+        """
+        Args:
+            cat (str): name of the conjugation category of interest
+        """
+        if cat in self.cats:
+            self.cats.remove(cat)
+            self.cat_buttons[cat].configure(bg="Red")
+        else:
+            self.cats.append(cat)
+            self.cat_buttons[cat].configure(bg="Green")
+
 ####################################################################################################
 
 def conjugate_verb(verb):
+    """_summary_
+
+    Args:
+        verb (str): _description_
+
+    Returns:
+        dict: _description_
+    """
     verb = verb.lower().replace("sich", "").strip()
     page = requests.get("https://pl.pons.com/odmiana-czasownikow/niemiecki/" + verb)
     parsed_page = BeautifulSoup(page.content, "html.parser")
@@ -43,14 +135,24 @@ def conjugate_verb(verb):
     return conjugations
 
 
-def test_conjugation(categories=("Präsens", "Präteritum", "Perfekt", "Imperativ")):
-    verbs = chain(*[key.split(" / ") for key in VERBS_DICT])
+def test_conjugation(categories, verbs="all"):
+    """_summary_
+
+    Args:
+        categories (tuple): _description_
+        verbs (str, optional): _description_. Defaults to "all".
+    """
+    if not categories:
+        return False
+    if verbs == "all":
+        verbs = list(chain(*[key.split(" / ") for key in VERBS_DICT]))
+        shuffle(verbs)
     for verb in verbs:
         conjugations = conjugate_verb(verb)
         for category, right_answer in conjugations.items():
             if category not in categories:
                 continue
-            layout = Conjugate_layout(7)
+            layout = Conjugate_layout(len(right_answer))
             layout.prompt_label.configure(text=f"Conjugate '{verb}' in {category}")
             window.wait_variable(layout.pause_var)
 
@@ -68,63 +170,13 @@ def test_conjugation(categories=("Präsens", "Präteritum", "Perfekt", "Imperati
     layout.prompt_label.configure(text="All finished.")
 
 
-class Conjugate_layout():
-    """The widget layout for conjugating German verbs."""
-    def __init__(self, entry_fields):
-        # Clearing the previous layout
-        for widget in window.winfo_children():
-            widget.destroy()
-        self.answer = tk.Text(height=entry_fields, width=40)
-        self.prompt_label, self.feedback_label = tk.Label(), tk.Label()
-        self.prompt_label.pack() ; self.answer.pack() ; self.feedback_label.pack()
-        # Pressing a button to continue
-        self.pause_var = tk.StringVar()
-        self.button_next = tk.Button(text="Submit answer", command=lambda: self.pause_var.set(1))
-        self.button_next.pack()
-        for char in "äüöß":
-            # Need to use partial instead of lambda, to avoid the cell-var-from-loop problem.
-            tk.Button(text=char, command=partial(self.answer.insert, tk.INSERT, char)).pack()
-
-
-class Translate_layout():
-    """The widget layout for single verb translations."""
-    def __init__(self, direction):
-        # Clearing the previous layout
-        for widget in window.winfo_children():
-            widget.destroy()
-        self.prompt_label, self.feedback_label, self.answer = tk.Label(), tk.Label(), tk.Entry()
-        self.prompt_label.pack() ; self.feedback_label.pack() ; self.answer.pack()
-        self.answer.focus_set() # Moving the cursor to the answer box
-        # Pressing enter to continue
-        self.pause_var = tk.StringVar()
-        window.bind("<Return>", lambda _: self.pause_var.set(1))
-        if direction == "english_to_german":
-            for char in "äüöß":
-                # Need to use partial instead of lambda, to avoid the cell-var-from-loop problem.
-                tk.Button(text=char, command=partial(self.answer.insert, tk.INSERT, char)).pack()
-
-
-class Starting_layout():
-    """The widget layout for the main menu."""
-    def __init__(self):
-        welcome_label = tk.Label(text="Choose what to practice.")
-        welcome_label.pack()
-        ger_to_eng = tk.Button(text="German to English", command=lambda:
-                               translate_words([VERBS_DICT, ADVERBS_DICT], "german_to_english"))
-        ger_to_eng.pack()
-        eng_to_ger = tk.Button(text="English to German", command=lambda:
-                               translate_words([VERBS_DICT, ADVERBS_DICT], "english_to_german"))
-        eng_to_ger.pack()
-        verb_conjugation = tk.Button(text="Verb conjugation", command=test_conjugation)
-        verb_conjugation.pack()
-
-
-def translate_words(vocab, direction):
+def translate_words(vocab, direction, conjugate=()):
     """_summary_
 
     Args:
         vocab (list): _description_
         direction (str): _description_
+        conjugate (tuple, optional): _description_
     """
     # Setting up tracking of my performance
     if isfile(f"{direction}.json"):
@@ -141,7 +193,7 @@ def translate_words(vocab, direction):
 
     # Setting up the prompts and answers
     vocab = list(ChainMap(*vocab).items())
-    if direction == "german_to_english":
+    if direction == "ger_to_eng":
         # Removing round & square brackets and everything inside them. Also flipping the word order.
         vocab = [(sub(r"\s*[\[\(].+[\]\)]\s*", "", item[1]), item[0]) for item in vocab]
     shuffle(vocab)
@@ -167,6 +219,9 @@ def translate_words(vocab, direction):
                 playsound(sound_name)
                 sleep(0.25)
         window.wait_variable(layout.pause_var)
+
+        if (words[0] in VERBS_DICT) and conjugate:
+            test_conjugation(conjugate, answer_pieces)
 
     layout.prompt_label.configure(text="All finished.")
 

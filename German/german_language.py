@@ -8,6 +8,9 @@ VERBS_DICT = {
     "müssen": "to have to (must)",
     "wollen": "to want",
     "sollen": "to ought to (shall)",
+    "werden": "will / to become", # Needs voice
+    "haben": "to have", # Needs voice
+    "sein": "to be", # Needs voice
     "brauchen": "to need",
     "denken": "to think",
     "wissen": "to know (a fact)",
