@@ -1,4 +1,5 @@
-"""This script is for learning German."""
+"""This script is for learning German. It should work both on Windows and
+Linux. Developed with Python 3.7.9."""
 #pylint: disable=multiple-statements
 
 from os.path import isfile, abspath, dirname
@@ -14,7 +15,7 @@ import tkinter as tk
 from time import sleep
 import json
 
-from playsound import playsound
+from playsound import playsound, PlaysoundException
 import requests
 from bs4 import BeautifulSoup
 
@@ -39,8 +40,8 @@ class Conjugate_layout():
         self.prompt_label, self.feedback_label = tk.Label(), tk.Label()
         self.prompt_label.pack() ; self.answer.pack() ; self.feedback_label.pack()
         # Pressing a button to continue
-        self.pause_var = tk.BooleanVar()
-        self.button_next = tk.Button(text="Submit answer", command=lambda: self.pause_var.set(1))
+        self.wait_var = tk.BooleanVar()
+        self.button_next = tk.Button(text="Submit answer", command=lambda: self.wait_var.set(1))
         self.button_next.pack()
         for char in "äüöß":
             # Need to use partial instead of lambda, to avoid the cell-var-from-loop problem.
@@ -62,8 +63,8 @@ class Translate_layout():
         self.prompt_label.pack() ; self.feedback_label.pack() ; self.answer.pack()
         self.answer.focus_set() # Moving the cursor to the answer box
         # Pressing enter to continue
-        self.pause_var = tk.BooleanVar()
-        window.bind("<Return>", lambda _: self.pause_var.set(1))
+        self.wait_var = tk.BooleanVar()
+        window.bind("<Return>", lambda _: self.wait_var.set(1))
         if direction == "eng_to_ger":
             for char in "äüöß":
                 # Need to use partial instead of lambda, to avoid the cell-var-from-loop problem.
@@ -120,15 +121,29 @@ class Listening_layout():
         self.feedback_label, self.answer = tk.Label(), tk.Entry()
         self.feedback_label.pack() ; self.answer.pack()
         self.answer.focus_set() # Moving the cursor to the answer box
-        tk.Button(text="Click to hear the word again.", command=lambda: playsound(audio)).pack()
+        tk.Button(text="Click to hear the word again.", command=lambda: _playsound(audio)).pack()
         # Pressing enter to continue
-        self.pause_var = tk.BooleanVar()
-        window.bind("<Return>", lambda _: self.pause_var.set(1))
+        self.wait_var = tk.BooleanVar()
+        window.bind("<Return>", lambda _: self.wait_var.set(1))
         for char in "äüöß":
             # Need to use partial instead of lambda, to avoid the cell-var-from-loop problem.
             tk.Button(text=char, command=partial(self.answer.insert, tk.INSERT, char)).pack()
 
 ####################################################################################################
+
+def _playsound(audio):
+    """The 'playsound' function from the 'playsound' library experiences random
+    bugs, which freeze the GUI window. This function is meant to handle those
+    bugs.
+
+    Args:
+        audio (str): absolute path to the audio file of interest
+    """
+    try:
+        playsound(audio)
+    except PlaysoundException:
+        print(f"Error playing '{audio}'")
+
 
 def conjugate_verb(verb):
     """_summary_
@@ -179,7 +194,7 @@ def test_conjugation(categories, verbs="all"):
                 continue
             layout = Conjugate_layout(len(right_answer))
             layout.prompt_label.configure(text=f"Conjugate '{verb}' in {category}")
-            window.wait_variable(layout.pause_var)
+            window.wait_variable(layout.wait_var)
 
             raw_answer = layout.answer.get("1.0", tk.END) # All text in the text box
             # Splitting into rows and removing excess whitespace (including empty rows).
@@ -190,7 +205,7 @@ def test_conjugation(categories, verbs="all"):
                 layout.feedback_label.configure(text="Wrong - the right answer is:\n" +
                                                 "\n".join(right_answer))
             layout.button_next.configure(text="Continue to next question.")
-            window.wait_variable(layout.pause_var)
+            window.wait_variable(layout.wait_var)
 
     layout.prompt_label.configure(text="All finished.")
 
@@ -231,7 +246,7 @@ def translate_words(vocab, direction, conjugate=()):
         rearranged = permutations(answer_pieces, len(answer_pieces))
         right_answers = [" / ".join(item) for item in rearranged]
         layout.prompt_label.configure(text=f"Translate '{words[1]}':\n")
-        window.wait_variable(layout.pause_var) # Wait until I press the Enter key
+        window.wait_variable(layout.wait_var) # Wait until I press the Enter key
 
         if layout.answer.get() in right_answers:
             layout.feedback_label.configure(text="Correct.")
@@ -241,9 +256,9 @@ def translate_words(vocab, direction, conjugate=()):
         for item in answer_pieces:
             sound_name = abspath(f"vicki-{item.replace(' ', '_')}.mp3")
             if isfile(sound_name):
-                playsound(sound_name)
+                _playsound(sound_name)
                 sleep(0.25)
-        window.wait_variable(layout.pause_var)
+        window.wait_variable(layout.wait_var)
 
         if (words[0] in VERBS_DICT) and conjugate:
             test_conjugation(conjugate, answer_pieces)
@@ -258,8 +273,8 @@ def test_listening():
     shuffle(audio_files)
     for audio_file in audio_files:
         layout = Listening_layout(abspath(audio_file))
-        playsound(abspath(audio_file))
-        window.wait_variable(layout.pause_var)
+        _playsound(abspath(audio_file))
+        window.wait_variable(layout.wait_var)
 
         right_answer = match(r"vicki-(.+).mp3", audio_file).group(1).replace("_", " ")
         if layout.answer.get() == right_answer:
@@ -272,7 +287,7 @@ def test_listening():
                 response += f"\nIt means '{eng}'"
                 break
         layout.feedback_label.configure(text=response)
-        window.wait_variable(layout.pause_var)
+        window.wait_variable(layout.wait_var)
 
     layout.feedback_label.configure(text="All finished.")
 
