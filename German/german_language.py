@@ -220,6 +220,7 @@ ADVERBS_DICT = {
     "eigentlich": "actually",
     "wirklich": "really",
     "trotzdem / dennoch": "nevertheless",
+    "leider": "unfortunately", # Needs voice
     "wo": "where?",
     "woher": "where from?",
     "wohin": "where to?",

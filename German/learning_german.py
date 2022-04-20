@@ -26,51 +26,6 @@ CONJUGATION_CATEGORIES = ["Präsens", "Präteritum", "Perfekt", "Plusquamperfekt
 
 ####################################################################################################
 
-class Conjugate_layout():
-    """The widget layout for conjugating German verbs."""
-    def __init__(self, entry_fields):
-        """
-        Args:
-            entry_fields (int): how many rows the answer text box should have
-        """
-        # Clearing the previous layout
-        for widget in window.winfo_children():
-            widget.destroy()
-        self.answer = tk.Text(height=entry_fields, width=40)
-        self.prompt_label, self.feedback_label = tk.Label(), tk.Label()
-        self.prompt_label.pack() ; self.answer.pack() ; self.feedback_label.pack()
-        # Pressing a button to continue
-        self.wait_var = tk.BooleanVar()
-        self.button_next = tk.Button(text="Submit answer", command=lambda: self.wait_var.set(1))
-        self.button_next.pack()
-        for char in "äüöß":
-            # Need to use partial instead of lambda, to avoid the cell-var-from-loop problem.
-            tk.Button(text=char, command=partial(self.answer.insert, tk.INSERT, char)).pack()
-
-
-class Translate_layout():
-    """The widget layout for single verb translations."""
-    def __init__(self, direction):
-        """
-        Args:
-            direction (str): Which language to translate from/to. Either
-                    "eng_to_ger" or "ger_to_eng".
-        """
-        # Clearing the previous layout
-        for widget in window.winfo_children():
-            widget.destroy()
-        self.prompt_label, self.feedback_label, self.answer = tk.Label(), tk.Label(), tk.Entry()
-        self.prompt_label.pack() ; self.feedback_label.pack() ; self.answer.pack()
-        self.answer.focus_set() # Moving the cursor to the answer box
-        # Pressing enter to continue
-        self.wait_var = tk.BooleanVar()
-        window.bind("<Return>", lambda _: self.wait_var.set(1))
-        if direction == "eng_to_ger":
-            for char in "äüöß":
-                # Need to use partial instead of lambda, to avoid the cell-var-from-loop problem.
-                tk.Button(text=char, command=partial(self.answer.insert, tk.INSERT, char)).pack()
-
-
 class Starting_layout():
     """The widget layout for the main menu."""
     def __init__(self):
@@ -107,27 +62,49 @@ class Starting_layout():
             self.cat_buttons[cat].configure(bg="Green")
 
 
-class Listening_layout():
-    """The widget layout for the listening exercise."""
-    def __init__(self, audio):
+class Exercise_layout():
+    """The customizable widget layout for various language exercises."""
+    #* Note that using 'answer_type=tk.Entry()' as a default argument caused problems.
+    def __init__(self, enter_or_click, answer_type, ger_char=True, extra_button=False):
         """
         Args:
-            audio (str): file path to the audio file with the word of interest
+            enter_or_click (str): _description_
+            answer_type (tkinter object): _description_
+            ger_char (bool, optional): _description_. Defaults to True.
+            extra_button (bool, optional): _description_. Defaults to False.
         """
-        # Clearing the previous layout
+        # Clearing the previous layout.
         for widget in window.winfo_children():
-            widget.destroy()
-        tk.Label(text="Write down the word you heard.").pack()
-        self.feedback_label, self.answer = tk.Label(), tk.Entry()
-        self.feedback_label.pack() ; self.answer.pack()
-        self.answer.focus_set() # Moving the cursor to the answer box
-        tk.Button(text="Click to hear the word again.", command=lambda: _playsound(audio)).pack()
-        # Pressing enter to continue
+            # Selecting only widgets that have been made visible through .pack()
+            if widget.winfo_ismapped():
+                widget.destroy()
+
+        # Adding text and text fields.
+        self.prompt_label, self.feedback_label, self.answer = tk.Label(), tk.Label(), answer_type
+        self.prompt_label.pack() ; self.feedback_label.pack() ; self.answer.pack()
+        self.answer.focus_set() # Moving the cursor to the answer box.
+
+        # Adding additional buttons.
+        if extra_button:
+            extra_button.pack()
+
+        # Setting up how to continue / progress through the GUI.
         self.wait_var = tk.BooleanVar()
-        window.bind("<Return>", lambda _: self.wait_var.set(1))
-        for char in "äüöß":
-            # Need to use partial instead of lambda, to avoid the cell-var-from-loop problem.
-            tk.Button(text=char, command=partial(self.answer.insert, tk.INSERT, char)).pack()
+        if enter_or_click == "enter": # By pressing the enter keyboard key.
+            window.bind("<Return>", lambda _: self.wait_var.set(1))
+        elif enter_or_click == "click": # By clicking a GUI button.
+            self.button_next = tk.Button(text="Submit answer", command=lambda: self.wait_var.set(1))
+            self.button_next.pack()
+
+        # Adding buttons for German characters.
+        if ger_char:
+            horizontal = tk.Frame(window)
+            horizontal.pack()
+            for char in "äüöß":
+                # Need to use partial instead of lambda, to avoid the cell-var-from-loop problem.
+                tk.Button(horizontal, text=char,
+                          command=partial(self.answer.insert, tk.INSERT, char)
+                          ).pack(side=tk.RIGHT)
 
 ####################################################################################################
 
@@ -139,6 +116,7 @@ def _playsound(audio):
     Args:
         audio (str): absolute path to the audio file of interest
     """
+    #TODO: Find a way to play audio files with special German characters in them.
     try:
         playsound(audio)
     except PlaysoundException:
@@ -175,7 +153,7 @@ def conjugate_verb(verb):
     return conjugations
 
 
-def test_conjugation(categories, verbs="all"):
+def test_conjugation(categories, verbs="all"): #pylint: disable=inconsistent-return-statements
     """_summary_
 
     Args:
@@ -192,7 +170,7 @@ def test_conjugation(categories, verbs="all"):
         for category, right_answer in conjugations.items():
             if category not in categories:
                 continue
-            layout = Conjugate_layout(len(right_answer))
+            layout = Exercise_layout("click", tk.Text(height=len(right_answer), width=40))
             layout.prompt_label.configure(text=f"Conjugate '{verb}' in {category}")
             window.wait_variable(layout.wait_var)
 
@@ -240,13 +218,13 @@ def translate_words(vocab, direction, conjugate=()):
     vocab = sorted(vocab, key=lambda item: memory[item[1]] if item[1] in memory else "")
 
     for words in vocab:
-        layout = Translate_layout(direction)
+        layout = Exercise_layout("enter", tk.Entry(), ger_char=bool(direction == "eng_to_ger"))
         # Complex as to deal with answers that contain more than two words, separated by "/".
         answer_pieces = words[0].split(" / ")
         rearranged = permutations(answer_pieces, len(answer_pieces))
         right_answers = [" / ".join(item) for item in rearranged]
         layout.prompt_label.configure(text=f"Translate '{words[1]}':\n")
-        window.wait_variable(layout.wait_var) # Wait until I press the Enter key
+        window.wait_variable(layout.wait_var)
 
         if layout.answer.get() in right_answers:
             layout.feedback_label.configure(text="Correct.")
@@ -272,7 +250,10 @@ def test_listening():
     audio_files = glob("vicki-*.mp3")
     shuffle(audio_files)
     for audio_file in audio_files:
-        layout = Listening_layout(abspath(audio_file))
+        extra_button = tk.Button(text="Click to hear the word again.",
+                                 command=partial(_playsound, abspath(audio_file)))
+        layout = Exercise_layout("enter", tk.Entry(), extra_button=extra_button)
+        layout.prompt_label.configure(text="Write down the word you heard.")
         _playsound(abspath(audio_file))
         window.wait_variable(layout.wait_var)
 
