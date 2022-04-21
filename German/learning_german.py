@@ -21,8 +21,9 @@ from bs4 import BeautifulSoup
 
 from german_language import VERBS_DICT, ADVERBS_DICT
 
-CONJUGATION_CATEGORIES = ["Präsens", "Präteritum", "Perfekt", "Plusquamperfekt", "Futur I",
-                          "Futur II", "Imperativ"]
+CONJUGATION_CATEGORIES = ("Präsens", "Präteritum", "Perfekt", "Plusquamperfekt", "Futur I",
+                          "Futur II", "Imperativ")
+PRONOUNS = ("ich", "du", "er/sie/es", "wir", "ihr", "sie")
 
 ####################################################################################################
 
@@ -139,6 +140,20 @@ def conjugate_verb(verb):
         print(f"Couldn't find verb {verb}, stopping.")
         return False
 
+    # Some verbs have multiple forms of conjugation (e.g. with and without 'sich'), which are stored
+    # on different webpages. Here the right page is found and loaded.
+    alternate_conjug = parsed_page.find("h2", class_="ft-variant-links-label")
+    if alternate_conjug:
+        print(f"'{verb}' has multiple forms.")
+        hyperlinks = alternate_conjug.parent.find_all("a")
+        if "sich " in verb:
+            right_conjug = "Zaimek zwrotny w bierniku"
+        else:
+            right_conjug = "Koniugacja z czasownikiem" # Haben or sein
+        right_link = list(filter(lambda link: link.text.startswith(right_conjug), hyperlinks))
+        page = requests.get("https://pl.pons.com" + right_link[0]["href"])
+        parsed_page = BeautifulSoup(page.content, "html.parser")
+
     conjugations = defaultdict(list)
     for mood in parsed_page.find_all("section", class_="pons content-box ft-group"):
         # Searching for h2 gives too many results here
@@ -167,11 +182,18 @@ def test_conjugation(categories, verbs="all"): #pylint: disable=inconsistent-ret
         shuffle(verbs)
     for verb in verbs:
         conjugations = conjugate_verb(verb)
+        if not conjugations:
+            continue
         for category, right_answer in conjugations.items():
             if category not in categories:
                 continue
+
             layout = Exercise_layout("click", tk.Text(height=len(right_answer), width=40))
             layout.prompt_label.configure(text=f"Conjugate '{verb}' in {category}")
+            # Auto-filling pronouns for the Indikativ mood.
+            for row in right_answer:
+                if row.split()[0] in PRONOUNS:
+                    layout.answer.insert(tk.END, row.split()[0] + " \n")
             window.wait_variable(layout.wait_var)
 
             raw_answer = layout.answer.get("1.0", tk.END) # All text in the text box
