@@ -19,7 +19,7 @@ from playsound import playsound, PlaysoundException
 import requests
 from bs4 import BeautifulSoup
 
-from german_language import VERBS_DICT, ADVERBS_DICT
+from german_language import VERBS_DICT, ADVERBS_DICT, TIPS_LIST
 
 CONJUGATION_CATEGORIES = ("Präsens", "Präteritum", "Perfekt", "Plusquamperfekt", "Futur I",
                           "Futur II", "Imperativ")
@@ -39,6 +39,7 @@ class Starting_layout():
         tk.Button(text="Listening", command=test_listening).pack()
         tk.Button(text="Verb conjugation", command=lambda:
                   test_conjugation(tuple(self.cats))).pack()
+        tk.Button(text="Tips and rules", command=show_tips).pack()
         tk.Label(text="Toggle which verb conjugations to practice.").pack()
 
         self.cats, self.cat_buttons = list(), dict()
@@ -124,6 +125,21 @@ def _playsound(audio):
         print(f"Error playing '{audio}'")
 
 
+def show_tips():
+    for widget in window.winfo_children():
+        widget.destroy()
+    wait_var = tk.BooleanVar()
+    tk.Button(text="Next tip", command=lambda: wait_var.set(1)).pack()
+    tip_label = tk.Label(wraplength=850)
+    tip_label.pack(expand=True) #* This is not a reliable method of centering widgets
+    tips = TIPS_LIST
+    shuffle(tips)
+    for tip in tips:
+        # Removing excess whitespace from the tips
+        tip_label.configure(text=sub(r"(\s*\n\s*)|(\s{2,})", " ", tip))
+        window.wait_variable(wait_var)
+
+
 def conjugate_verb(verb):
     """_summary_
 
@@ -194,6 +210,8 @@ def test_conjugation(categories, verbs="all"): #pylint: disable=inconsistent-ret
             for row in right_answer:
                 if row.split()[0] in PRONOUNS:
                     layout.answer.insert(tk.END, row.split()[0] + " \n")
+            # Moving the cursor to the end of the first line
+            layout.answer.mark_set(tk.INSERT, "1.99")
             window.wait_variable(layout.wait_var)
 
             raw_answer = layout.answer.get("1.0", tk.END) # All text in the text box
@@ -299,12 +317,12 @@ def test_listening():
 if __name__ == "__main__":
     chdir(dirname(abspath(__file__)))
     window = tk.Tk()
-    window.geometry("700x700")
+    window.geometry("900x700")
     window.option_add("*font", "size 19") # Changing the default font size
     Starting_layout()
     window.mainloop()
 
-#TODO: translate sentences, useful knowledge
+#TODO: translate sentences, pronoun declination
 
 ####################################################################################################
 
