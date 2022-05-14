@@ -7,7 +7,7 @@ from os import chdir, _exit
 from random import shuffle
 from collections import ChainMap, defaultdict
 from functools import partial
-from itertools import permutations, chain
+from itertools import permutations, chain, count
 from datetime import datetime
 from glob import glob
 from re import sub, match
@@ -130,7 +130,7 @@ def show_tips():
         widget.destroy()
     wait_var = tk.BooleanVar()
     tk.Button(text="Next tip", command=lambda: wait_var.set(1)).pack()
-    tip_label = tk.Label(wraplength=850)
+    tip_label = tk.Label(wraplength=850, font="size 22")
     tip_label.pack(expand=True) #* This is not a reliable method of centering widgets
     tips = TIPS_LIST
     shuffle(tips)
@@ -138,6 +138,7 @@ def show_tips():
         # Removing excess whitespace from the tips
         tip_label.configure(text=sub(r"(\s*\n\s*)|(\s{2,})", " ", tip))
         window.wait_variable(wait_var)
+    tip_label.configure(text="All finished.")
 
 
 def conjugate_verb(verb):
@@ -149,20 +150,20 @@ def conjugate_verb(verb):
     Returns:
         dict: _description_
     """
-    verb = verb.lower().replace("sich", "").strip()
-    page = requests.get("https://pl.pons.com/odmiana-czasownikow/niemiecki/" + verb)
+    url_verb = verb.lower().replace("sich", "").strip()
+    page = requests.get("https://pl.pons.com/odmiana-czasownikow/niemiecki/" + url_verb)
     parsed_page = BeautifulSoup(page.content, "html.parser")
     if parsed_page.find("div", class_="alert alert-block alert-warning"):
-        print(f"Couldn't find verb {verb}, stopping.")
+        print(f"Couldn't find verb '{url_verb}', stopping.")
         return False
 
     # Some verbs have multiple forms of conjugation (e.g. with and without 'sich'), which are stored
     # on different webpages. Here the right page is found and loaded.
     alternate_conjug = parsed_page.find("h2", class_="ft-variant-links-label")
     if alternate_conjug:
-        print(f"'{verb}' has multiple forms.")
+        print(f"'{url_verb}' has multiple forms.")
         hyperlinks = alternate_conjug.parent.find_all("a")
-        if "sich " in verb:
+        if "sich " in verb.lower():
             right_conjug = "Zaimek zwrotny w bierniku"
         else:
             right_conjug = "Koniugacja z czasownikiem" # Haben or sein
@@ -225,7 +226,8 @@ def test_conjugation(categories, verbs="all"): #pylint: disable=inconsistent-ret
             layout.button_next.configure(text="Continue to next question.")
             window.wait_variable(layout.wait_var)
 
-    layout.prompt_label.configure(text="All finished.")
+    if len(verbs) > 1:
+        layout.prompt_label.configure(text="All finished.")
 
 
 def translate_words(vocab, direction, conjugate=()):
@@ -256,6 +258,7 @@ def translate_words(vocab, direction, conjugate=()):
         vocab = [(sub(r"\s*[\[\(].+[\]\)]\s*", "", item[1]), item[0]) for item in vocab]
     shuffle(vocab)
     vocab = sorted(vocab, key=lambda item: memory[item[1]] if item[1] in memory else "")
+    countdown = count(len(vocab), step=-1)
 
     for words in vocab:
         layout = Exercise_layout("enter", tk.Entry(), ger_char=bool(direction == "eng_to_ger"))
@@ -263,7 +266,7 @@ def translate_words(vocab, direction, conjugate=()):
         answer_pieces = words[0].split(" / ")
         rearranged = permutations(answer_pieces, len(answer_pieces))
         right_answers = [" / ".join(item) for item in rearranged]
-        layout.prompt_label.configure(text=f"Translate '{words[1]}':\n")
+        layout.prompt_label.configure(text=f"Translate '{words[1]}'\n{next(countdown)} words left")
         window.wait_variable(layout.wait_var)
 
         if layout.answer.get() in right_answers:
@@ -310,7 +313,7 @@ def test_listening():
         layout.feedback_label.configure(text=response)
         window.wait_variable(layout.wait_var)
 
-    layout.feedback_label.configure(text="All finished.")
+    layout.prompt_label.configure(text="All finished.")
 
 ####################################################################################################
 

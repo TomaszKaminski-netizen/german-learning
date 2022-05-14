@@ -1,0 +1,64 @@
+{
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "[python]": {
+        "editor.rulers": [
+            79,
+            100
+        ]
+    },
+    "autoDocstring.docstringFormat": "google",
+    "better-comments.tags": [
+        {
+            "tag": "pylint:",
+            "color": "#394d42",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "!",
+            "color": "#FF2D00",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "?",
+            "color": "#3498DB",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "//",
+            "color": "#474747",
+            "strikethrough": true,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "todo",
+            "color": "#FF8C00",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "*",
+            "color": "#98C379",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        }
+    ],
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": [
+                    "variable.other.readwrite"
+                ],
+                "settings": {
+                    "foreground": "#d4d4d4"
+                },
+            }
+        ]
+    },
+    "workbench.colorCustomizations": {
+        "editorBracketHighlight.foreground1": "#d4d4d4"
+    }
+}
