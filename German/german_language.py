@@ -49,6 +49,7 @@ VERBS_DICT = {
     "hören": "to hear / to listen",
     "sprechen": "to speak",
     "riechen": "to smell",
+    "schmecken": "to taste", # Needs voice
     "klingen": "to sound", # Needs voice
     "reden": "to talk",
     "sagen": "to say",
@@ -223,6 +224,7 @@ ADVERBS_DICT = {
     "trotzdem / dennoch": "nevertheless",
     "leider": "unfortunately", # Needs voice
     "überall": "everywhere", # Needs voice
+    "übrigens": "by the way", # Needs voice
     "wo": "where?",
     "woher": "where from?",
     "wohin": "where to?",
@@ -254,10 +256,11 @@ TIPS_LIST = [
     auswählen is about choosing a particular option from a limited set of choices (e.g. I always
     choose this hotel when staying in Berlin). In some situations, both words are acceptable.""",
     "Möchten is not a verb of its own. Rather, it is the Konjunktiv Präteritum form of mögen.",
-    """Some verbs have prefixes which are moved to the end of the sentence in the present tense, for
-    example: mitnehmen -> Ich nehme mein Handy mit. Note that not all prefixes are separable this
-    way, for example: verkaufen -> Ich verkaufe Bücher. There are also prefixes which are sometimes
-    separable and sometimes non-separable: durch, über, um, unter, wieder.""",
+    """Many verbs can have their meaning changed by a suffix (unrelated to cases & conjugation). In
+    Präsens, some of these prefixes separate from the verb and move to the end of the sentence (e.g.
+    mitnehmen -> Ich nehme den Ball mit). These are: ab, an, auf, aus, ein, los, mit, nach, vor, zu.
+    Other prefixes are non-separable: be, ent, emp, er, ge, miss, ver, zer. There are also prefixes
+    which are sometimes separable and sometimes non-separable: durch, über, um, unter, wieder.""",
     # Pronunciation
     "If a words ends with b, d, or g, these letter are pronounced as p, t, k.",
     "Most words in German are accented on the first syllable",
@@ -307,12 +310,40 @@ TIPS_LIST = [
     irgendwer - someone. Irgendwas carries a connotation of vagueness when compared to etwas - it is
     like a mix of something + anything.""",
     # Verb conjugation
-    """Many verbs that end in 'ieren' don't get a 'ge' prefix in Perfekt (e.g., studieren, rotieren,
-    tapezieren). But then that's only for verbs adapted from Latin/French - when it comes to verbs
-    like 'zieren', 'schmieren', 'gieren', which are Germanic, then you do get the 'ge'.""",
-    """For verbs with prefixes, the special rule is that if it is a separable prefix, the 'ge' is
-    inserted between prefix and stem, so feststecken -> festgesteckt. If it is an inseparable
-    prefix, there is no 'ge'.""",
+    """In Präsens, verb stems that end with d / t, or m / n following a consonant (other than l/r/n)
+    gain an additional 'e' before t / st suffixes (e.g., arbeiten -> du arbeitest, zeichnen -> es
+    zeichnet). Verbs whose stems end in s/ß/x/z drop the 's' from the 'st' prefix.""",
+    """In Präsens, irregularly-conjugated verbs have the same suffixes & prefixes as regular verbs,
+    but they experience letter changes in the verb's stem. These are predominantly: a > ä, e > i,
+    and e > ie, but there are also rare cases like eh > im (nehmen -> nimmst/nimmt), e > it (treten
+    -> trittst/tritt), and o > ö (stoßen -> stößt). Additionally, when the a > ä change occurs, no
+    'e' is added before s/st endings (e.g. laden -> lädst).""",
+    """In Präsens, stem changes mostly occur just for du + er/sie/es. An exception are the six modal
+    verbs (können, müssen, dürfen, wollen, sollen, mögen), where all the singular forms have stem
+    changes and ich + er/sie/es have no suffixes. Moreover, verbs sein, haben, werden, and wissen
+    have fully irregular single forms, and sein (uniquely) has an irregular plural form.""",
+    """In Präteritum, the suffixes follow almost the same rules as in Präsens (although er/sie/es
+    switch to the ich suffix) with an additional 'te' at the beginning of each suffix. If this were
+    to result in two 'e's next to each other, one 'e' is dropped (e.g., tanzen -> Sie tanzten).""",
+    """In Perfekt, regular verbs gain the prefix 'ge' and finish with 't/et' (following the same
+    logic as in Präsens). However, irregular verbs often end with 'en' rather than 't/et' and have
+    stem letter changes, which are different than the changes in Präsens. In all cases, the main
+    verb does not change depending on the person - instead an auxiliary verb (either haben or sein)
+    is conjugated using Präsens.""",
+    """In Perfekt, haben is used with transitive verbs and sein with intransitive verbs. Transitive
+    verbs are those that require / very often take a direct object, e.g. "I destroyed an object". It
+    is possible to just say "I destroyed", but that is not how the verb is usually employed (so it
+    still pairs with haben). Intransitive verbs either can't or don't need to have a direct object
+    (e.g. 'The light shone', 'We were running', 'He died'). Intransitive verbs are far less common
+    than transitive, and as a rule of thumb they relate to movement or change of state. Note that
+    'sich' counts as a direct object, e.g. Ich habe mich gefreut. Moreover, when an intransitive
+    verb (I flew by plane -> Ich bin mit dem Flugzeug geflogen) is used in a transitive way (I flew
+    the plane -> Ich habe das Flugzeug geflogen) it switches to haben.""",
+    """In Perfekt, if a verb already has a separable prefix, the 'ge' is inserted between it and
+    stem (e.g. feststecken -> festgesteckt). If it is an inseparable prefix, no 'ge' is added.
+    Furthermore, many verbs that end in 'ieren' do not receive 'ge' (e.g., studieren, rotieren,
+    tapezieren). However, these are verbs adapted from Latin/French - when it comes to Germanic
+    verbs like 'zieren', 'schmieren', 'gieren', you do get the 'ge'.""",
     """The only rule - never broken - is about accent. The prefix 'ge' goes on verbs immediately
     before the accented syllable. If the first syllable is unaccented, there is no 'ge'. All those
     borrowed verbs with 'ieren' have the accent on the 'ieren', and so they have one or more
@@ -322,22 +353,17 @@ TIPS_LIST = [
     no verb that begins 'ver' or 'zer' can take 'ge', because 'ver' and 'zer' can't take the accent.
     If the prefix does take the accent, it is a separable prefix, so it splits off and the 'ge' goes
     in the middle.""",
-    """In Prasens, irregularly-conjugated verbs have the same suffixes & prefixes as regular verbs,
-    but they experience letter changes in the verb's stem. These changes (a > ä, e > i, e > ie)
-    usually occur just for du + er/sie/es. An exception are the six modal verbs (können, müssen,
-    dürfen, wollen, sollen, mögen), where all the singular forms have stem changes and ich +
-    er/sie/es have no suffixes. Lastly, the verbs sein, haben, werden, and wissen have fully
-    irregular single forms, and sein also (uniquely) has an irregular plural form.
-    """,
-    """Perfekt is used mostly in conversational contexts in German and Präteritum is used mostly in
-    written German. For this reason, the 2nd person forms (du, ihr, Sie) are very uncommon in
-    Präteritum and sound strange to the ear of a native speaker - it is odd to narrate directly to a
-    person what he or she did at some past time. An exception are the 6 modal verbs, sein, haben,
-    werden, and wissen, for which Präteritum is preferred over Perfekt even in spoken German.""",
-    """In Präsens, verb stems that end with d / t, or m / n following a consonant (other than l/r)
-    gain an additional 'e' before t / st suffixes (e.g., arbeiten -> du arbeitest, zeichnen -> es
-    zeichnet). Verbs whose stems end in s/ß/x/z drop the 's' from the 'st' prefix.""",
-    """In Präteritum the suffixes follow almost the same rules as in Präsens (although er/sie/es
-    switch to the ich suffix) with an additional 'te' at the beginning of each suffix. If this were
-    to result in two 'e's next to each other, one 'e' is dropped (e.g., tanzen -> Sie tanzten)."""
+    """Perfekt is used mostly in conversational contexts and Präteritum is used mostly in writing.
+    For this reason, the 2nd person forms (du, ihr, Sie) are very uncommon in Präteritum and sound
+    strange to the ear of a native speaker - it is odd to narrate directly to a person what he or
+    she did at some past time. An exception are the 6 modal verbs, sein, and haben, for which
+    Präteritum is preferred over Perfekt even in spoken German.""",
+    """To form the equivalent of English Present/Past Continuous, add the word 'gerade' to Präsens /
+    Präteritum. For example 'I am studying German' is 'Ich lerne gerade Deutsch' and 'I was studying
+    German' is 'Ich lernte gerade Deutsch'. However, when combined with Perfekt, 'gerade' instead
+    means that something has just happened - 'Wir sind gerade aus dem Kino gekommen' means 'We have
+    just come back from cinema'.""",
+    """Futur I is the easiest case to remember, made by combining the infinitive (i.e. most basic)
+    form of the verb with werden conjugated in Präsens. This leaves no room for irregularities."""
+    # Imperativ
 ]
