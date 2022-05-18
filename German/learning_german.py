@@ -19,7 +19,7 @@ from playsound import playsound, PlaysoundException
 import requests
 from bs4 import BeautifulSoup
 
-from german_language import VERBS_DICT, ADVERBS_DICT, TIPS_LIST
+from german_language import VERBS_DICT, ADVERBS_DICT, NOUNS_DICT, TIPS_LIST
 
 CONJUGATION_CATEGORIES = ("Präsens", "Präteritum", "Perfekt", "Plusquamperfekt", "Futur I",
                           "Futur II", "Imperativ")
@@ -30,17 +30,20 @@ PRONOUNS = ("ich", "du", "er/sie/es", "wir", "ihr", "sie")
 class Starting_layout():
     """The widget layout for the main menu."""
     def __init__(self):
-        all_vocab = [VERBS_DICT, ADVERBS_DICT]
+        all_vocab = [VERBS_DICT, ADVERBS_DICT, NOUNS_DICT]
         tk.Label(text="Choose what to practice.").pack()
-        tk.Button(text="German to English", command=lambda:
-                  translate_words(all_vocab, "ger_to_eng")).pack()
-        tk.Button(text="English to German", command=lambda:
-                  translate_words(all_vocab, "eng_to_ger", tuple(self.cats))).pack()
-        tk.Button(text="Listening", command=test_listening).pack()
-        tk.Button(text="Verb conjugation", command=lambda:
-                  test_conjugation(tuple(self.cats))).pack()
         tk.Button(text="Tips and rules", command=show_tips).pack()
-        tk.Label(text="Toggle which verb conjugations to practice.").pack()
+        tk.Button(text="Listening", command=test_listening).pack()
+        tk.Button(text="German to English", command=lambda:
+                  translate(all_vocab, "ger_to_eng")).pack()
+        tk.Button(text="English to German", command=lambda:
+                  translate(all_vocab, "eng_to_ger", self.cats, self.plural_nouns.get())).pack()
+        tk.Button(text="Nouns", command=lambda:
+                  translate([NOUNS_DICT], "eng_to_ger", [], self.plural_nouns.get())).pack()
+        self.plural_nouns = tk.BooleanVar()
+        tk.Checkbutton(text="Enable plural noun forms.", variable=self.plural_nouns).pack()
+        tk.Button(text="Verb conjugation", command=lambda: test_conjugation(self.cats)).pack()
+        tk.Label(text="Toggle which verb conjugations to enable.").pack()
 
         self.cats, self.cat_buttons = list(), dict()
         for cat in CONJUGATION_CATEGORIES:
@@ -48,7 +51,7 @@ class Starting_layout():
                                               command=partial(self.toggle_category, cat))
             self.cat_buttons[cat].pack()
         # These for categories are enabled by default.
-        for cat in CONJUGATION_CATEGORIES[:3] + CONJUGATION_CATEGORIES[-1:]:
+        for cat in CONJUGATION_CATEGORIES[0:3:2]:
             self.toggle_category(cat)
 
     def toggle_category(self, cat):
@@ -189,7 +192,7 @@ def test_conjugation(categories, verbs="all"): #pylint: disable=inconsistent-ret
     """_summary_
 
     Args:
-        categories (tuple): _description_
+        categories (list): _description_
         verbs (str, optional): _description_. Defaults to "all".
     """
     if not categories:
@@ -221,7 +224,7 @@ def test_conjugation(categories, verbs="all"): #pylint: disable=inconsistent-ret
             if set(cleaned_answer) == set(right_answer):
                 layout.feedback_label.configure(text="Correct.")
             else:
-                layout.feedback_label.configure(text="Wrong - the right answer is:\n" +
+                layout.feedback_label.configure(text="Wrong, the right answer is:\n" +
                                                 "\n".join(right_answer))
             layout.button_next.configure(text="Continue to next question.")
             window.wait_variable(layout.wait_var)
@@ -230,13 +233,14 @@ def test_conjugation(categories, verbs="all"): #pylint: disable=inconsistent-ret
         layout.prompt_label.configure(text="All finished.")
 
 
-def translate_words(vocab, direction, conjugate=()):
+def translate(vocab, direction, conjugate=[], plural_nouns=True): #pylint: disable=dangerous-default-value
     """_summary_
 
     Args:
         vocab (list): _description_
         direction (str): _description_
-        conjugate (tuple, optional): _description_
+        conjugate (list, optional): _description_
+        plural_nouns (bool, optional): _description_
     """
     # Setting up tracking of my performance
     if isfile(f"{direction}.json"):
@@ -261,9 +265,12 @@ def translate_words(vocab, direction, conjugate=()):
     countdown = count(len(vocab), step=-1)
 
     for words in vocab:
-        layout = Exercise_layout("enter", tk.Entry(), ger_char=bool(direction == "eng_to_ger"))
+        layout = Exercise_layout("enter", tk.Entry(width=38),
+                                 ger_char=bool(direction == "eng_to_ger"))
         # Complex as to deal with answers that contain more than two words, separated by "/".
         answer_pieces = words[0].split(" / ")
+        if (words[0] in NOUNS_DICT) and not plural_nouns:
+            answer_pieces = answer_pieces[0:1] # Just the single form of the noun
         rearranged = permutations(answer_pieces, len(answer_pieces))
         right_answers = [" / ".join(item) for item in rearranged]
         layout.prompt_label.configure(text=f"Translate '{words[1]}'\n{next(countdown)} words left")
@@ -273,7 +280,7 @@ def translate_words(vocab, direction, conjugate=()):
             layout.feedback_label.configure(text="Correct.")
             memory[words[1]] = datetime.now().strftime(r"%m-%d")
         else:
-            layout.feedback_label.configure(text=f"Wrong - the right answer is '{words[0]}'")
+            layout.feedback_label.configure(text=f"Wrong, the right answer is '{right_answers[0]}'")
         for item in answer_pieces:
             sound_name = abspath(f"vicki-{item.replace(' ', '_')}.mp3")
             if isfile(sound_name):
@@ -304,7 +311,7 @@ def test_listening():
         if layout.answer.get() == right_answer:
             response = "Correct."
         else:
-            response = f"Wrong - the right answer is '{right_answer}'"
+            response = f"Wrong, the right answer is '{right_answer}'"
         all_vocab = ChainMap(VERBS_DICT, ADVERBS_DICT)
         for ger, eng in all_vocab.items():
             if right_answer in ger.split(" / "):
@@ -320,7 +327,7 @@ def test_listening():
 if __name__ == "__main__":
     chdir(dirname(abspath(__file__)))
     window = tk.Tk()
-    window.geometry("900x700")
+    window.geometry("900x750")
     window.option_add("*font", "size 19") # Changing the default font size
     Starting_layout()
     window.mainloop()
