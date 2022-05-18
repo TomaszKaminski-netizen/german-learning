@@ -17,6 +17,7 @@ VERBS_DICT = {
     "abhängen": "to depend",
     "kennen": "to be familiar with",
     "erkennen": "to recognise",
+    "heißen": "to be named", # Needs voice
     "lernen": "to learn",
     "umlernen": "to retrain",
     "verlernen": "to forget (something already learned)",
@@ -28,6 +29,7 @@ VERBS_DICT = {
     "erinnern": "to remind",
     "sich erinnern": "to remember",
     "glauben": "to believe",
+    "merken": "to realise (a fact)", # Needs voice
     "achten": "to pay attention",
     "üben": "to practice",
     "bedeuten": "to mean",
@@ -62,11 +64,13 @@ VERBS_DICT = {
     "schauen": "to look",
     "anschauen / sich ansehen": "to watch / to look at",
     "beobachten": "to observe",
+    "bemerken": "to notice", # Needs voice
     "zeichnen": "to draw",
     "zeigen": "to show",
     "machen": "to make / to do",
     "tun": "to do",
-    "rufen": "to call",
+    "nennen": "to call / to name", # Needs voice
+    "rufen": "to call (for) / to shout",
     "anrufen": "to phone",
     "bleiben": "to stay",
     "gehen": "to go",
@@ -144,6 +148,7 @@ VERBS_DICT = {
     "benutzen": "to use",
     "lösen": "to solve / to remove / to untighten",
     "spannen": "to tension / to tighten",
+    "schneiden": "to cut", # Needs voice
     "gehören": "to belong",
     "besitzen": "to own",
     "ausmachen": "to turn off",
@@ -172,6 +177,7 @@ VERBS_DICT = {
     "gewinnen": "to win",
     "erreichen": "to achieve / to reach",
     "vorhaben": "to intend",
+    "betreffen": "to concern / to affect", # Needs voice
     "hoffen": "to hope",
     "wünschen": "to wish",
     "beenden": "to finish",
@@ -197,6 +203,7 @@ ADVERBS_DICT = {
     "statt": "instead of",
     "ziemlich": "pretty / quite",
     "genau": "exactly",
+    "unbedingt": "absolutely / necessarily", # Needs voice
     "deshalb / deswegen": "therefore",
     "immer": "always",
     "manchmal": "sometimes",
@@ -234,6 +241,54 @@ ADVERBS_DICT = {
     "wie": "how?",
     "warum / wieso": "why?"}
 
+#! All of these need voice
+NOUNS_DICT = {
+    "das Küchenmesser / die Küchenmesser": "kitchen knife",
+    "das Messer / die Messer": "knife",
+    "der Löffel / die Löffel": "spoon",
+    "die Suppenkelle / die Suppenkellen": "ladle",
+    "die Gabel / die Gabeln": "fork",
+    "die Schüssel / die Schüsseln": "bowl",
+    "der Teller / die Teller": "plate",
+    "der Pfannenwender / die Pfannenwender": "spatula",
+    "die Küchenwaage / die Küchenwaagen": "kitchen scale",
+    "das Schneidebrett / die Schneidebretter": "cutting board",
+    "die Tasse / die Tassen": "cup",
+    "der Kochtopf / die Kochtöpfe": "pot",
+    "die Pfanne / die Pfannen": "pan",
+    "das Backblech / die Backbleche": "baking sheet",
+    "die Auflaufform / die Auflaufformen": "baking dish",
+    "der Handmixer / die Handmixer": "hand mixer",
+    "der Ventilator / die Ventilatoren": "ventilator",
+    "der Wasserkocher / die Wasserkocher": "kettle",
+    "der Ofen / die Öfen": "oven",
+    "der Kühlschrank / die Kühlschränke": "fridge",
+    "der Gefrierschrank / die Gefrierschränke": "freezer",
+    "die Seife / die Seifen": "soap",
+    "das Handtuch / die Handtücher": "body towel",
+    "das Papiertuch / die Papiertücher": "paper towel",
+    "das Toilettenpapier / die Toilettenpapiere": "toilet paper",
+    "die Kleidung / die Kleidungen": "clothes",
+    "die Waschmaschine / die Waschmaschinen": "washing machine",
+    "der Wäschetrockner / die Wäschetrockner": "clothes dryer",
+    "der Föhn / die Föhne": "hair dryer",
+    "das Waschbecken / die Waschbecken": "sink",
+    "der Spiegel / die Spiegel": "mirror",
+    "der Tisch / die Tische": "table",
+    "der Stuhl / die Stühle": "chair",
+    "die Tür / die Türen": "door",
+    "der Boden / die Böden": "floor",
+    "das Fenster / die Fenster": "window",
+    "das Licht / die Lichter": "light",
+    "das Bett / die Betten": "bed",
+    "die Box / die Boxen": "box",
+    "die Schublade / die Schubladen": "drawer",
+    "der Mülleimer / die Mülleimer": "bin",
+    "der Müllsack / die Müllsäcke": "bin bag",
+    "der Rucksack / die Rucksäcke": "backpack",
+    "das Handy / die Handys": "mobile phone"
+}
+
 TIPS_LIST = [
     # Verbs
     "When used in the sense of 'to do', machen and tun are often - but not always - replaceable.",
@@ -261,13 +316,14 @@ TIPS_LIST = [
     mitnehmen -> Ich nehme den Ball mit). These are: ab, an, auf, aus, ein, los, mit, nach, vor, zu.
     Other prefixes are non-separable: be, ent, emp, er, ge, miss, ver, zer. There are also prefixes
     which are sometimes separable and sometimes non-separable: durch, über, um, unter, wieder.""",
+    """Heißen is used when referring to the true names of people / objects, whereas kennen is for
+    nicknames and aliases. For example, 'Ich heiße Katharina, aber du kannst mich Kathi nennen'.""",
     # Pronunciation
     "If a words ends with b, d, or g, these letter are pronounced as p, t, k.",
-    "Most words in German are accented on the first syllable",
     "German 'r' is like the Dutch 'g' - it is spoken from deep within the throat",
     """Ü is pronounced like a long 'u' with a high note, ö like a long 'u' with a low note, and ä
     like a short 'e'.""",
-    """When the letter 'e' in German is located in an open stressed syllable (i.e. when there are no
+    """When the letter 'e' is located in an open stressed syllable (i.e. when there are no
     consonants at the end), it is pronounced as 'ej' (e.g. Wesen = 'wejsen'). The problem is: What
     if you want the short 'e'? Use 'ä' instead.""",
     """If after a vowel (aeiouöäü) there are two identical letters, the vowel is always short.
@@ -296,8 +352,8 @@ TIPS_LIST = [
     """Ordinal numbers (first, second, etc.) are created from cardinal numbers (one, two) by adding
     the ending 'te' to them for numbers from 1 to 19, and 'ste' for numbers from 20 upwards. There
     are four exceptions: erste (1st), dritte (3rd), siebte (7th), achte (8th). Be careful - instead
-    of using st / rd / th, in German you denote ordinal numbers by putting a full stop after them
-    (e.g., Der 1. Mai ist ein Feiertag in Deutschland.).""",
+    of using st/rd/th, in German you denote ordinal numbers by putting a full stop after them (e.g.
+    Der 1. Mai ist ein Feiertag in Deutschland.).""",
     """When talking about inanimate objects using personal pronouns (er/sie/es), you must use
     'da-words'. For example, 'Ich träume von ihr (die Party)' is incorrect and 'Ich träume davon
     (die Party)' is correct. Davon is made from the prefix 'da' + linker word 'von'. Other examples
@@ -310,8 +366,8 @@ TIPS_LIST = [
     irgendwer - someone. Irgendwas carries a connotation of vagueness when compared to etwas - it is
     like a mix of something + anything.""",
     # Verb conjugation
-    """In Präsens, verb stems that end with d / t, or m / n following a consonant (other than l/r/n)
-    gain an additional 'e' before t / st suffixes (e.g., arbeiten -> du arbeitest, zeichnen -> es
+    """In Präsens, verb stems that end with d/t, or m/n following a consonant (other than l/r/n)
+    gain an additional 'e' before t/st suffixes (e.g. arbeiten -> du arbeitest, zeichnen -> es
     zeichnet). Verbs whose stems end in s/ß/x/z drop the 's' from the 'st' prefix.""",
     """In Präsens, irregularly-conjugated verbs have the same suffixes & prefixes as regular verbs,
     but they experience letter changes in the verb's stem. These are predominantly: a > ä, e > i,
@@ -324,7 +380,7 @@ TIPS_LIST = [
     have fully irregular single forms, and sein (uniquely) has an irregular plural form.""",
     """In Präteritum, the suffixes follow almost the same rules as in Präsens (although er/sie/es
     switch to the ich suffix) with an additional 'te' at the beginning of each suffix. If this were
-    to result in two 'e's next to each other, one 'e' is dropped (e.g., tanzen -> Sie tanzten).""",
+    to result in two 'e's next to each other, one 'e' is dropped (e.g. tanzen -> Sie tanzten).""",
     """In Perfekt, regular verbs gain the prefix 'ge' and finish with 't/et' (following the same
     logic as in Präsens). However, irregular verbs often end with 'en' rather than 't/et' and have
     stem letter changes, which are different than the changes in Präsens. In all cases, the main
@@ -341,7 +397,7 @@ TIPS_LIST = [
     the plane -> Ich habe das Flugzeug geflogen) it switches to haben.""",
     """In Perfekt, if a verb already has a separable prefix, the 'ge' is inserted between it and
     stem (e.g. feststecken -> festgesteckt). If it is an inseparable prefix, no 'ge' is added.
-    Furthermore, many verbs that end in 'ieren' do not receive 'ge' (e.g., studieren, rotieren,
+    Furthermore, many verbs that end in 'ieren' do not receive 'ge' (e.g. studieren, rotieren,
     tapezieren). However, these are verbs adapted from Latin/French - when it comes to Germanic
     verbs like 'zieren', 'schmieren', 'gieren', you do get the 'ge'.""",
     """The only rule - never broken - is about accent. The prefix 'ge' goes on verbs immediately
@@ -364,6 +420,30 @@ TIPS_LIST = [
     means that something has just happened - 'Wir sind gerade aus dem Kino gekommen' means 'We have
     just come back from cinema'.""",
     """Futur I is the easiest case to remember, made by combining the infinitive (i.e. most basic)
-    form of the verb with werden conjugated in Präsens. This leaves no room for irregularities."""
-    # Imperativ
+    form of the verb with werden conjugated in Präsens. This leaves no room for irregularities.""",
+    # Imperativ conjugation
+    # Nouns
+    """Plural nouns are formed in many ways, the most common of which are: no change, 'e' suffix,
+    'e' suffix plus umlaut, 'en/n' suffix, 'er' suffix plus umlaut, or 's' suffix. Statistically
+    speaking, 80% masculine and 75% neuter nouns take the 'e' plural, whilst 90% feminine nouns take
+    the 'en/n' plural. The 's' suffix is given to people's names/surnames, abbreviations, and many
+    nouns with roots in English, Dutch or French. Lastly, all nouns ending with 'e' gain an 'n'.""",
+    "The plural form of Kleidung is uncommon."
 ]
+
+####################################################################################################
+
+"""folgen - follow (physically, temporally)
+befolgen - follow (rules, orders)
+bitten - request
+raten / beraten - advise
+halten - hold / stop
+enden - end
+verlassen - leave
+lassen - let / not do / leave
+absagen - cancel
+ausfallen - (be) cancelled
+kündigen / stornieren - cancel (a contract)
+erlauben - permit
+Kündigen is for cancelling contracts that you have already signed, whereas stornieren is for
+cancelling planned contracts."""
