@@ -15,7 +15,7 @@ import tkinter as tk
 from time import sleep
 import json
 
-from playsound import playsound, PlaysoundException
+from pygame import mixer #* The playsound library did not work with special German characters
 import requests
 from bs4 import BeautifulSoup
 
@@ -106,21 +106,6 @@ class Exercise_layout():
                           ).pack(side=tk.RIGHT)
 
 ####################################################################################################
-
-def _playsound(audio):
-    """The 'playsound' function from the 'playsound' library experiences random
-    bugs, which freeze the GUI window. This function is meant to handle those
-    bugs.
-
-    Args:
-        audio (str): absolute path to the audio file of interest
-    """
-    #TODO: Find a way to play audio files with special German characters in them.
-    try:
-        playsound(audio)
-    except PlaysoundException:
-        print(f"Error playing '{audio}'")
-
 
 def show_tips():
     for widget in window.winfo_children():
@@ -278,7 +263,7 @@ def translate(vocab, direction, conjugate=tuple(), plural_nouns=True):
         for item in answer_pieces:
             sound_name = abspath(f"vicki-{item.replace(' ', '_')}.mp3")
             if isfile(sound_name):
-                _playsound(sound_name)
+                mixer.Sound(sound_name).play()
                 sleep(0.25)
         window.wait_variable(layout.wait_var)
 
@@ -294,11 +279,11 @@ def test_listening():
     audio_files = glob("vicki-*.mp3")
     shuffle(audio_files)
     for audio_file in audio_files:
-        extra_button = tk.Button(text="Click to hear the word again.",
-                                 command=partial(_playsound, abspath(audio_file)))
+        sound = mixer.Sound(abspath(audio_file))
+        extra_button = tk.Button(text="Click to hear the word again.", command=sound.play)
         layout = Exercise_layout("enter", tk.Entry(), extra_button=extra_button)
         layout.prompt_label.configure(text="Write down the word you heard.")
-        _playsound(abspath(audio_file))
+        sound.play()
         window.wait_variable(layout.wait_var)
 
         right_answer = match(r"vicki-(.+).mp3", audio_file).group(1).replace("_", " ")
@@ -324,6 +309,7 @@ if __name__ == "__main__":
     window.geometry("900x750")
     window.option_add("*font", "size 19") # Changing the default font size
     Starting_layout()
+    mixer.init() # This is necessary for playing audio files
     window.mainloop()
 
 #TODO: translate sentences, pronoun declination
@@ -331,9 +317,12 @@ if __name__ == "__main__":
 ####################################################################################################
 
     # Use https://freetts.com/Home/GermanTTS for pronunciation sound files, Vicki voice
-    #all_files = glob("C:\\Users\\daiwe\\Downloads\\better_german-*.mp3")
-    #all_files = sorted(all_files, key=lambda x: int(search(r"german-(\d+)\.mp3", x).group(1)))
-    #names = iter(["empfehlen","abfahren","selten","dann","einladen","woher", ...]
+    # Use semicolons to separate words. Analyse > Label Sounds, then File > Export > Export Multiple
+    #from re import search
+    #from os import rename
+    #all_files = glob("C:\\Users\\daiwe\\Downloads\\vicki-*.mp3")
+    #all_files = sorted(all_files, key=lambda x: int(search(r"vicki-(\d+)\.mp3", x).group(1)))
+    #names = iter(["leider", "überall", "übrigens", "unbedingt", "betreffen", "schneiden", "nennen", "bemerken", "klingen", "schmecken", "bitten", "merken", "heißen", "sein", "haben", "werden"])
     #for file in all_files:
     #    part_name = "\\".join(file.split("\\")[:-1])
     #    rename(file, f'{part_name}\\vicki-{next(names).replace(" ", "_")}.mp3')

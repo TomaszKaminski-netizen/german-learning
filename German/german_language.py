@@ -8,16 +8,16 @@ VERBS_DICT = {
     "müssen": "to have to (must)",
     "wollen": "to want",
     "sollen": "to ought to (shall)",
-    "werden": "will / to become", # Needs voice
-    "haben": "to have", # Needs voice
-    "sein": "to be", # Needs voice
+    "werden": "will / to become",
+    "haben": "to have",
+    "sein": "to be",
     "brauchen": "to need",
     "denken": "to think",
     "wissen": "to know (a fact)",
     "abhängen": "to depend",
     "kennen": "to be familiar with",
     "erkennen": "to recognise",
-    "heißen": "to be named", # Needs voice
+    "heißen": "to be named",
     "lernen": "to learn",
     "umlernen": "to retrain",
     "verlernen": "to forget (something already learned)",
@@ -29,7 +29,7 @@ VERBS_DICT = {
     "erinnern": "to remind",
     "sich erinnern": "to remember",
     "glauben": "to believe",
-    "merken": "to realise (a fact)", # Needs voice
+    "merken": "to realise (a fact)",
     "achten": "to pay attention",
     "üben": "to practice",
     "bedeuten": "to mean",
@@ -44,6 +44,7 @@ VERBS_DICT = {
     "zustimmen": "to agree",
     "helfen": "to help",
     "teilen": "to share",
+    "bitten": "to request",
     "bieten / anbieten": "to offer",
     "verbieten": "to forbid",
     "lügen": "to lie (falshood)",
@@ -51,8 +52,8 @@ VERBS_DICT = {
     "hören": "to hear / to listen",
     "sprechen": "to speak",
     "riechen": "to smell",
-    "schmecken": "to taste", # Needs voice
-    "klingen": "to sound", # Needs voice
+    "schmecken": "to taste",
+    "klingen": "to sound",
     "reden": "to talk",
     "sagen": "to say",
     "lesen": "to read",
@@ -64,12 +65,12 @@ VERBS_DICT = {
     "schauen": "to look",
     "anschauen / sich ansehen": "to watch / to look at",
     "beobachten": "to observe",
-    "bemerken": "to notice", # Needs voice
+    "bemerken": "to notice",
     "zeichnen": "to draw",
     "zeigen": "to show",
     "machen": "to make / to do",
     "tun": "to do",
-    "nennen": "to call / to name", # Needs voice
+    "nennen": "to call / to name",
     "rufen": "to call (for) / to shout",
     "anrufen": "to phone",
     "bleiben": "to stay",
@@ -148,7 +149,7 @@ VERBS_DICT = {
     "benutzen": "to use",
     "lösen": "to solve / to remove / to untighten",
     "spannen": "to tension / to tighten",
-    "schneiden": "to cut", # Needs voice
+    "schneiden": "to cut",
     "gehören": "to belong",
     "besitzen": "to own",
     "ausmachen": "to turn off",
@@ -177,7 +178,7 @@ VERBS_DICT = {
     "gewinnen": "to win",
     "erreichen": "to achieve / to reach",
     "vorhaben": "to intend",
-    "betreffen": "to concern / to affect", # Needs voice
+    "betreffen": "to concern / to affect",
     "hoffen": "to hope",
     "wünschen": "to wish",
     "beenden": "to finish",
@@ -203,7 +204,7 @@ ADVERBS_DICT = {
     "statt": "instead of",
     "ziemlich": "pretty / quite",
     "genau": "exactly",
-    "unbedingt": "absolutely / necessarily", # Needs voice
+    "unbedingt": "absolutely / necessarily",
     "deshalb / deswegen": "therefore",
     "immer": "always",
     "manchmal": "sometimes",
@@ -229,9 +230,9 @@ ADVERBS_DICT = {
     "eigentlich": "actually",
     "wirklich": "really",
     "trotzdem / dennoch": "nevertheless",
-    "leider": "unfortunately", # Needs voice
-    "überall": "everywhere", # Needs voice
-    "übrigens": "by the way", # Needs voice
+    "leider": "unfortunately",
+    "überall": "everywhere",
+    "übrigens": "by the way",
     "wo": "where?",
     "woher": "where from?",
     "wohin": "where to?",
@@ -241,7 +242,6 @@ ADVERBS_DICT = {
     "wie": "how?",
     "warum / wieso": "why?"}
 
-#! All of these need voice
 NOUNS_DICT = {
     "das Küchenmesser / die Küchenmesser": "kitchen knife",
     "das Messer / die Messer": "knife",
@@ -311,7 +311,7 @@ TIPS_LIST = [
     auswählen is about choosing a particular option from a limited set of choices (e.g. I always
     choose this hotel when staying in Berlin). In some situations, both words are acceptable.""",
     "Möchten is not a verb of its own. Rather, it is the Konjunktiv Präteritum form of mögen.",
-    """Many verbs can have their meaning changed by a suffix (unrelated to cases & conjugation). In
+    """Many verbs can have their meaning changed by a suffix (unrelated to tenses & conjugation). In
     Präsens, some of these prefixes separate from the verb and move to the end of the sentence (e.g.
     mitnehmen -> Ich nehme den Ball mit). These are: ab, an, auf, aus, ein, los, mit, nach, vor, zu.
     Other prefixes are non-separable: be, ent, emp, er, ge, miss, ver, zer. There are also prefixes
@@ -419,23 +419,34 @@ TIPS_LIST = [
     German' is 'Ich lernte gerade Deutsch'. However, when combined with Perfekt, 'gerade' instead
     means that something has just happened - 'Wir sind gerade aus dem Kino gekommen' means 'We have
     just come back from cinema'.""",
-    """Futur I is the easiest case to remember, made by combining the infinitive (i.e. most basic)
+    """Futur I is the easiest tense to remember, made by combining the infinitive (i.e. most basic)
     form of the verb with werden conjugated in Präsens. This leaves no room for irregularities.""",
-    # Imperativ conjugation
+    """Unlike other tenses, Imperativ exists only for du, wir, ihr, and Sie. For plural persons, it
+    simply copies the Präsens form of the verb, but for du it also removes the 'st' suffix and
+    (sometimes) replaces it with 'e'. Stem changes are also copied, but not those that add an
+    umlaut. As could be expected, sein is fully irregular: seien Sie / seien wir / seid (ihr) /
+    sei (du). The Imperativ verb goes before the personal pronoun, with ihr & du pronouns often
+    omitted, and any separable prefixes go to the end of the sentence.""",
     # Nouns
     """Plural nouns are formed in many ways, the most common of which are: no change, 'e' suffix,
     'e' suffix plus umlaut, 'en/n' suffix, 'er' suffix plus umlaut, or 's' suffix. Statistically
     speaking, 80% masculine and 75% neuter nouns take the 'e' plural, whilst 90% feminine nouns take
     the 'en/n' plural. The 's' suffix is given to people's names/surnames, abbreviations, and many
-    nouns with roots in English, Dutch or French. Lastly, all nouns ending with 'e' gain an 'n'.""",
-    "The plural form of Kleidung is uncommon."
+    nouns with roots in English, Dutch or French. All feminine nouns gain a suffix and / or umlaut,
+    as otherwise the plural form would be indistinguishable from the singular form. Lastly, all
+    nouns ending with 'e' gain an 'n'.""",
+    "The plural form of Kleidung is uncommon.",
+    """Noun endings can be used to recognize 80% of noun genders. For instance, nouns ending with
+    'heit', 'keit', 'ung', 'schaft', or 'tät' are always feminine, whereas those ending with 'ich',
+    'ig', or 'ling' are nearly always masculine. Nouns ending with 'chen' or 'lein' are neuter, as
+    are many that end with 'nis', 'tum', or 'sal'. A noun ending in 'e' is likely to be feminine;
+    it is neuter when beginning with 'ge' and masculine when it denotes people or animals."""
 ]
 
 ####################################################################################################
 
 """folgen - follow (physically, temporally)
 befolgen - follow (rules, orders)
-bitten - request
 raten / beraten - advise
 halten - hold / stop
 enden - end
@@ -444,6 +455,5 @@ lassen - let / not do / leave
 absagen - cancel
 ausfallen - (be) cancelled
 kündigen / stornieren - cancel (a contract)
-erlauben - permit
 Kündigen is for cancelling contracts that you have already signed, whereas stornieren is for
 cancelling planned contracts."""
