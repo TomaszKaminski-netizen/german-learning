@@ -34,37 +34,31 @@ class Starting_layout():
         tk.Label(text="Choose what to practice.").pack()
         tk.Button(text="Tips and rules", command=show_tips).pack()
         tk.Button(text="Listening", command=test_listening).pack()
+
         tk.Button(text="German to English", command=lambda:
                   translate(all_vocab, "ger_to_eng")).pack()
         tk.Button(text="English to German", command=lambda:
-                  translate(all_vocab, "eng_to_ger", self.cats, self.plural_nouns.get())).pack()
+                  translate(all_vocab, "eng_to_ger", get_cats(), self.plural_nouns.get())).pack()
         tk.Button(text="Nouns", command=lambda:
-                  translate([NOUNS_DICT], "eng_to_ger", [], self.plural_nouns.get())).pack()
+                  translate([NOUNS_DICT], "eng_to_ger", tuple(), self.plural_nouns.get())).pack()
+
         self.plural_nouns = tk.BooleanVar()
         tk.Checkbutton(text="Enable plural noun forms.", variable=self.plural_nouns).pack()
-        tk.Button(text="Verb conjugation", command=lambda: test_conjugation(self.cats)).pack()
+        tk.Button(text="Verb conjugation", command=lambda: test_conjugation(get_cats())).pack()
         tk.Label(text="Toggle which verb conjugations to enable.").pack()
 
-        self.cats, self.cat_buttons = list(), dict()
+        self.cats, self.cat_buttons = dict(), dict()
         for cat in CONJUGATION_CATEGORIES:
-            self.cat_buttons[cat] = tk.Button(text=cat, bg="Red",
-                                              command=partial(self.toggle_category, cat))
+            self.cats[cat] = tk.BooleanVar()
+            self.cat_buttons[cat] = tk.Checkbutton(text=cat, variable=self.cats[cat])
             self.cat_buttons[cat].pack()
-        # These for categories are enabled by default.
+        # These categories are enabled by default.
         for cat in CONJUGATION_CATEGORIES[0:3:2]:
-            self.toggle_category(cat)
+            self.cats[cat].set(True)
 
-    def toggle_category(self, cat):
-        """
-        Args:
-            cat (str): name of the conjugation category of interest
-        """
-        if cat in self.cats:
-            self.cats.remove(cat)
-            self.cat_buttons[cat].configure(bg="Red")
-        else:
-            self.cats.append(cat)
-            self.cat_buttons[cat].configure(bg="Green")
+        def get_cats(): # Turning the 'cats' dictionary into a tuple of enabled category names.
+            enabled_cats = [cat if value.get() else False for (cat, value) in self.cats.items()]
+            return tuple(filter(bool, enabled_cats))
 
 
 class Exercise_layout():
@@ -192,7 +186,7 @@ def test_conjugation(categories, verbs="all"): #pylint: disable=inconsistent-ret
     """_summary_
 
     Args:
-        categories (list): _description_
+        categories (tuple): _description_
         verbs (str, optional): _description_. Defaults to "all".
     """
     if not categories:
@@ -233,13 +227,13 @@ def test_conjugation(categories, verbs="all"): #pylint: disable=inconsistent-ret
         layout.prompt_label.configure(text="All finished.")
 
 
-def translate(vocab, direction, conjugate=[], plural_nouns=True): #pylint: disable=dangerous-default-value
+def translate(vocab, direction, conjugate=tuple(), plural_nouns=True):
     """_summary_
 
     Args:
         vocab (list): _description_
         direction (str): _description_
-        conjugate (list, optional): _description_
+        conjugate (tuple, optional): _description_
         plural_nouns (bool, optional): _description_
     """
     # Setting up tracking of my performance
