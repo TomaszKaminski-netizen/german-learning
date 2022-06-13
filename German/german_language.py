@@ -3,6 +3,7 @@
 VERBS_DICT = {
     "dürfen": "to be allowed to (may)",
     "können": "to be able to (can)",
+    "könnten": "could (politely)",
     "mögen": "to like",
     "möchten": "would like to",
     "müssen": "to have to (must)",
@@ -39,6 +40,7 @@ VERBS_DICT = {
     "antworten": "to answer",
     "lehren / unterrichten": "to teach",
     "erklären": "to explain",
+    "raten": "to advise / to guess",
     "melden": "to report",
     "vergleichen": "to compare",
     "zustimmen": "to agree",
@@ -109,6 +111,7 @@ VERBS_DICT = {
     "verdienen": "to earn",
     "ausgeben": "to spend (money)",
     "spenden": "to donate",
+    "kündigen / stornieren": "to cancel (a contract)",
     "suchen": "to search",
     "arbeiten": "to work",
     "wohnen": "to live (reside)",
@@ -142,6 +145,7 @@ VERBS_DICT = {
     "dauern": "to last (take time)",
     "überdauern": "to outlast",
     "reisen": "to travel",
+    "absagen": "to call off",
     "besuchen": "to visit / to attend",
     "einladen": "to invite",
     "treffen": "to meet",
@@ -178,10 +182,12 @@ VERBS_DICT = {
     "gewinnen": "to win",
     "erreichen": "to achieve / to reach",
     "vorhaben": "to intend",
+    "befolgen": "to follow (rules / orders)",
+    "folgen": "to follow (physically / temporally)",
     "betreffen": "to concern / to affect",
     "hoffen": "to hope",
     "wünschen": "to wish",
-    "beenden": "to finish",
+    "enden / beenden": "to finish",
     "beginnen / anfangen": "to begin",
     "wählen / auswählen": "to choose / to select"}
 
@@ -286,7 +292,56 @@ NOUNS_DICT = {
     "der Mülleimer / die Mülleimer": "bin",
     "der Müllsack / die Müllsäcke": "bin bag",
     "der Rucksack / die Rucksäcke": "backpack",
-    "das Handy / die Handys": "mobile phone"
+    "das Handy / die Handys": "mobile phone",
+    "das Brot / die Brote": "bread",
+    "der Reis": "rice",
+    "die Nudel / die Nudeln": "noodle",
+    "der Zucker / die Zucker": "sugar",
+    "der Honig / die Honige": "honey",
+    "die Marmelade / die Marmeladen": "jam",
+    "das Mehl": "flour",
+    "das Öl / die Öle": "oil",
+    "der Essig / die Essige": "vinegar",
+    "der Senf": "mustard",
+    "das Salz / die Salze": "salt",
+    "der Pfeffer / die Pfeffer": "pepper",
+    "das Obst": "fruit",
+    "die Traube / die Trauben": "grape",
+    "der Apfel / die Äpfel": "apple",
+    "die Banane / die Bananen": "banana",
+    "die Zitrone / die Zitronen": "lemon",
+    "die Erdbeere / die Erdbeeren": "strawberry",
+    "die Himbeere / die Himbeeren": "raspberry",
+    "das Gemüse / die Gemüse": "vegetable",
+    "die Kartoffel / die Kartoffeln": "potato",
+    "die Karotte / die Karotten": "carrot",
+    "die Zwiebel / die Zwiebeln": "onion",
+    "der Knoblauch": "garlic",
+    "die Erbse / die Erbsen": "pea",
+    "die Bohne / die Bohnen": "bean",
+    "die Tomate / die Tomaten": "tomato",
+    "die Gurke / die Gurken": "cucumber",
+    "der Spinat / die Spinate": "spinach",
+    "der Kohl / die Kohle": "cabbage",
+    "der Pilz / die Pilze": "mushroom",
+    "die Milch": "milk",
+    "die Butter": "butter",
+    "das Ei / die Eier": "egg",
+    "der Käse / die Käse": "cheese",
+    "der Schinken / die Schinken": "ham",
+    "die Wurst / die Würste": "sausage",
+    "die Garnele / die Garnelen": "shrimp",
+    "das Schweinefleisch": "pork",
+    "das Rindfleisch": "beef",
+    "das Hühnerfleisch": "chicken",
+    "das Putenfleisch": "turkey",
+    "das Lammfleisch": "lamb",
+    "der Fisch": "fish",
+    "die Nuss / die Nüsse": "nut",
+    "die Schokolade / die Schokoladen": "chocolate",
+    "der Keks / die Kekse": "cookie",
+    "der Kuchen / die Kuchen": "cake",
+    "der Tee / die Tees": "tea"
 }
 
 TIPS_LIST = [
@@ -310,7 +365,8 @@ TIPS_LIST = [
     non-specific manner (e.g. When going on holiday I choose mountains over the sea), whereas
     auswählen is about choosing a particular option from a limited set of choices (e.g. I always
     choose this hotel when staying in Berlin). In some situations, both words are acceptable.""",
-    "Möchten is not a verb of its own. Rather, it is the Konjunktiv Präteritum form of mögen.",
+    """Möchten and könnten are not verbs of their own. Rather, they are the Konjunktiv II Präteritum
+    forms of mögen and können, respectively.""",
     """Many verbs can have their meaning changed by a suffix (unrelated to tenses & conjugation). In
     Präsens, some of these prefixes separate from the verb and move to the end of the sentence (e.g.
     mitnehmen -> Ich nehme den Ball mit). These are: ab, an, auf, aus, ein, los, mit, nach, vor, zu.
@@ -318,6 +374,10 @@ TIPS_LIST = [
     which are sometimes separable and sometimes non-separable: durch, über, um, unter, wieder.""",
     """Heißen is used when referring to the true names of people / objects, whereas kennen is for
     nicknames and aliases. For example, 'Ich heiße Katharina, aber du kannst mich Kathi nennen'.""",
+    """Enden is something that happens to the subject (e.g. Der Deutschkurs endet um 17:00), whilst
+    beenden is done to an object (e.g. Ich beende mein Studium bald).""",
+    """Kündigen is for cancelling contracts that you have already signed, whereas stornieren is for
+    cancelling reservations and planned contracts.""",
     # Pronunciation
     "If a words ends with b, d, or g, these letter are pronounced as p, t, k.",
     "German 'r' is like the Dutch 'g' - it is spoken from deep within the throat",
@@ -337,8 +397,8 @@ TIPS_LIST = [
     The former is thus used in questions and the latter in statements.""",
     """Both denn and weil mean 'because', with denn also having other meanings. The difference
     between them is that denn does not affect the sentence structure, whilst weil makes the verb
-    move to the end of the clause: 'Sie geht jeden tag spazieren, denn sie hat einen Hund.' vs 'Sie
-    geht jeden tag spazieren, weil sie einen Hund hat.'. Additionally, sentences can't begin with
+    move to the end of the clause: 'Sie geht jeden tag spazieren, denn sie hat einen Hund' vs 'Sie
+    geht jeden tag spazieren, weil sie einen Hund hat'. Additionally, sentences can not begin with
     denn, but can with weil.""",
     """The English word 'too' was originally a stressed version of 'to' and English decided to
     capture that in a spelling difference. German didn't bother, and so zu is both the words 'to'
@@ -365,6 +425,9 @@ TIPS_LIST = [
     irgendwo - somewhere, irgendwann - some time, irgendwie - somehow, irgendwas - something,
     irgendwer - someone. Irgendwas carries a connotation of vagueness when compared to etwas - it is
     like a mix of something + anything.""",
+    """Adding the interjection 'bitte' to orders / demands makes them sound more polite. However,
+    using bitte in requests / questions (e.g. Would you have time to help me?) makes them sound like
+    orders, and thus impolite. Therefore, instead of bitte use vielleicht and/or könnten.""",
     # Verb conjugation
     """In Präsens, verb stems that end with d/t, or m/n following a consonant (other than l/r/n)
     gain an additional 'e' before t/st suffixes (e.g. arbeiten -> du arbeitest, zeichnen -> es
@@ -425,8 +488,9 @@ TIPS_LIST = [
     simply copies the Präsens form of the verb, but for du it also removes the 'st' suffix and
     (sometimes) replaces it with 'e'. Stem changes are also copied, but not those that add an
     umlaut. As could be expected, sein is fully irregular: seien Sie / seien wir / seid (ihr) /
-    sei (du). The Imperativ verb goes before the personal pronoun, with ihr & du pronouns often
-    omitted, and any separable prefixes go to the end of the sentence.""",
+    sei (du). Moreover, the six modal verbs do not possess an Imperativ form. Finally, in Imperativ
+    the verb goes before the personal pronoun, with ihr & du pronouns often omitted, and any
+    separable prefix goes to the end of the sentence.""",
     # Nouns
     """Plural nouns are formed in many ways, the most common of which are: no change, 'e' suffix,
     'e' suffix plus umlaut, 'en/n' suffix, 'er' suffix plus umlaut, or 's' suffix. Statistically
@@ -434,26 +498,12 @@ TIPS_LIST = [
     the 'en/n' plural. The 's' suffix is given to people's names/surnames, abbreviations, and many
     nouns with roots in English, Dutch or French. All feminine nouns gain a suffix and / or umlaut,
     as otherwise the plural form would be indistinguishable from the singular form. Lastly, all
-    nouns ending with 'e' gain an 'n'.""",
-    "The plural form of Kleidung is uncommon.",
+    nouns ending with 'e' gain an 'n'. As in English, some nouns do not have a plural form.""",
     """Noun endings can be used to recognize 80% of noun genders. For instance, nouns ending with
     'heit', 'keit', 'ung', 'schaft', or 'tät' are always feminine, whereas those ending with 'ich',
     'ig', or 'ling' are nearly always masculine. Nouns ending with 'chen' or 'lein' are neuter, as
     are many that end with 'nis', 'tum', or 'sal'. A noun ending in 'e' is likely to be feminine;
-    it is neuter when beginning with 'ge' and masculine when it denotes people or animals."""
+    it is neuter when beginning with 'ge' and masculine when it denotes people or animals.""",
+    """The gender of compound nouns, such as Toilettenpapier, is always the gender of the final
+    constitutive noun."""
 ]
-
-####################################################################################################
-
-"""folgen - follow (physically, temporally)
-befolgen - follow (rules, orders)
-raten / beraten - advise
-halten - hold / stop
-enden - end
-verlassen - leave
-lassen - let / not do / leave
-absagen - cancel
-ausfallen - (be) cancelled
-kündigen / stornieren - cancel (a contract)
-Kündigen is for cancelling contracts that you have already signed, whereas stornieren is for
-cancelling planned contracts."""
