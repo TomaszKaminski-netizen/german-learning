@@ -99,7 +99,7 @@ class Exercise_layout():
         if ger_char:
             horizontal = tk.Frame(window)
             horizontal.pack()
-            for char in "äüöß":
+            for char in "ÄÖÜäüöß":
                 # Need to use partial instead of lambda, to avoid the cell-var-from-loop problem.
                 tk.Button(horizontal, text=char,
                           command=partial(self.answer.insert, tk.INSERT, char)
@@ -264,7 +264,9 @@ def translate(vocab, direction, conjugate=tuple(), plural_nouns=True):
             sound_name = abspath(f"vicki-{item.replace(' ', '_')}.mp3")
             if isfile(sound_name):
                 mixer.Sound(sound_name).play()
-                sleep(0.25)
+                # Sound().play does not stop code execution for the duration of the audio file, so a
+                # sufficiently long sleep period needs to be implemented here.
+                sleep(1)
         window.wait_variable(layout.wait_var)
 
         if (words[0] in VERBS_DICT) and conjugate:
@@ -283,6 +285,7 @@ def test_listening():
         extra_button = tk.Button(text="Click to hear the word again.", command=sound.play)
         layout = Exercise_layout("enter", tk.Entry(), extra_button=extra_button)
         layout.prompt_label.configure(text="Write down the word you heard.")
+        #TODO: Eliminate the popping sound. Can be done by fading the audio file out, 3ms is enough.
         sound.play()
         window.wait_variable(layout.wait_var)
 
@@ -322,7 +325,7 @@ if __name__ == "__main__":
     #from os import rename
     #all_files = glob("C:\\Users\\daiwe\\Downloads\\vicki-*.mp3")
     #all_files = sorted(all_files, key=lambda x: int(search(r"vicki-(\d+)\.mp3", x).group(1)))
-    #names = iter(["leider", "überall", "übrigens", "unbedingt", "betreffen", "schneiden", "nennen", "bemerken", "klingen", "schmecken", "bitten", "merken", "heißen", "sein", "haben", "werden"])
+    #names = iter(["könnten", "raten", "kündigen", "stornieren", "absagen", "befolgen", "folgen", "enden", "das Brot", "die Brote", "der Reis", "die Nudel", "die Nudeln", "der Zucker", "die Zucker", "der Honig", "die Honige", "die Marmelade", "die Marmeladen", "das Mehl", "das Öl", "die Öle", "der Essig", "die Essige", "der Senf", "das Salz", "die Salze", "der Pfeffer", "die Pfeffer", "das Obst", "die Traube", "die Trauben", "der Apfel", "die Äpfel", "die Banane", "die Bananen", "die Zitrone", "die Zitronen", "die Erdbeere", "die Erdbeeren", "die Himbeere", "die Himbeeren", "das Gemüse", "die Gemüse", "die Kartoffel", "die Kartoffeln", "die Karotte", "die Karotten", "die Zwiebel", "die Zwiebeln", "der Knoblauch", "die Erbse", "die Erbsen", "die Bohne", "die Bohnen", "die Tomate", "die Tomaten", "die Gurke", "die Gurken", "der Spinat", "die Spinate", "der Kohl", "die Kohle", "der Pilz", "die Pilze", "die Milch", "die Butter", "das Ei", "die Eier", "der Käse", "die Käse", "der Schinken", "die Schinken", "die Wurst", "die Würste", "die Garnele", "die Garnelen", "das Schweinefleisch", "das Rindfleisch", "das Hühnerfleisch", "das Putenfleisch", "das Lammfleisch", "der Fisch", "die Nuss", "die Nüsse", "die Schokolade", "die Schokladen", "der Keks", "die Kekse", "der Kuchen", "die Kuchen", "der Tee", "die Tees"])
     #for file in all_files:
     #    part_name = "\\".join(file.split("\\")[:-1])
     #    rename(file, f'{part_name}\\vicki-{next(names).replace(" ", "_")}.mp3')
