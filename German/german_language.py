@@ -341,10 +341,36 @@ NOUNS_DICT = {
     "die Schokolade / die Schokoladen": "chocolate",
     "der Keks / die Kekse": "cookie",
     "der Kuchen / die Kuchen": "cake",
-    "der Tee / die Tees": "tea"
-}
+    "der Tee / die Tees": "tea"}
 
-TIPS_LIST = [
+DECLENSION_ORDER = ("masculine", "feminine", "neuter", "plural")
+# Case order is Nominativ / Akkusativ / Dativ.
+DECLENSION_AFFIXES = {
+    "standard": (("er", "e", "es", "e"), ("en", "e", "es", "e"), ("em", "er", "em", "en")),
+    "alternate": (("", "e", "", "e"), ("en", "e", "", "e"), ("em", "er", "em", "en"))}
+DECLENSION_DICT = {
+    "my": ["mein", "alt affix"],
+    "your [singular]": ["dein", "alt affix"],
+    "his": ["sein", "alt affix"],
+    "her": ["ihr", "alt affix"],
+    "its": ["sein", "alt affix"],
+    "our": ["unser", "alt affix"],
+    "your [plural]": ["euer", "alt affix"],
+    "their": ["ihr", "alt affix"],
+    "your [polite]": ["Ihr", "alt affix"],
+    # Same order as the affixes.
+    "the": ["der", "die", "das", "die", "den", "die", "das", "die", "dem", "der", "dem", "den"],
+    "a / an": ["ein", "alt affix", "plural = -"],
+    "no / none": ["kein", "alt affix"],
+    "every / all": ["jed", "plural = all"],
+    "this / these": ["dies"],
+    "which?": ["welch"],
+    # Different scheme than above.
+    "personal pronouns": ["ich", "du", "er", "sie", "es", "wir", "ihr", "sie",
+                          "mich", "dich", "ihn", "sie", "es", "uns", "euch", "sie",
+                          "mir", "dir", "ihm", "ihr", "ihm", "uns", "euch", "ihnen"]}
+
+TIPS = (
     # Verbs
     "When used in the sense of 'to do', machen and tun are often - but not always - replaceable.",
     """Unterrichten means teaching by low-level teachers (e.g. private tutors and higschool
@@ -505,5 +531,22 @@ TIPS_LIST = [
     are many that end with 'nis', 'tum', or 'sal'. A noun ending in 'e' is likely to be feminine;
     it is neuter when beginning with 'ge' and masculine when it denotes people or animals.""",
     """The gender of compound nouns, such as Toilettenpapier, is always the gender of the final
-    constitutive noun."""
-]
+    constitutive noun.""",
+    # Pronouns and articles
+    """Other than der/die/das, pronoun and article declension is mostly regular. The major exception
+    are words based on 'ein' (ein, kein, and all possessive pronouns), which do not receive a suffix
+    for masculine & neuter Nominativ and neuter Akkusativ.""",
+    """The indefinite articles ein & jeder exists only in singular form. For plural form either no
+    article is used (e.g. 'Hier wächst ein Baum' vs 'Hier wachsen Bäume') or the article 'alle' is
+    used (e.g. 'Jeder Baum hat Blätter' vs 'Alle Bäume haben Blätter'), respectively. Note that
+    'alle' has no singular form.""",
+
+    """Akkusativ (biernik - kogo? co?) Oskarżam …
+    For the direct object (her). Also motion.
+    Łączniki po których zawsze jest Akkusativ: bis, durch, für, gegen, ohne, um, wider.
+    Różnica od Polskiego: Ich kenne diese Frau. Ich kenne diese Frau nicht. → Znam [kogo? biernik] ją. Nie znam [kogo? dopełniacz] jej. W Niemieckim zawsze biernik.
+    mich - mnie (Mnemonic: Oskarża mnie mnich Aku o poruszenie.)
+    Dativ (celownik - komu? czemu?, narzędnik - (z) kim? (z) czym?)	 Pomogę … / Stoję z …
+    For the indirect object (to her/with her, etc.). Also location.
+    Łączniki po których zawsze jest Dativ: aus, bei, zu, von, nach, mit.
+    mir - mi, mną (Mnemonic: Stój ze mną i pomóż mi zbierać mirabelki)""")
