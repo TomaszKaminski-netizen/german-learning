@@ -7,10 +7,10 @@ from os import chdir, _exit
 from random import shuffle
 from collections import ChainMap, defaultdict
 from functools import partial
-from itertools import permutations, chain, count
+from itertools import permutations, chain, count, cycle
 from datetime import datetime
 from glob import glob
-from re import sub, match
+from re import sub, search
 import tkinter as tk
 from time import sleep
 import json
@@ -19,11 +19,16 @@ from pygame import mixer #* The playsound library did not work with special Germ
 import requests
 from bs4 import BeautifulSoup
 
-from german_language import VERBS_DICT, ADVERBS_DICT, NOUNS_DICT, TIPS_LIST
+from german_language import VERBS_DICT, ADVERBS_DICT, NOUNS_DICT, TIPS, DECLENSION_AFFIXES, \
+    DECLENSION_DICT, DECLENSION_ORDER
 
 CONJUGATION_CATEGORIES = ("Präsens", "Präteritum", "Perfekt", "Plusquamperfekt", "Futur I",
                           "Futur II", "Imperativ")
-PRONOUNS = ("ich", "du", "er/sie/es", "wir", "ihr", "sie")
+PRONOUNS = ("ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie")
+
+# Replaces all whitespace characters with (at most) single consecutive space. Also removes trailing
+# and leading spaces.
+trim = lambda string: sub(r"\s+", " ", string.strip())
 
 ####################################################################################################
 
@@ -34,6 +39,7 @@ class Starting_layout():
         tk.Label(text="Choose what to practice.").pack()
         tk.Button(text="Tips and rules", command=show_tips).pack()
         tk.Button(text="Listening", command=test_listening).pack()
+        tk.Button(text="Pronouns and articles", command=test_declension).pack()
 
         tk.Button(text="German to English", command=lambda:
                   translate(all_vocab, "ger_to_eng")).pack()
@@ -114,7 +120,7 @@ def show_tips():
     tk.Button(text="Next tip", command=lambda: wait_var.set(1)).pack()
     tip_label = tk.Label(wraplength=850, font="size 22")
     tip_label.pack(expand=True) #* This is not a reliable method of centering widgets
-    tips = TIPS_LIST
+    tips = TIPS
     shuffle(tips)
     for tip in tips:
         # Removing excess whitespace from the tips
@@ -199,7 +205,7 @@ def test_conjugation(categories, verbs="all"): #pylint: disable=inconsistent-ret
 
             raw_answer = layout.answer.get("1.0", tk.END) # All text in the text box
             # Splitting into rows and removing excess whitespace (including empty rows).
-            cleaned_answer = filter(bool, [row.strip() for row in raw_answer.split("\n")])
+            cleaned_answer = filter(bool, [trim(row) for row in raw_answer.split("\n")])
             if set(cleaned_answer) == set(right_answer):
                 layout.feedback_label.configure(text="Correct.")
             else:
@@ -255,7 +261,7 @@ def translate(vocab, direction, conjugate=tuple(), plural_nouns=True):
         layout.prompt_label.configure(text=f"Translate '{words[1]}'\n{next(countdown)} words left")
         window.wait_variable(layout.wait_var)
 
-        if layout.answer.get() in right_answers:
+        if trim(layout.answer.get()) in right_answers:
             layout.feedback_label.configure(text="Correct.")
             memory[words[1]] = datetime.now().strftime(r"%m-%d")
         else:
@@ -289,8 +295,8 @@ def test_listening():
         sound.play()
         window.wait_variable(layout.wait_var)
 
-        right_answer = match(r"vicki-(.+).mp3", audio_file).group(1).replace("_", " ")
-        if layout.answer.get() == right_answer:
+        right_answer = search(r"vicki-(.+).mp3", audio_file).group(1).replace("_", " ")
+        if trim(layout.answer.get()) == right_answer:
             response = "Correct."
         else:
             response = f"Wrong, the right answer is '{right_answer}'"
@@ -300,6 +306,56 @@ def test_listening():
                 response += f"\nIt means '{eng}'"
                 break
         layout.feedback_label.configure(text=response)
+        window.wait_variable(layout.wait_var)
+
+    layout.prompt_label.configure(text="All finished.")
+
+
+def test_declension():
+    """_summary_
+    """
+    vocab = list(DECLENSION_DICT.items())
+    # Always testing person pronouns (last item in DECLENSION_DICT) first.
+    test_first = [vocab.pop(-1)]
+    shuffle(vocab)
+    for eng, ger in test_first + vocab:
+        if len(ger) > 4: # Semi-arbitrary cutoff value
+            right_answer = ger
+        else:
+            which_affix = "alternate" if "alt affix" in ger else "standard"
+            affixes = iter(chain(*DECLENSION_AFFIXES[which_affix]))
+            # By joining the list 'extra' into one string it becomes easier to search via RegEx.
+            plural = search(r"plural = (\S+)", "\t".join(ger))
+
+            right_answer = []
+            for _ in range(3): # Nominativ / Akkusativ / Dativ
+                for gender in DECLENSION_ORDER:
+                    if (plural is not None) and (gender == "plural"):
+                        answer_piece = plural.group(1) + next(affixes)
+                    else:
+                        answer_piece = ger[0] + next(affixes)
+                    right_answer.append("-" if "-" in answer_piece else answer_piece)
+
+        layout = Exercise_layout("click", tk.Text(height=3, width=35))
+        one_third = int(len(right_answer) / 3)
+        if eng == "personal pronouns":
+            layout.prompt_label.configure(text=f"Declenate '{eng}'")
+            # Populating the text box with personal pronouns in Nominativ, to act as labels.
+            layout.answer.insert(tk.INSERT, "     ".join(ger[:one_third]) + "\n")
+        else:
+            layout.prompt_label.configure(text=f"Declenate '{eng}'\n{'   '.join(DECLENSION_ORDER)}")
+        #TODO: Add grammatical case labels for the text box.
+        window.wait_variable(layout.wait_var)
+
+        raw_answer = layout.answer.get("1.0", tk.END) # All text in the text box
+        if trim(raw_answer) == " ".join(right_answer):
+            layout.feedback_label.configure(text="Correct.")
+        else:
+            whitespace = cycle(["\n"] + ["\t"] * (one_third - 1))
+            # Presenting the correct answer in a grid format through the use of whitespace.
+            display_answer = "".join(chain(*zip(whitespace, right_answer)))
+            layout.feedback_label.configure(text=f"Wrong, the right answer is:{display_answer}")
+        layout.button_next.configure(text="Continue to next question.")
         window.wait_variable(layout.wait_var)
 
     layout.prompt_label.configure(text="All finished.")
@@ -315,13 +371,12 @@ if __name__ == "__main__":
     mixer.init() # This is necessary for playing audio files
     window.mainloop()
 
-#TODO: translate sentences, pronoun declination
+#TODO: adjectives, translate sentences
 
 ####################################################################################################
 
     # Use https://freetts.com/Home/GermanTTS for pronunciation sound files, Vicki voice
     # Use semicolons to separate words. Analyse > Label Sounds, then File > Export > Export Multiple
-    #from re import search
     #from os import rename
     #all_files = glob("C:\\Users\\daiwe\\Downloads\\vicki-*.mp3")
     #all_files = sorted(all_files, key=lambda x: int(search(r"vicki-(\d+)\.mp3", x).group(1)))
