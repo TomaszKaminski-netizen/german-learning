@@ -19,12 +19,13 @@ from pygame import mixer #* The playsound library did not work with special Germ
 import requests
 from bs4 import BeautifulSoup
 
-from german_language import VERBS_DICT, ADVERBS_DICT, NOUNS_DICT, TIPS, DECLENSION_AFFIXES, \
-    DECLENSION_DICT, DECLENSION_ORDER
+from german_language import VERBS_DICT, ADVERBS_DICT, NOUNS_DICT, ADJECTIVES_DICT, TIPS, \
+    DECLENSION_AFFIXES, DECLENSION_DICT, DECLENSION_ORDER
 
 CONJUGATION_CATEGORIES = ("Präsens", "Präteritum", "Perfekt", "Plusquamperfekt", "Futur I",
                           "Futur II", "Imperativ")
-PRONOUNS = ("ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie")
+# Needs to be the same as found on https://pl.pons.com/odmiana-czasownikow/niemiecki
+PRONOUNS = ("ich", "du", "er/sie/es", "wir", "ihr", "sie")
 
 # Replaces all whitespace characters with (at most) single consecutive space. Also removes trailing
 # and leading spaces.
@@ -35,7 +36,7 @@ trim = lambda string: sub(r"\s+", " ", string.strip())
 class Starting_layout():
     """The widget layout for the main menu."""
     def __init__(self):
-        all_vocab = [VERBS_DICT, ADVERBS_DICT, NOUNS_DICT]
+        all_vocab = [VERBS_DICT, ADVERBS_DICT, NOUNS_DICT, ADJECTIVES_DICT]
         tk.Label(text="Choose what to practice.").pack()
         tk.Button(text="Tips and rules", command=show_tips).pack()
         tk.Button(text="Listening", command=test_listening).pack()
@@ -45,6 +46,8 @@ class Starting_layout():
                   translate(all_vocab, "ger_to_eng")).pack()
         tk.Button(text="English to German", command=lambda:
                   translate(all_vocab, "eng_to_ger", get_cats(), self.plural_nouns.get())).pack()
+        tk.Button(text="Adjectives", command=lambda:
+                  translate([ADJECTIVES_DICT], "eng_to_ger")).pack()
         tk.Button(text="Nouns", command=lambda:
                   translate([NOUNS_DICT], "eng_to_ger", tuple(), self.plural_nouns.get())).pack()
 
@@ -300,7 +303,7 @@ def test_listening():
             response = "Correct."
         else:
             response = f"Wrong, the right answer is '{right_answer}'"
-        all_vocab = ChainMap(VERBS_DICT, ADVERBS_DICT)
+        all_vocab = ChainMap(VERBS_DICT, ADVERBS_DICT, NOUNS_DICT, ADJECTIVES_DICT)
         for ger, eng in all_vocab.items():
             if right_answer in ger.split(" / "):
                 response += f"\nIt means '{eng}'"
@@ -365,13 +368,13 @@ def test_declension():
 if __name__ == "__main__":
     chdir(dirname(abspath(__file__)))
     window = tk.Tk()
-    window.geometry("900x750")
+    window.geometry("900x800")
     window.option_add("*font", "size 19") # Changing the default font size
     Starting_layout()
     mixer.init() # This is necessary for playing audio files
     window.mainloop()
 
-#TODO: adjectives, translate sentences
+#TODO: translate sentences
 
 ####################################################################################################
 
@@ -380,7 +383,7 @@ if __name__ == "__main__":
     #from os import rename
     #all_files = glob("C:\\Users\\daiwe\\Downloads\\vicki-*.mp3")
     #all_files = sorted(all_files, key=lambda x: int(search(r"vicki-(\d+)\.mp3", x).group(1)))
-    #names = iter(["die Schokoladen", "der Paprika", "die Paprika", "übersetzen", "aufstehen", "sich hinsetzen", "sich hinlegen", "legen", "setzen", "tatsächlich", "der Hüttenkäse", "die Hüttenkäse", "die Minze", "die Minzen", "die Rosine", "die Rosinen", "das Eis", "entweder oder", "gießen", "rühren", "mischen", "schälen", "würzen", "backen", "braten", "schmoren", "hacken", "abschneiden", "messen", "anbraten", "die Blaubeere", "die Blaubeeren", "dämpfen", "das Spiegelei", "die Spiegeleier"])
+    #names = iter(["groß", "klein", "gut", "schlecht", "einfach", "leicht", "schwer", "kalt", "heiß", "warm", "alt", "neu", "jung", "früh", "spät", "kurz", "schnell", "langsam", "langweilig", "nass", "trocken", "sauber", "schmutzig", "dreckig", "lang", "breit", "schmal", "eng", "dick", "dünn", "niedrig", "hoch", "stark", "schwach", "krank", "gesund", "schön", "hässlich", "arm", "reich", "teuer", "billig", "frei", "hell", "dunkel", "gefährlich", "sicher", "ähnlich", "verschieden", "unterschiedlich", "wichtig", "bequem", "komisch", "lustig", "weiß", "schwarz", "blau", "rot", "gelb", "grün", "braun", "lila", "grau", "scharf", "süß", "lecker", "frisch", "stinkend", "salzig", "bitter", "sauer", "roh", "aufhören", "das Spiegelei", "die Spiegeleier"])
     #for file in all_files:
     #    part_name = "\\".join(file.split("\\")[:-1])
     #    rename(file, f'{part_name}\\vicki-{next(names).replace(" ", "_")}.mp3')
