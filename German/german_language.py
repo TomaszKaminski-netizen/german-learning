@@ -207,8 +207,36 @@ VERBS_DICT = {
     "hoffen": "to hope",
     "wünschen": "to wish",
     "enden / beenden": "to finish",
+    "aufhören": "to cease",
     "beginnen / anfangen": "to begin",
     "wählen / auswählen": "to choose / to select"}
+
+# missbrauchen
+# meinen
+# vorkommen
+# erhalten
+# empfangen
+# annehmen
+# befehlen
+# fehlen
+# behandeln
+# handeln
+# verhandeln
+# misshandeln
+# danken
+# drücken
+# finden
+# zuhören
+# prüfen
+# rechnen
+# reiben
+# wiegen
+# einkochen
+# vorlesen
+# fortsetzen
+# fortfahren
+# entwerfen
+# verwenden
 
 ADVERBS_DICT = {
     "dann": "then",
@@ -267,6 +295,78 @@ ADVERBS_DICT = {
     "wer": "who?",
     "wie": "how?",
     "warum / wieso": "why?"}
+
+ADJECTIVES_DICT = {
+    "groß": "big",
+    "klein": "small",
+    "gut": "good",
+    "schlecht": "bad",
+    "einfach": "simple / easy",
+    "leicht": "light / easy",
+    "schwer": "difficult / heavy",
+    "kalt": "cold",
+    "heiß": "hot",
+    "warm": "warm",
+    "alt": "old",
+    "neu": "new",
+    "jung": "young",
+    "früh": "early",
+    "spät": "late",
+    "kurz": "short",
+    "schnell": "fast",
+    "langsam": "slow",
+    "langweilig": "boring",
+    "nass": "wet",
+    "trocken": "dry",
+    "sauber": "clean",
+    "schmutzig / dreckig": "dirty",
+    "lang": "long",
+    "breit": "wide / broad",
+    "schmal": "narrow",
+    "eng": "tight",
+    "dick": "thick / fat",
+    "dünn": "thin",
+    "niedrig": "low",
+    "hoch": "high",
+    "stark": "strong",
+    "schwach": "weak",
+    "krank": "sick",
+    "gesund": "healthy",
+    "schön": "beautiful",
+    "hässlich": "ugly",
+    "arm": "poor",
+    "reich": "rich",
+    "teuer": "expensive",
+    "billig": "cheap",
+    "frei": "free",
+    "hell": "bright",
+    "dunkel": "dark",
+    "gefährlich": "dangerous",
+    "sicher": "safe / sure",
+    "ähnlich": "similar",
+    "verschieden / unterschiedlich": "varied",
+    "wichtig": "important",
+    "bequem": "comfortable",
+    "komisch": "strange",
+    "lustig": "funny",
+    "weiß": "white",
+    "schwarz": "black",
+    "blau": "blue",
+    "rot": "red",
+    "gelb": "yellow",
+    "grün": "green",
+    "braun": "brown",
+    "lila": "purple",
+    "grau": "grey",
+    "scharf": "spicy",
+    "süß": "sweet",
+    "lecker": "tasty",
+    "frisch": "fresh",
+    "stinkend": "stinky",
+    "salzig": "salty",
+    "bitter": "bitter",
+    "sauer": "sour",
+    "roh": "raw"}
 
 NOUNS_DICT = {
     "das Küchenmesser / die Küchenmesser": "kitchen knife",
@@ -350,7 +450,7 @@ NOUNS_DICT = {
     "die Milch": "milk",
     "die Butter": "butter",
     "das Ei / die Eier": "egg",
-    "das Spiegelei / die Spiegeleier": "fried egg", # Needs voice
+    "das Spiegelei / die Spiegeleier": "fried egg",
     "das Rührei / die Rühreier": "scrambled egg",
     "der Käse / die Käse": "cheese",
     "der Hüttenkäse / die Hüttenkäse": "cottage cheese",
@@ -513,7 +613,7 @@ TIPS = (
     verb does not change depending on the person - instead an auxiliary verb (either haben or sein)
     is conjugated using Präsens.""",
     """In Perfekt, haben is used with transitive verbs and sein with intransitive verbs. Transitive
-    verbs are those that require / very often take a direct object, e.g. "I destroyed an object". It
+    verbs are those that require / very often take a direct object, e.g. "I destroyed a chair". It
     is possible to just say "I destroyed", but that is not how the verb is usually employed (so it
     still pairs with haben). Intransitive verbs either can't or don't need to have a direct object
     (e.g. 'The light shone', 'We were running', 'He died'). Intransitive verbs are far less common
@@ -569,7 +669,7 @@ TIPS = (
     it is neuter when beginning with 'ge' and masculine when it denotes people or animals.""",
     """The gender of compound nouns, such as Toilettenpapier, is always the gender of the final
     constitutive noun.""",
-    # Pronouns and articles
+    # Determiners
     """Other than der/die/das, pronoun and article declension is mostly regular. The major exception
     are words based on 'ein' (ein, kein, and all possessive pronouns), which do not receive a suffix
     for masculine & neuter Nominativ and neuter Akkusativ.""",
@@ -577,13 +677,30 @@ TIPS = (
     article is used (e.g. 'Hier wächst ein Baum' vs 'Hier wachsen Bäume') or the article 'alle' is
     used (e.g. 'Jeder Baum hat Blätter' vs 'Alle Bäume haben Blätter'), respectively. Note that
     'alle' has no singular form.""",
-
-    """Akkusativ (biernik - kogo? co?) Oskarżam …
-    For the direct object (her). Also motion.
-    Łączniki po których zawsze jest Akkusativ: bis, durch, für, gegen, ohne, um, wider.
-    Różnica od Polskiego: Ich kenne diese Frau. Ich kenne diese Frau nicht. → Znam [kogo? biernik] ją. Nie znam [kogo? dopełniacz] jej. W Niemieckim zawsze biernik.
-    mich - mnie (Mnemonic: Oskarża mnie mnich Aku o poruszenie.)
-    Dativ (celownik - komu? czemu?, narzędnik - (z) kim? (z) czym?)	 Pomogę … / Stoję z …
-    For the indirect object (to her/with her, etc.). Also location.
-    Łączniki po których zawsze jest Dativ: aus, bei, zu, von, nach, mit.
-    mir - mi, mną (Mnemonic: Stój ze mną i pomóż mi zbierać mirabelki)""")
+    """The Nominativ case is for the subject (performs action), Akkusativ for the direct object
+    (receives the action), and Dativ for the indirect object (to/for whom the action is performed)
+    of a sentence. For example, 'The cook sends the cooking pot to the lady' -> 'Die Köchin (N)
+    schickt den Kochtopf (A) zu der Dame (D)'. Roughly 50 verbs (including all intransitive verbs)
+    only have an indirect object, but it is far more common for a setence to only feature a direct
+    object.""",
+    """Akkusativ always appears after the connecting words: bis, durch, für, gegen, ohne, um, wider.
+    Dative instead follows after: aus, bei, zu, von, nach, mit""",
+    """Compared with Polish cases, Akkusativ is the 'biernik' (kogo? co?) and Dativ the 'celownik'
+    (komu? czemu?) plus 'narzędnik' (z kim? z czym?) combined.""",
+    # Adjectives
+    """Adjectives follow the same strong declension as non-'ein' determiners. However, when there
+    is both an adjective and a determiner in front of a noun, the adjective instead uses weak
+    declension, as the necessary grammatical information has already been conveyed. Here the only
+    two suffixes are 'e' (for all singular Nominativ plus female & neuter Akkusativ) and 'en' (for
+    the rest). The one exception are 'ein'-type determiners lacking a suffix, in the case which the
+    adjective still takes strong declension for clarity.""",
+    """Adjectives are intensified by either adding the 'er' (2nd degree, e.g. hotter) or '(e)sten'
+    (3rd degree, e.g. hottest) suffix to the base form (1st degree). Unlike English, German never
+    uses a word like 'more' to form the 2nd degree (e.g. more beautiful). Most one-syllable
+    adjectives receive an umlaut over a/o/u in their 2nd & 3rd degree. There are also a few fully
+    irregular adjectives and adverbs: viel / mehr / am meisten, gut / besser / am besten, bald /
+    eher / am ehesten, gern / lieber / am liebsten.""",
+    """Adjectives are either predicate (e.g. This dog is big) or attributive (e.g. The big dog is
+    barking). In German predicate adjectives do not undergo declension, but their 3rd degree needs
+    to be precedded by the word 'am'. Declension suffixes are added after the 2nd degree 'er' suffix
+    and replace the 'en' in the '(e)sten' 3rd degree suffix.""")
