@@ -47,11 +47,15 @@ VERBS_DICT = {
     "helfen": "to help",
     "teilen": "to share",
     "bitten": "to request",
+    "danken": "to thank",
     "bieten / anbieten": "to offer",
     "verbieten": "to forbid",
+    "behandeln": "to treat",
+    "misshandeln": "to mistreat",
+    "missbrauchen": "to abuse / to misuse",
     "lügen": "to lie (falshood)",
     "verraten": "to betray",
-    "hören": "to hear / to listen",
+    "hören / zuhören": "to hear / to listen",
     "sprechen": "to speak",
     "riechen": "to smell",
     "schmecken": "to taste",
@@ -59,6 +63,7 @@ VERBS_DICT = {
     "reden": "to talk",
     "sagen": "to say",
     "lesen": "to read",
+    "vorlesen": "to read aloud",
     "schreiben": "to write",
     "buchstabieren": "to spell",
     "übersetzen": "to translate",
@@ -95,6 +100,7 @@ VERBS_DICT = {
     "bekommen": "to get",
     "nehmen": "to take",
     "mitnehmen": "to take along",
+    "annehmen": "to accept / to assume",
     "holen": "to fetch",
     "bringen": "to bring",
     "geben": "to give",
@@ -107,6 +113,7 @@ VERBS_DICT = {
     "packen": "to pack",
     "werfen": "to throw",
     "wegwerfen": "to throw away",
+    "fangen": "to catch",
     "bestellen": "to order",
     "kaufen": "to buy",
     "einkaufen": "to shop",
@@ -118,7 +125,12 @@ VERBS_DICT = {
     "ausgeben": "to spend (money)",
     "spenden": "to donate",
     "kündigen / stornieren": "to cancel (a contract)",
+    "handeln": "to act / to trade",
+    "verhandeln / aushandeln": "to negotiate",
     "suchen": "to search",
+    "finden": "to find",
+    "sammeln": "to gather",
+    "sich befinden": "to be located",
     "arbeiten": "to work",
     "wohnen": "to live (reside)",
     "leben": "to be alive",
@@ -168,9 +180,10 @@ VERBS_DICT = {
     "hacken": "to chop",
     "schneiden": "to cut",
     "abschneiden": "to slice",
+    "reiben": "to rub / to grate",
     "dämpfen": "to steam / to dampen",
     "messen": "to measure",
-    "benutzen": "to use",
+    "nutzen / benutzen": "to use",
     "lösen": "to solve / to remove / to untighten",
     "spannen": "to tension / to tighten",
     "gehören": "to belong",
@@ -184,6 +197,7 @@ VERBS_DICT = {
     "schließen": "to close",
     "aufschließen": "to unlock",
     "öffnen": "to open",
+    "drücken": "to press / to push",
     "ziehen": "to pull / to move",
     "bauen": "to build",
     "sich interessieren": "to be interested in",
@@ -201,42 +215,19 @@ VERBS_DICT = {
     "gewinnen": "to win",
     "erreichen": "to achieve / to reach",
     "vorhaben": "to intend",
+    "entwerfen": "to design / to draft",
     "befolgen": "to follow (rules / orders)",
     "folgen": "to follow (physically / temporally)",
+    "befehlen": "to command",
+    "fehlen": "to be missing",
     "betreffen": "to concern / to affect",
     "hoffen": "to hope",
     "wünschen": "to wish",
     "enden / beenden": "to finish",
     "aufhören": "to cease",
     "beginnen / anfangen": "to begin",
+    "passieren": "to happen / to pass",
     "wählen / auswählen": "to choose / to select"}
-
-# missbrauchen
-# meinen
-# vorkommen
-# erhalten
-# empfangen
-# annehmen
-# befehlen
-# fehlen
-# behandeln
-# handeln
-# verhandeln
-# misshandeln
-# danken
-# drücken
-# finden
-# zuhören
-# prüfen
-# rechnen
-# reiben
-# wiegen
-# einkochen
-# vorlesen
-# fortsetzen
-# fortfahren
-# entwerfen
-# verwenden
 
 ADVERBS_DICT = {
     "dann": "then",
@@ -319,7 +310,12 @@ ADJECTIVES_DICT = {
     "nass": "wet",
     "trocken": "dry",
     "sauber": "clean",
-    "schmutzig / dreckig": "dirty",
+    "dreckig": "dirty",
+    "weich": "soft",
+    "brüchig": "brittle / crumbling",
+    "hart": "hard",
+    "glatt": "smooth",
+    "rau": "rough",
     "lang": "long",
     "breit": "wide / broad",
     "schmal": "narrow",
@@ -328,6 +324,8 @@ ADJECTIVES_DICT = {
     "dünn": "thin",
     "niedrig": "low",
     "hoch": "high",
+    "voll": "full", # Needs voice
+    "leer": "empty", # Needs voice
     "stark": "strong",
     "schwach": "weak",
     "krank": "sick",
@@ -347,29 +345,32 @@ ADJECTIVES_DICT = {
     "verschieden / unterschiedlich": "varied",
     "wichtig": "important",
     "bequem": "comfortable",
+    "überraschend": "surprising",
     "komisch": "strange",
     "lustig": "funny",
+    "notwendig": "necessary", # Needs voice
     "weiß": "white",
     "schwarz": "black",
     "blau": "blue",
     "rot": "red",
+    "hellrot": "light red",
     "gelb": "yellow",
     "grün": "green",
     "braun": "brown",
     "lila": "purple",
     "grau": "grey",
-    "scharf": "spicy",
+    "scharf": "spicy / sharp",
     "süß": "sweet",
     "lecker": "tasty",
     "frisch": "fresh",
     "stinkend": "stinky",
+    "duftend": "fragrant",
     "salzig": "salty",
     "bitter": "bitter",
     "sauer": "sour",
     "roh": "raw"}
 
 NOUNS_DICT = {
-    "das Küchenmesser / die Küchenmesser": "kitchen knife",
     "das Messer / die Messer": "knife",
     "der Löffel / die Löffel": "spoon",
     "die Suppenkelle / die Suppenkellen": "ladle",
@@ -388,6 +389,7 @@ NOUNS_DICT = {
     "der Ventilator / die Ventilatoren": "ventilator",
     "der Wasserkocher / die Wasserkocher": "kettle",
     "der Ofen / die Öfen": "oven",
+    "der Herd / die Herde": "stove",
     "der Kühlschrank / die Kühlschränke": "fridge",
     "der Gefrierschrank / die Gefrierschränke": "freezer",
     "die Seife / die Seifen": "soap",
@@ -404,9 +406,19 @@ NOUNS_DICT = {
     "der Stuhl / die Stühle": "chair",
     "die Tür / die Türen": "door",
     "der Boden / die Böden": "floor",
+    "die Wand / die Wände": "wall [ściana]",
+    "die Mauer / die Mauern": "wall [mur]",
     "das Fenster / die Fenster": "window",
+    "der Vorhang / die Vorhänge": "curtain",
     "das Licht / die Lichter": "light",
     "das Bett / die Betten": "bed",
+    "das Kopfkissen / die Kopfkissen": "pillow",
+    "das Haus / die Häuser": "house",
+    "das Wohnzimmer / die Wohnzimmer": "living room",
+    "das Badezimmer / die Badezimmer": "bathroom",
+    "das Schlafzimmer / die Schlafzimmer": "bedroom",
+    "der Garten / die Gärten": "garden",
+    "das Erdgeschoss / die Erdgeschosse": "ground floor",
     "die Box / die Boxen": "box",
     "die Schublade / die Schubladen": "drawer",
     "der Mülleimer / die Mülleimer": "bin",
@@ -425,6 +437,7 @@ NOUNS_DICT = {
     "der Senf": "mustard",
     "das Salz / die Salze": "salt",
     "der Pfeffer / die Pfeffer": "pepper",
+    "das Gewürz / die Gewürze": "spice",
     "das Obst": "fruit",
     "die Traube / die Trauben": "grape",
     "die Rosine / die Rosinen": "raisin",
@@ -435,6 +448,8 @@ NOUNS_DICT = {
     "die Himbeere / die Himbeeren": "raspberry",
     "die Blaubeere / die Blaubeeren": "blueberry",
     "das Gemüse / die Gemüse": "vegetable",
+    "der Kürbis / die Kürbisse": "pumpkin",
+    "der Mais / die Maise": "corn",
     "die Kartoffel / die Kartoffeln": "potato",
     "die Karotte / die Karotten": "carrot",
     "die Zwiebel / die Zwiebeln": "onion",
@@ -503,8 +518,9 @@ TIPS = (
     "When used in the sense of 'to do', machen and tun are often - but not always - replaceable.",
     """Unterrichten means teaching by low-level teachers (e.g. private tutors and higschool
     teachers), whereas lehren means teaching by high-level teachers (e.g. university professor).""",
-    """Fühlen without sich seems to be rarely used, appearing in sentences like 'I can't feel my
-    hands' or 'I feel your pain as if it was my pain'.""",
+    """Fühlen without sich seems to be rarely used, if at all, with spüren being preferred.""",
+    """Hören can mean both 'to listen' and 'to hear', but zuhören is always about attentive
+    listening.""",
     """Schauen and sehen are often (colloquially) used to mean 'to watch / look at', but only when
     there is no possible confusion with the actual meaning of 'to look / see'. For example, in
     English you can 'watch a movie' or 'watch your children'. You can say 'I saw a movie', because a
@@ -512,6 +528,10 @@ TIPS = (
     of 'I watch my children', because those are two diffrent things.""",
     """Sich anziehen means to put on clothes, whereas sich kleiden is about dressing with a
     particular fashing style.""",
+    """Verhandeln is about negotiating in general, whereas aushandeln focuses on completing the
+    negotiation [wynegocjować].""",
+    """Both benutzen and nutzen mean 'to use', but benutzen is connotation-free [używać], whilst
+    nutzen emphasizes the benefits that come from the usage [korzystać].""",
     """Both bieten and anbieten mean 'to offer', but anbieten is for a particular concrete offer
     between people (think of a commercial deal), whereas bieten is a broader term (e.g. Life offers
     many opportunities to those who look for them.).""",
