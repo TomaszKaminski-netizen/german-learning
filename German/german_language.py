@@ -47,6 +47,7 @@ VERBS_DICT = {
     "helfen": "to help",
     "teilen": "to share",
     "bitten": "to request",
+    "verlangen / fordern" : "to demand",
     "danken": "to thank",
     "bieten / anbieten": "to offer",
     "verbieten": "to forbid",
@@ -105,6 +106,7 @@ VERBS_DICT = {
     "bringen": "to bring",
     "geben": "to give",
     "schenken": "to gift",
+    "gefallen": "to please [podobać się]",
     "senden / schicken": "to send",
     "tragen": "to carry",
     "legen": "to lay",
@@ -120,6 +122,7 @@ VERBS_DICT = {
     "verkaufen": "to sell",
     "bezahlen": "to pay",
     "zählen": "to count",
+    "rechnen": "to calculate",
     "kosten": "to cost",
     "verdienen": "to earn",
     "ausgeben": "to spend (money)",
@@ -128,6 +131,7 @@ VERBS_DICT = {
     "handeln": "to act / to trade",
     "verhandeln / aushandeln": "to negotiate",
     "suchen": "to search",
+    "entdecken": "to discover",
     "finden": "to find",
     "sammeln": "to gather",
     "sich befinden": "to be located",
@@ -167,6 +171,7 @@ VERBS_DICT = {
     "einladen": "to invite",
     "treffen": "to meet",
     "sich treffen": "to meet up",
+    "feiern": "to celebrate",
     "kochen": "to cook",
     "gießen": "to pour",
     "rühren": "to stir",
@@ -200,6 +205,7 @@ VERBS_DICT = {
     "drücken": "to press / to push",
     "ziehen": "to pull / to move",
     "bauen": "to build",
+    "zerstören": "to destroy",
     "sich interessieren": "to be interested in",
     "träumen": "to dream",
     "lieben": "to love",
@@ -208,6 +214,7 @@ VERBS_DICT = {
     "spüren": "to sense",
     "erleben": "to experience",
     "sich freuen": "to be happy about [cieszyć się że / na]",
+    "lachen": "to laugh",
     "versuchen": "to try (a task)",
     "probieren": "to try (a thing)",
     "aufgeben": "to give up",
@@ -215,6 +222,7 @@ VERBS_DICT = {
     "gewinnen": "to win",
     "erreichen": "to achieve / to reach",
     "vorhaben": "to intend",
+    "sich entscheiden": "to decide",
     "entwerfen": "to design / to draft",
     "befolgen": "to follow (rules / orders)",
     "folgen": "to follow (physically / temporally)",
@@ -237,6 +245,8 @@ ADVERBS_DICT = {
     "etwas": "something / a bit",
     "etwa": "about / roughly",
     "dort": "there [tam]",
+    "weit": "far",
+    "nahe": "near",
     "noch": "still / yet",
     "jetzt": "now",
     "aber": "but",
@@ -247,17 +257,22 @@ ADVERBS_DICT = {
     "ohne": "without",
     "statt": "instead of",
     "ziemlich": "pretty / quite",
-    "genau": "exactly",
+    "genau": "exactly / accurate",
     "unbedingt": "absolutely / necessarily",
     "deshalb / deswegen": "therefore",
+    "außerdem": "besides / moreover",
     "immer": "always",
     "manchmal": "sometimes",
+    "meistens": "mostly",
     "sofort": "immediately",
     "vielleicht": "perhaps",
+    "wahrscheinlich": "probably",
+    "gern": "gladly",
     "genug": "enough",
     "wieder": "again",
     "wider": "against",
     "obwohl": "although",
+    "sogar / selbst": "even [nawet]",
     "ob": "whether",
     "dass": "that [że]",
     "trotz": "despite",
@@ -272,6 +287,9 @@ ADVERBS_DICT = {
     "selten": "rarely",
     "sehr": "very",
     "kaum": "hardly",
+    "insgesamt": "altogether",
+    "zusammen": "together",
+    "allein": "alone",
     "tatsächlich / eigentlich": "actually",
     "wirklich": "really / truly",
     "trotzdem / dennoch": "nevertheless",
@@ -291,6 +309,8 @@ ADJECTIVES_DICT = {
     "groß": "big",
     "klein": "small",
     "gut": "good",
+    "nett": "nice",
+    "toll": "fantastic",
     "schlecht": "bad",
     "einfach": "simple / easy",
     "leicht": "light / easy",
@@ -307,6 +327,7 @@ ADJECTIVES_DICT = {
     "schnell": "fast",
     "langsam": "slow",
     "langweilig": "boring",
+    "aufregend": "exciting",
     "nass": "wet",
     "trocken": "dry",
     "sauber": "clean",
@@ -324,12 +345,18 @@ ADJECTIVES_DICT = {
     "dünn": "thin",
     "niedrig": "low",
     "hoch": "high",
-    "voll": "full", # Needs voice
-    "leer": "empty", # Needs voice
+    "voll": "full",
+    "leer": "empty",
+    "laut": "loud",
+    "ruhig": "quiet / calm",
+    "still": "silent / still",
     "stark": "strong",
     "schwach": "weak",
+    "kaputt / gebrochen": "broken",
     "krank": "sick",
     "gesund": "healthy",
+    "glücklich": "lucky / happy",
+    "traurig": "sad",
     "schön": "beautiful",
     "hässlich": "ugly",
     "arm": "poor",
@@ -339,16 +366,23 @@ ADJECTIVES_DICT = {
     "frei": "free",
     "hell": "bright",
     "dunkel": "dark",
+    "klar / deutlich": "clear",
     "gefährlich": "dangerous",
+    "unmöglich": "impossible",
     "sicher": "safe / sure",
+    "fertig / bereit": "ready",
     "ähnlich": "similar",
+    "gleich": "same / equal",
     "verschieden / unterschiedlich": "varied",
     "wichtig": "important",
     "bequem": "comfortable",
+    "gemütlich": "cosy",
     "überraschend": "surprising",
     "komisch": "strange",
     "lustig": "funny",
-    "notwendig": "necessary", # Needs voice
+    "notwendig": "necessary",
+    "zusätzlich": "additional",
+    "beide": "both",
     "weiß": "white",
     "schwarz": "black",
     "blau": "blue",
@@ -371,6 +405,19 @@ ADJECTIVES_DICT = {
     "roh": "raw"}
 
 NOUNS_DICT = {
+    "das Meer / die Meere": "sea",
+    "der See / die Seen": "lake",
+    "der Fluss / die Flüsse": "river / flow",
+    "die Klippe / die Klippen": "cliff",
+    "der Strand / die Strände": "beach",
+    "die Insel / die Inseln": "island",
+    "der Sumpf / die Sümpfe": "marsh",
+    "der Hügel / die Hügel": "hill",
+    "der Berg / die Berge": "mountain",
+    "das Tal / die Täler": "valley",
+    "der Wald / die Wälder": "forest",
+    "die Wiese / die Wiesen": "meadow",
+    "der Weg / die Wege": "path / way",
     "das Messer / die Messer": "knife",
     "der Löffel / die Löffel": "spoon",
     "die Suppenkelle / die Suppenkellen": "ladle",
@@ -392,18 +439,22 @@ NOUNS_DICT = {
     "der Herd / die Herde": "stove",
     "der Kühlschrank / die Kühlschränke": "fridge",
     "der Gefrierschrank / die Gefrierschränke": "freezer",
+    "der Korb / die Körbe": "basket",
     "die Seife / die Seifen": "soap",
     "das Handtuch / die Handtücher": "body towel",
     "das Papiertuch / die Papiertücher": "paper towel",
     "das Toilettenpapier / die Toilettenpapiere": "toilet paper",
     "die Kleidung / die Kleidungen": "clothes",
     "die Waschmaschine / die Waschmaschinen": "washing machine",
+    "die Spülmaschine / die Spülmaschinen": "dishwasher",
     "der Wäschetrockner / die Wäschetrockner": "clothes dryer",
+    "der Wäscheständer / die Wäscheständer": "clothes horse",
     "der Föhn / die Föhne": "hair dryer",
     "das Waschbecken / die Waschbecken": "sink",
     "der Spiegel / die Spiegel": "mirror",
     "der Tisch / die Tische": "table",
     "der Stuhl / die Stühle": "chair",
+    "das Möbel / die Möbel": "furniture",
     "die Tür / die Türen": "door",
     "der Boden / die Böden": "floor",
     "die Wand / die Wände": "wall [ściana]",
@@ -581,7 +632,7 @@ TIPS = (
     geht jeden tag spazieren, weil sie einen Hund hat'. Additionally, sentences can not begin with
     denn, but can with weil.""",
     """The English word 'too' was originally a stressed version of 'to' and English decided to
-    capture that in a spelling difference. German didn't bother, and so zu is both the words 'to'
+    capture that in a spelling difference. German didn't bother, so zu is both the words 'to'
     and 'too'.""",
     """Bereits is more common in writing, whilst schon is more common in speech. Schon is also often
     used as a modal particle, in the case which it means 'indeed'.""",
@@ -591,6 +642,17 @@ TIPS = (
     """Whilst they both mean 'actually', tatsächlich emphasizes that a statement is true, whilst
     eigentlich is a kind of diminisher - think of the way in which 'technically' is used in English.
     """,
+    """The adverb zwar is used in two different ways. Firstly, it can alert the reader/listener that
+    information is coming that will put parameters / limits on what is being stated (e.g. That is a
+    good thought, but it is not a new one -> Das ist zwar ein guter, aber kein neuer Gedanke). In
+    these cases zwar can be understood to mean 'indeed'. Secondly, zwar combined with und announces
+    clarification of the previous statement (e.g. The family is travelling south on vacation,
+    specifically to Italy -> Die Familie reist im Urlaub in den Süden, und zwar nach Italien). Here
+    zwar is best thought of as 'namely' or a dash (—).""",
+    """Besides its colloquial use as a way to agree with somebody, genau is also an ordinary
+    adjective with the meaning 'exact / accurate'.""",
+    """In German there is no equivalent to the English suffix 'ly' (e.g. slow -> slowly). Rather,
+    German adjectives often also serve as adverbs, without needing to undergo any modification.""",
     # Miscellanous
     """Ordinal numbers (first, second, etc.) are created from cardinal numbers (one, two) by adding
     the ending 'te' to them for numbers from 1 to 19, and 'ste' for numbers from 20 upwards. There
@@ -608,6 +670,8 @@ TIPS = (
     irgendwo - somewhere, irgendwann - some time, irgendwie - somehow, irgendwas - something,
     irgendwer - someone. Irgendwas carries a connotation of vagueness when compared to etwas - it is
     like a mix of something + anything.""",
+    """Je and desto are used together the same way as 'the' in 'The longer more you work, the more
+    money you will earn' -> 'Je länger Sie arbeiten, desto mehr Geld werden Sie verdienen'.""",
     """Adding the interjection 'bitte' to orders / demands makes them sound more polite. However,
     using bitte in requests / questions (e.g. Would you have time to help me?) makes them sound like
     orders, and thus impolite. Therefore, instead of bitte use vielleicht and/or könnten.""",
@@ -633,8 +697,8 @@ TIPS = (
     verb does not change depending on the person - instead an auxiliary verb (either haben or sein)
     is conjugated using Präsens.""",
     """In Perfekt, haben is used with transitive verbs and sein with intransitive verbs. Transitive
-    verbs are those that require / very often take a direct object, e.g. "I destroyed a chair". It
-    is possible to just say "I destroyed", but that is not how the verb is usually employed (so it
+    verbs are those that require / very often take a direct object, e.g. 'I destroyed a chair'. It
+    is possible to just say 'I destroyed', but that is not how the verb is usually employed (so it
     still pairs with haben). Intransitive verbs either can't or don't need to have a direct object
     (e.g. 'The light shone', 'We were running', 'He died'). Intransitive verbs are far less common
     than transitive, and as a rule of thumb they relate to movement or change of state. Note that
@@ -723,4 +787,7 @@ TIPS = (
     """Adjectives are either predicate (e.g. This dog is big) or attributive (e.g. The big dog is
     barking). In German predicate adjectives do not undergo declension, but their 3rd degree needs
     to be precedded by the word 'am'. Declension suffixes are added after the 2nd degree 'er' suffix
-    and replace the 'en' in the '(e)sten' 3rd degree suffix.""")
+    and replace the 'en' in the '(e)sten' 3rd degree suffix.""",
+    """Fertig implies that a task has been completed (i.e. finished), whereas bereit implies that a
+    new task can now begin (i.e. preparations are complete).""",
+    "Gebrochen means 'physically broken', whilst kaputt refers to a state of not being functional.")

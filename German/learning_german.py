@@ -374,7 +374,7 @@ if __name__ == "__main__":
     mixer.init() # This is necessary for playing audio files
     window.mainloop()
 
-#TODO: translate sentences, add a way of scaling the amount of words tested (chronologically), connector words
+#TODO: translate sentences, connector words, add a way of scaling the amount of words tested (chronologically)
 
 ####################################################################################################
 
@@ -383,7 +383,7 @@ if __name__ == "__main__":
     #from os import rename
     #all_files = glob("C:\\Users\\daiwe\\Downloads\\vicki-*.mp3")
     #all_files = sorted(all_files, key=lambda x: int(search(r"vicki-(\d+)\.mp3", x).group(1)))
-    #names = iter(["danken", "behandeln", "misshandeln", "missbrauchen", "zuhören", "vorlesen", "annehmen", "fangen", "handeln", "verhandeln", "aushandeln", "finden", "sammeln", "sich befinden", "reiben", "nutzen", "drücken", "entwerfen", "befehlen", "fehlen", "passieren", "weich", "brüchig", "hart", "glatt", "rau", "überraschend", "hellrot", "duftend", "der Herd", "die Herde", "die Wand", "die Wände", "die Mauer", "die Mauern", "der Vorhang", "die Vorhänge", "das Kopfkissen", "die Kopfkissen", "das Haus", "die Häuser", "das Wohnzimmer", "die Wohnzimmer", "das Badezimmer", "die Badezimmer", "das Schlafzimmer", "die Schlafzimmer", "der Garten", "die Gärten", "das Erdgeschoss", "die Erdgeschosse", "das Gewürz", "die Gewürze", "der Kürbis", "die Kürbisse", "der Mais", "die Maise"])
+    #names = iter(["gefallen", "rechnen", "entdecken", "feiern", "zerstören", "lachen", "sich entscheiden", "weit", "nahe", "außerdem", "meistens", "wahrscheinlich", "gern", "sogar", "selbst", "insgesamt", "zusammen", "allein", "nett", "toll", "aufregend", "das Möbel", "die Möbel", "der Korb", "die Körbe", "der Wäscheständer", "die Wäscheständer", "die Spülmaschine", "die Spülmaschinen", "voll", "leer", "laut", "ruhig", "still", "kaputt", "gebrochen", "glücklich", "traurig", "klar", "deutlich", "unmöglich", "bereit", "fertig", "gleich", "gemütlich", "notwendig", "zusätzlich", "beide", "das Meer", "die Meere", "der See", "die Seen", "der Fluss", "die Flüsse", "die Klippe", "die Klippen", "der Strand", "die Stränd", "die Insel", "die Inseln", "der Sumpf", "die Sümpfe", "der Hügel", "die Hüge", "der Berg", "die Berg", "das Tal", "die Täler", "der Wald", "die Wälde", "die Wiese", "die Wiesen", "der Weg", "die Wege"])
     #for file in all_files:
     #    part_name = "\\".join(file.split("\\")[:-1])
     #    rename(file, f'{part_name}\\vicki-{next(names).replace(" ", "_")}.mp3')
