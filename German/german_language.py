@@ -60,7 +60,7 @@ VERBS_DICT = {
     "hören / zuhören": "to hear / to listen",
     "sprechen": "to speak",
     "riechen": "to smell",
-    "schmecken": "to taste",
+    "schmecken": "to taste [smakować]",
     "klingen": "to sound",
     "reden": "to talk",
     "sagen": "to say",
@@ -208,6 +208,7 @@ VERBS_DICT = {
     "drücken": "to press / to push",
     "ziehen": "to pull / to move",
     "bauen": "to build",
+    "bilden": "to form",
     "zerstören": "to destroy",
     "sich interessieren": "to be interested in",
     "träumen": "to dream",
@@ -230,7 +231,7 @@ VERBS_DICT = {
     "befolgen": "to follow (rules / orders)",
     "folgen": "to follow (physically / temporally)",
     "befehlen": "to command",
-    "fehlen": "to be missing",
+    "fehlen": "to be missing [brakować]",
     "betreffen": "to concern / to affect",
     "hoffen": "to hope",
     "wünschen": "to wish",
@@ -268,6 +269,7 @@ ADVERBS_DICT = {
     "manchmal": "sometimes",
     "meistens": "mostly",
     "sofort": "immediately",
+    "plötzlich": "suddenly",
     "vielleicht": "perhaps",
     "wahrscheinlich": "probably",
     "gern": "gladly",
@@ -335,6 +337,7 @@ ADJECTIVES_DICT = {
     "trocken": "dry",
     "sauber": "clean",
     "dreckig": "dirty",
+    "faul": "lazy / rotten",
     "weich": "soft",
     "brüchig": "brittle / crumbling",
     "hart": "hard",
@@ -456,6 +459,8 @@ NOUNS_DICT = {
     "der Laubbaum / die Laubbäume": "deciduous tree",
     "das Blatt / die Blätter": "leaf / sheet",
     "das Tier / die Tiere": "animal",
+    "das Besteck / die Bestecke": "cutlery",
+    "das Geschirr / die Geschirre": "dishes (tableware)",
     "das Messer / die Messer": "knife",
     "der Löffel / die Löffel": "spoon",
     "die Suppenkelle / die Suppenkellen": "ladle",
@@ -501,7 +506,9 @@ NOUNS_DICT = {
     "die Mauer / die Mauern": "wall [mur]",
     "das Fenster / die Fenster": "window",
     "der Vorhang / die Vorhänge": "curtain",
+    "das Bild / die Bilder": "picture",
     "das Licht / die Lichter": "light",
+    "die Glühbirne / die Glühbirnen": "lightbulb (incandescent)",
     "das Bett / die Betten": "bed",
     "das Kopfkissen / die Kopfkissen": "pillow",
     "das Haus / die Häuser": "house",
@@ -662,9 +669,10 @@ TIPS = (
     beenden is done to an object (e.g. Ich beende mein Studium bald).""",
     """Kündigen is for cancelling contracts that you have already signed, whereas stornieren is for
     cancelling reservations and planned contracts.""",
-    """Stellen, setzen, and legen are the active counterparts to the passive stehen, sitzen, and
-    liegen, respectively. They former can all be roughly translated as 'to put'. Note that setzen
-    applies only to objects (both animate and inanimate) with bendable knees.""",
+    """Stellen, setzen, and legen are the active (transitive) counterparts to the passive
+    (intransitive) stehen, sitzen, and liegen, respectively. They former can all be roughly
+    translated as 'to put'. Note that setzen applies only to objects (both animate and inanimate)
+    with bendable knees.""",
     """Rühren is the base verb for a family of verbs related to stirring. Due to their nuances,
     their meaning is best conveyed by translation to Polish: verühren -> wymieszać, umrühren ->
     zamieszać, einrühren -> wmieszać.""",
@@ -823,9 +831,8 @@ TIPS = (
     """The Nominativ case is for the subject (performs action), Akkusativ for the direct object
     (receives the action), and Dativ for the indirect object (to/for whom the action is performed)
     of a sentence. For example, 'The cook sends the cooking pot to the lady' -> 'Die Köchin (N)
-    schickt den Kochtopf (A) zu der Dame (D)'. Roughly 50 verbs (including all intransitive verbs)
-    only have an indirect object, but it is far more common for a setence to only feature a direct
-    object.""",
+    schickt den Kochtopf (A) zu der Dame (D)'. Roughly 50 (intransitive) verbs can pair with just an
+    indirect object, but it is far more common for a setence to only feature a direct object.""",
     """Akkusativ always appears after the connecting words: bis, durch, für, gegen, ohne, um, wider.
     Dative instead follows after: aus, bei, zu, von, nach, mit""",
     """Compared with Polish cases, Akkusativ is the 'biernik' (kogo? co?) and Dativ the 'celownik'
