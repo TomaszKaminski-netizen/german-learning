@@ -114,6 +114,49 @@ class Exercise_layout():
                           command=partial(self.answer.insert, tk.INSERT, char)
                           ).pack(side=tk.RIGHT)
 
+
+class Memory():
+    """An object for keeping track of my learning progress. For longer-term
+    storage the information is synced with a memory.json file."""
+    def __init__(self):
+        self.memory = defaultdict(self.track_new_word)
+        if isfile("memory.json"):
+            with open("memory.json", "r", encoding="utf-8") as file:
+                self.memory.update(json.load(file))
+        # The .json file gets updated only when the GUI window is closed.
+        window.protocol("WM_DELETE_WINDOW", self.save_to_file)
+
+    @staticmethod
+    def track_new_word():
+        return {"date added": datetime.now().strftime(r"%Y-%m-%d"), "ans_corr": [], "ans_wrng": []}
+
+    def record(self, german, correct):
+        outcome = "ans_corr" if correct else "ans_wrng"
+        self.memory[german][outcome].append(int(datetime.now().timestamp()))
+
+    def get_accuracy(self, words, day_limit=21):
+        # Date beyond which correct and incorrect answers do not count for the accuracy measurement.
+        cutoff = int(datetime.now().timestamp()) - day_limit * 60 * 60 * 24
+        try:
+            corr = list(filter(lambda date: date > cutoff, self.memory[words[0]]["ans_corr"]))
+            wrng = list(filter(lambda date: date > cutoff, self.memory[words[0]]["ans_wrng"]))
+            return round(len(corr) / (len(corr) + len(wrng)), ndigits=1)
+        except ZeroDivisionError:
+            return 0
+
+    def get_last_correct(self, words):
+        try:
+            # Rounding to a coarseness of roughly a day.
+            return round(max(self.memory[words[0]]["ans_corr"]), ndigits=-5)
+        except ValueError:
+            return 0
+
+    def save_to_file(self):
+        with open("memory.json", "w", encoding="utf-8") as file:
+            json.dump(self.memory, file, ensure_ascii=False, indent=4)
+        window.destroy()
+        _exit(0)
+
 ####################################################################################################
 
 def show_tips():
@@ -230,26 +273,16 @@ def translate(vocab, direction, conjugate=tuple(), plural_nouns=True):
         conjugate (tuple, optional): _description_
         plural_nouns (bool, optional): _description_
     """
-    # Setting up tracking of my performance
-    if isfile(f"{direction}.json"):
-        with open(f"{direction}.json", "r", encoding="utf-8") as file:
-            memory = json.load(file)
-    else:
-        memory = dict()
-    def save_memory():
-        with open(f"{direction}.json", "w", encoding="utf-8") as file:
-            json.dump(memory, file, ensure_ascii=False, indent=4)
-        window.destroy()
-        _exit(0)
-    window.protocol("WM_DELETE_WINDOW", save_memory)
-
     # Setting up the prompts and answers
     vocab = list(ChainMap(*vocab).items())
+    shuffle(vocab)
+    # Placing words answered correctly a long time ago earlier.
+    vocab = sorted(vocab, key=memory.get_last_correct)
+    # Placing words with better answer accuracy earlier.
+    vocab = sorted(vocab, key=memory.get_accuracy)
     if direction == "ger_to_eng":
         # Removing round & square brackets and everything inside them. Also flipping the word order.
         vocab = [(sub(r"\s*[\[\(].+[\]\)]\s*", "", item[1]), item[0]) for item in vocab]
-    shuffle(vocab)
-    vocab = sorted(vocab, key=lambda item: memory[item[1]] if item[1] in memory else "")
     countdown = count(len(vocab), step=-1)
 
     for words in vocab:
@@ -266,9 +299,11 @@ def translate(vocab, direction, conjugate=tuple(), plural_nouns=True):
 
         if trim(layout.answer.get()) in right_answers:
             layout.feedback_label.configure(text="Correct.")
-            memory[words[1]] = datetime.now().strftime(r"%m-%d")
+            memory.record(words[0 if direction == "eng_to_ger" else 1], True)
         else:
             layout.feedback_label.configure(text=f"Wrong, the right answer is '{right_answers[0]}'")
+            memory.record(words[0 if direction == "eng_to_ger" else 1], False)
+
         for item in answer_pieces:
             sound_name = abspath(f"vicki-{item.replace(' ', '_')}.mp3")
             if isfile(sound_name):
@@ -372,9 +407,10 @@ if __name__ == "__main__":
     window.option_add("*font", "size 19") # Changing the default font size
     Starting_layout()
     mixer.init() # This is necessary for playing audio files
+    memory = Memory()
     window.mainloop()
 
-#TODO: translate sentences, connector words, add a way of scaling the amount of words tested (chronologically)
+#TODO: translate sentences, connector words
 
 ####################################################################################################
 
