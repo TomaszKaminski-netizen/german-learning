@@ -28,8 +28,8 @@ CONJUGATION_CATEGORIES = ("Präsens", "Präteritum", "Perfekt", "Plusquamperfekt
 PRONOUNS = ("ich", "du", "er/sie/es", "wir", "ihr", "sie")
 
 # Replaces all whitespace characters with (at most) single consecutive space. Also removes trailing
-# and leading spaces.
-trim = lambda string: sub(r"\s+", " ", string.strip())
+# and leading spaces and ensures that slashes are flanked by exactly one space on each side.
+trim = lambda string: sub(r"\s+", " ", string.replace("/", " / ").strip())
 
 ####################################################################################################
 
@@ -134,7 +134,7 @@ class Memory():
         outcome = "ans_corr" if correct else "ans_wrng"
         self.memory[german][outcome].append(int(datetime.now().timestamp()))
 
-    def get_accuracy(self, words, day_limit=21):
+    def get_accuracy(self, words, day_limit=31):
         # Date beyond which correct and incorrect answers do not count for the accuracy measurement.
         cutoff = int(datetime.now().timestamp()) - day_limit * 60 * 60 * 24
         try:
@@ -166,7 +166,7 @@ def show_tips():
     tk.Button(text="Next tip", command=lambda: wait_var.set(1)).pack()
     tip_label = tk.Label(wraplength=850, font="size 22")
     tip_label.pack(expand=True) #* This is not a reliable method of centering widgets
-    tips = TIPS
+    tips = list(TIPS)
     shuffle(tips)
     for tip in tips:
         # Removing excess whitespace from the tips
@@ -410,7 +410,7 @@ if __name__ == "__main__":
     memory = Memory()
     window.mainloop()
 
-#TODO: translate sentences, connector words
+#TODO: translate sentences, prepositions
 
 ####################################################################################################
 
