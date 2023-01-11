@@ -243,7 +243,7 @@ VERBS_DICT = {
 
 ADVERBS_DICT = {
     "dann": "then",
-    "also": "so",
+    "so / also": "so",
     "auch": "also / too",
     "fast": "almost / nearly",
     "etwas": "something / a bit",
@@ -258,8 +258,6 @@ ADVERBS_DICT = {
     "man": "(some)one",
     "bald": "soon",
     "nur": "just / only",
-    "ohne": "without",
-    "statt": "instead of",
     "ziemlich": "pretty / quite",
     "genau": "exactly / accurate",
     "unbedingt": "absolutely / necessarily",
@@ -275,17 +273,17 @@ ADVERBS_DICT = {
     "gern": "gladly",
     "genug": "enough",
     "wieder": "again",
-    "wider": "against",
     "obwohl": "although",
+    "hingegen": "on the other hand",
     "sogar / selbst": "even [nawet]",
     "ob": "whether",
     "dass": "that [że]",
-    "trotz": "despite",
     "weder noch": "neither nor",
     "entweder oder": "either or",
     "nie / niemals": "never",
     "bereits / schon": "already",
     "wenn / als": "when",
+    "bevor": "before [zanim]",
     "denn / weil": "because",
     "besonders": "especially",
     "oft": "often",
@@ -308,8 +306,42 @@ ADVERBS_DICT = {
     "wann": "when?",
     "was": "what?",
     "wer": "who?",
+    "wen / wem": "whom?",
+    "wessen": "whose?",
     "wie": "how?",
-    "warum / wieso": "why?"}
+    "warum / weshalb / wieso": "why?"}
+
+PREPOSITIONS_DICT = {
+    # Dativ / Akkusativ
+    "über": "above / over",
+    "unter": "under / among",
+    "vor": "in front of / before [przed]",
+    "hinter": "behind",
+    "neben": "next to [obok]",
+    "auf": "on (horizontal surface)",
+    "an": "on (vertical surface)",
+    "zwischen": "between",
+    "in": "in / into",
+    # Dativ / Genitiv
+    "statt": "instead of",
+    "trotz": "despite",
+    "während": "during",
+    "wegen": "due to",
+    # Dativ
+    "mit": "with",
+    "seit": "since",
+    "bei": "near to / at",
+    "aus": "from / out of (material)",
+    "von": "from / of (belonging)",
+    "zu": "toward / too",
+    "nach": "toward / after",
+    # Akkusativ
+    "ohne": "without",
+    "wider / gegen": "against",
+    "bis": "until",
+    "durch": "through / via",
+    "für": "for",
+    "um": "around"}
 
 ADJECTIVES_DICT = {
     "groß": "big",
@@ -672,12 +704,15 @@ TIPS = (
     """Kündigen is for cancelling contracts that you have already signed, whereas stornieren is for
     cancelling reservations and planned contracts.""",
     """Stellen, setzen, and legen are the active (and transitive) counterparts to the passive
-    (and intransitive) stehen, sitzen, and liegen, respectively. They former can all be roughly
+    (and intransitive) stehen, sitzen, and liegen, respectively. The former can all be roughly
     translated as 'to put'. Note that setzen applies only to objects (both animate and inanimate)
     with bendable knees.""",
     """Rühren is the base verb for a family of verbs related to stirring. Due to their nuances,
     their meaning is best conveyed by translation to Polish: verühren -> wymieszać, umrühren ->
     zamieszać, einrühren -> wmieszać.""",
+    """When describing how you feel, German uses Ich bin (e.g. traurig) or Ich habe (e.g. Hunger),
+    but there are three common exceptions: I am cold/warm/bored -> Mir ist kalt/warm/langweilig.
+    Using 'Ich bin' here would mean that you are cold/warm/boring as a person.""",
     # Pronunciation
     "If a words ends with b, d, or g, these letter are pronounced as p, t, k.",
     "German 'r' is like the Dutch 'g' - it is spoken from deep within the throat",
@@ -694,6 +729,8 @@ TIPS = (
     and can thus be preceeded by any letter.""",
     "Wider and weider are pronounced exactly the same.",
     # Adverbs
+    """Both also and so mean 'so', but also is a conjunction that connects phrases (e.g. He was too
+    tall, so he could not fit) whilst so is an adverb (e.g. He was so tall and handsome).""",
     """Both wenn and als mean 'when'. Als is used for the past (certainty), whilst wenn is used for
     the future, present, theoretical pasts, and wishes (uncertainty). Wenn thus also simultaneously
     means 'if', but note that the word 'if' in English carries a very large number of connotations,
@@ -705,9 +742,6 @@ TIPS = (
     move to the end of the clause: 'Sie geht jeden tag spazieren, denn sie hat einen Hund' vs 'Sie
     geht jeden tag spazieren, weil sie einen Hund hat'. Additionally, sentences can not begin with
     denn, but can with weil.""",
-    """The English word 'too' was originally a stressed version of 'to' and English decided to
-    capture that in a spelling difference. German didn't bother, so zu is both the words 'to'
-    and 'too'.""",
     """Bereits is more common in writing, whilst schon is more common in speech. Schon is also often
     used as a modal particle, in the case which it disperses doubt / gives reassurance. For example:
     'Bist du verletzt? Nein, geht schon' -> 'Are you hurt? No, I am ok', or 'Hat dir der alte Job
@@ -729,6 +763,8 @@ TIPS = (
     "The word gar can be placed immediately before nicht / kein / nichts to intensify them.",
     """In German there is no equivalent to the English suffix 'ly' (e.g. slow -> slowly). Rather,
     German adjectives often also serve as adverbs, without needing to undergo any modification.""",
+    """Wer, wen, wem, and wessen are all the same word, conjugated in the four cases: Nominativ,
+    Akkusativ, Dativ, and Genitiv, respectively.""",
     # Miscellanous
     """Ordinal numbers (first, second, etc.) are created from cardinal numbers (one, two) by adding
     the ending 'te' to them for numbers from 1 to 19, and 'ste' for numbers from 20 upwards. There
@@ -795,15 +831,6 @@ TIPS = (
     Furthermore, many verbs that end in 'ieren' do not receive 'ge' (e.g. studieren, rotieren,
     tapezieren). However, these are verbs adapted from Latin/French - when it comes to Germanic
     verbs like 'zieren', 'schmieren', 'gieren', you do get the 'ge'.""",
-    """The only rule - never broken - is about accent. The prefix 'ge' goes on verbs immediately
-    before the accented syllable. If the first syllable is unaccented, there is no 'ge'. All those
-    borrowed verbs with 'ieren' have the accent on the 'ieren', and so they have one or more
-    unaccented syllables before that. That means they can't take 'ge'. Native words have no
-    syllables before the syllable in 'ieren', so the accent is on the first syllable of the word,
-    and they can take the 'ge'. Words with a prefix can't take 'ge' if the prefix is unaccented. So
-    no verb that begins 'ver' or 'zer' can take 'ge', because 'ver' and 'zer' can't take the accent.
-    If the prefix does take the accent, it is a separable prefix, so it splits off and the 'ge' goes
-    in the middle.""",
     """Perfekt is used mostly in conversational contexts and Präteritum is used mostly in writing.
     For this reason, the 2nd person forms (du, ihr, Sie) are very uncommon in Präteritum and sound
     strange to the ear of a native speaker - it is odd to narrate directly to a person what he or
@@ -813,7 +840,7 @@ TIPS = (
     Präteritum. For example 'I am studying German' is 'Ich lerne gerade Deutsch' and 'I was studying
     German' is 'Ich lernte gerade Deutsch'. However, when combined with Perfekt, 'gerade' instead
     means that something has just happened - 'Wir sind gerade aus dem Kino gekommen' means 'We have
-    just come back from cinema'.""",
+    just come back from cinema'. Note that 'gerade' also has many other uses.""",
     """Futur I is the easiest tense to remember, made by combining the infinitive (i.e. most basic)
     form of the verb with werden conjugated in Präsens. This leaves no room for irregularities. The
     same holds true for Konjunktiv II Futur I (hypothetical future), except werden is replaced with
@@ -859,10 +886,41 @@ TIPS = (
     ones, by directing the action towards a direct object.""",
     """Compared with Polish cases, Akkusativ corresponds to the 'biernik' (kogo? co?) and Dativ to
     the 'celownik' (komu? czemu?) plus 'narzędnik' (z kim? z czym?) combined.""",
+    """A few verbs uniquely demand two direct objects and no indirect object: fragen, unterrichten,
+    lehren, nennen, kosten. However, in colloquial German if the recipient of the action is clear
+    from the context, one of the direct objects is often dropped. For example, 'Äpfel kosten mich
+    viel Geld' -> 'Äpfel kosten viel Geld'. The same situation occurs in Polish - 'Jabłka kosztują
+    mnie dużo pieniędzy' -> 'Jabłka kosztują dużo pieniędzy'.""",
+    # Prepositions
+    """Dativ always appears after some prepositions and Akkusative after others. However, certain
+    prepositions can take either case: auf, über, unter, vor, hinter, neben, an, zwischen, in. The
+    choice here is based on whether we are describing directed movement (e.g. Ich setze mich in den
+    Stuhl, Akkusativ) or not (Ich sitze in dem Stuhl, Dativ). This rule goes against the idea that
+    verbs related to movement are intransitive (and thus use Dativ) - indeed, the case rules related
+    to prepositions are completely independent & orthogonal to the rules linked to direct/indirect
+    objects.""",
+    """Consider 'Ich schreibe auf dem Tisch' vs 'Ich schreibe auf den Tisch'. In the first example,
+    Dativ marks the table as the location where the writing happens. In the second, Akkusativ marks
+    that the table is the destination of the writing - I am literally writing onto the table.""",
+    """Prepositions defy a clean 1-to-1 translation from German to English, due to differences in
+    usage. For example, 'Ich interessiere mich für Kunst' means 'I am interested in art', but für
+    does not mean 'in' - it is still 'for', just used in place of 'in'.""",
+    """When asking questions in English, prepositions go to the end of the sentence (e.g. What are
+    you dreaming of?), whilst in German they move to the very beginning (e.g. Von was träumst du?).
+    Moreover, the question word 'was' can fuse with those prepositions, forming terms like: wovon,
+    woran, womit, worauf.""",
     """In colloquial German, the Genitiv case is usually replaced by Dativ plus von. However, such
     von-phrases have ambiguous meaning - von meinem Vater could stand for either 'of my father' or
     'from my father'. If one wants to avoid possible confusion, the use of the Genitiv des Vaters
     (of my father) is preferable.""",
+    "Gegen and wider both mean 'against', but wieder is far less popular and sounds antiquated.",
+    """Both zu and nach mean 'toward', with nach being used when talking about going to countries or
+    cities, using cardinal directions, or going left / right. However, nach does not work with the
+    few countries that take an article, e.g. Wir fliegen in die Schweiz.""",
+    """Both aus and von mean 'from', but aus is utilised when coming from places that one can enter
+    (buildings, venues, countries), whereas von is reserved for people, activities, and causal
+    relationships (e.g. My skin is dry from all the washing up -> Meine Haut ist trocken vom vielen
+    Abwaschen).""",
     # Adjectives
     """Adjectives follow the same strong declension as non-'ein' determiners. However, when there
     is both an adjective and a determiner in front of a noun, the adjective instead uses weak
