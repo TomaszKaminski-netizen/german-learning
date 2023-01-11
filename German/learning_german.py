@@ -20,7 +20,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from german_language import VERBS_DICT, ADVERBS_DICT, NOUNS_DICT, ADJECTIVES_DICT, TIPS, \
-    DECLENSION_AFFIXES, DECLENSION_DICT, DECLENSION_ORDER
+    DECLENSION_AFFIXES, DECLENSION_DICT, DECLENSION_ORDER, PREPOSITIONS_DICT
 
 CONJUGATION_CATEGORIES = ("Präsens", "Präteritum", "Perfekt", "Plusquamperfekt", "Futur I",
                           "Futur II", "Imperativ")
@@ -36,7 +36,7 @@ trim = lambda string: sub(r"\s+", " ", string.replace("/", " / ").strip())
 class Starting_layout():
     """The widget layout for the main menu."""
     def __init__(self):
-        all_vocab = [VERBS_DICT, ADVERBS_DICT, NOUNS_DICT, ADJECTIVES_DICT]
+        all_vocab = [VERBS_DICT, ADVERBS_DICT, NOUNS_DICT, ADJECTIVES_DICT, PREPOSITIONS_DICT]
         tk.Label(text="Choose what to practice.").pack()
         tk.Button(text="Tips and rules", command=show_tips).pack()
         tk.Button(text="Listening", command=test_listening).pack()
@@ -322,6 +322,7 @@ def translate(vocab, direction, conjugate=tuple(), plural_nouns=True):
 def test_listening():
     """_summary_
     """
+    all_vocab = ChainMap(VERBS_DICT, ADVERBS_DICT, NOUNS_DICT, ADJECTIVES_DICT, PREPOSITIONS_DICT)
     audio_files = glob("vicki-*.mp3")
     shuffle(audio_files)
     for audio_file in audio_files:
@@ -338,7 +339,6 @@ def test_listening():
             response = "Correct."
         else:
             response = f"Wrong, the right answer is '{right_answer}'"
-        all_vocab = ChainMap(VERBS_DICT, ADVERBS_DICT, NOUNS_DICT, ADJECTIVES_DICT)
         for ger, eng in all_vocab.items():
             if right_answer in ger.split(" / "):
                 response += f"\nIt means '{eng}'"
@@ -410,7 +410,7 @@ if __name__ == "__main__":
     memory = Memory()
     window.mainloop()
 
-#TODO: translate sentences, prepositions
+#TODO: translate sentences
 
 ####################################################################################################
 
@@ -419,7 +419,7 @@ if __name__ == "__main__":
     #from os import rename
     #all_files = glob("C:\\Users\\daiwe\\Downloads\\vicki-*.mp3")
     #all_files = sorted(all_files, key=lambda x: int(search(r"vicki-(\d+)\.mp3", x).group(1)))
-    #names = iter(["retten", "sparen", "erfinden", "das Glas", "die Gläser", "die Flasche", "die Flaschen", "die Dose", "die Dosen", "die Blume", "die Blumen", "der Nadelbaum", "die Nadelbäume", "der Laubbaum", "die Laubbäume", "das Blatt", "die Blätter", "das Tier", "die Tiere", "die Brille", "der Gürtel", "die Gürtel", "die Socke", "die Socken", "der Stiefel", "die Stiefel", "der Schuh", "die Schuhe", "der Handschuh", "die Handschuhe", "die Unterwäsche", "die Hose", "die Hosen", "der Regenmantel", "die Regenmäntel", "der Hut", "die Hüte", "das Hemd", "die Hemden", "die Jacke", "die Jacken", "der Kapuzenpulli", "die Kapuzenpullis", "der Ärmel", "die Ärmel", "der Schlafanzug", "die Schlafanzüge", "die Tasche", "die Taschen", "das Frühstück", "die Frühstücke", "das Mittagessen", "die Mittagessen", "das Abendessen", "die Abendessen", "der Körper", "die Körper", "der Kopf", "die Köpfe", "der Arm", "die Arme", "das Bein", "die Beine", "das Ohr", "die Ohren", "das Auge", "die Augen", "das Gesicht", "die Gesichter", "das Haar", "die Haare", "der Mund", "die Münder", "die Nase", "die Nasen", "die Schulter", "die Schultern", "der Rücken", "die Rücken", "der Bauch", "die Bäuche", "die Brust", "die Brüste", "der Finger", "die Finger", "der Fingernagel", "die Fingernägel", "der Fuß", "die Füße", "die Hand", "die Hände", "das Knie", "die Knie", "das Blut", "der Knochen", "die Knochen", "das Herz", "die Herzen", "die Leber", "die Lebern", "der Muskel", "die Muskeln", "die Haut", "die Häute", "der Schenkel", "die Schenkel", "die Zunge", "die Zungen", "der Zahn", "die Zähne", "giftig", "essbar"])
+    #names = iter(["hingegen", "bevor", "über", "unter", "vor", "hinter", "neben", "auf", "an", "zwischen", "in", "während", "wegen", "mit", "seit", "bei", "aus", "von", "zu", "nach", "gegen", "bis", "durch", "für", "um"])
     #for file in all_files:
     #    part_name = "\\".join(file.split("\\")[:-1])
     #    rename(file, f'{part_name}\\vicki-{next(names).replace(" ", "_")}.mp3')
