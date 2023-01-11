@@ -3,6 +3,7 @@ virtenv
 *.pdb1
 *.pse
 *.mp3
+!vicki-*.mp3
 *.pyc
 Low_importance_files
 Testing_folder*
