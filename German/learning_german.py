@@ -354,7 +354,7 @@ def test_declension():
     """
     vocab = list(DECLENSION_DICT.items())
     # Always testing person pronouns (last item in DECLENSION_DICT) first.
-    test_first = [vocab.pop(-1)]
+    test_first = [vocab.pop(-2)]
     shuffle(vocab)
     for eng, ger in test_first + vocab:
         if len(ger) > 4: # Semi-arbitrary cutoff value
@@ -376,7 +376,7 @@ def test_declension():
 
         layout = Exercise_layout("click", tk.Text(height=3, width=35))
         one_third = int(len(right_answer) / 3)
-        if eng == "personal pronouns":
+        if eng in ["personal pronouns", "reflexive pronouns"]:
             layout.prompt_label.configure(text=f"Declenate '{eng}'")
             # Populating the text box with personal pronouns in Nominativ, to act as labels.
             layout.answer.insert(tk.INSERT, "     ".join(ger[:one_third]) + "\n")
@@ -410,7 +410,7 @@ if __name__ == "__main__":
     memory = Memory()
     window.mainloop()
 
-#TODO: translate sentences
+#TODO: translate sentences, core verb revision
 
 ####################################################################################################
 
@@ -419,7 +419,7 @@ if __name__ == "__main__":
     #from os import rename
     #all_files = glob("C:\\Users\\daiwe\\Downloads\\vicki-*.mp3")
     #all_files = sorted(all_files, key=lambda x: int(search(r"vicki-(\d+)\.mp3", x).group(1)))
-    #names = iter(["hingegen", "bevor", "über", "unter", "vor", "hinter", "neben", "auf", "an", "zwischen", "in", "während", "wegen", "mit", "seit", "bei", "aus", "von", "zu", "nach", "gegen", "bis", "durch", "für", "um"])
+    #names = iter(["die Zukunft", "die Vergangenheit", "die Vergangenheiten", "die Geschichte", "die Geschichten", "die Zeit", "die Zeiten", "der Morgen", "die Morgen", "der Winter", "die Winter", "der Frühling", "die Frühlinge", "der Sommer", "die Sommer", "der Herbst", "die Herbste", "das Jahr", "die Jahre", "der Monat", "die Monate", "die Woche", "die Wochen", "der Tag", "die Tage", "die Stunde", "die Stunden", "die Minute", "die Minuten", "der Mensch", "die Menschen", "die Leute", "der Beruf", "die Berufe", "das Geld", "die Gelder", "der Satz", "die Sätze", "die Ziffer", "die Ziffern", "die Zahl", "die Zahlen", "die Nummer", "die Nummern", "die Anzahl", "das Stäbchen", "die Stäbchen", "das Wasser", "die Wässer", "das Buch", "die Bücher", "die Straße", "die Straßen", "die Stadt", "die Städte"])
     #for file in all_files:
     #    part_name = "\\".join(file.split("\\")[:-1])
     #    rename(file, f'{part_name}\\vicki-{next(names).replace(" ", "_")}.mp3')
