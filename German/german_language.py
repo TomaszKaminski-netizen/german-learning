@@ -9,12 +9,11 @@ VERBS_DICT = {
     "müssen": "to have to",
     "wollen": "to want",
     "sollen": "to ought to (shall)",
-    "werden": "will / to become",
     "haben": "to have",
     "sein": "to be",
     "brauchen": "to need",
-    "lassen": "to let / to leave",
-    "sich verlassen": "to rely",
+    "werden": "to become",
+    "wachsen": "to grow [rosnąć]",
     "denken": "to think",
     "wissen": "to know (a fact)",
     "abhängen": "to depend",
@@ -26,7 +25,7 @@ VERBS_DICT = {
     "studieren": "to study",
     "verstehen": "to understand",
     "fragen": "to ask (a question)",
-    "sich fragen": "to wonder",
+    "sich fragen": "to wonder (to ponder)",
     "wiederholen": "to repeat",
     "widersprechen": "to contradict",
     "vorstellen": "to introduce / to imagine",
@@ -59,6 +58,8 @@ VERBS_DICT = {
     "bieten / anbieten": "to offer",
     "verbieten": "to forbid",
     "erlauben": "to allow / to permit",
+    "lassen": "to let / to leave",
+    "sich verlassen": "to rely",
     "behandeln": "to treat",
     "misshandeln": "to mistreat",
     "missbrauchen": "to abuse / to misuse",
@@ -231,11 +232,13 @@ VERBS_DICT = {
     "heben": "to lift / to raise",
     "bauen": "to build",
     "bilden": "to form",
+    "verbessern": "to improve",
     "zerstören": "to destroy",
     "sich interessieren": "to be interested in",
     "träumen": "to dream",
     "lieben": "to love",
     "hassen": "to hate",
+    "nerven": "to annoy",
     "sich fühlen": "to feel [czuć się]",
     "spüren": "to sense",
     "erleben": "to experience",
@@ -246,6 +249,7 @@ VERBS_DICT = {
     "aufgeben": "to give up",
     "verlieren": "to lose",
     "gewinnen": "to win",
+    "schaffen": "to manage (to succeed) / to create",
     "verpassen": "to miss (a bus / an event)",
     "verfehlen": "to miss (a throw)",
     "erreichen": "to achieve / to reach",
@@ -298,8 +302,8 @@ ADVERBS_DICT = {
     "sobald": "as soon as (once)",
     "auch": "too (also)",
     "nur": "only (just)",
-    "ziemlich": "pretty (quite)",
     "genau": "exactly / accurate",
+    "ziemlich": "pretty (quite)",
     "unbedingt": "absolutely / necessarily",
     "deshalb / deswegen": "therefore",
     "außerdem": "besides / moreover",
@@ -340,6 +344,7 @@ ADVERBS_DICT = {
     "trotzdem / dennoch": "nevertheless",
     "zufällig": "by chance / coincidentally",
     "wenn / als": "when",
+    "falls": "in case (if)",
     "obwohl": "although",
     "ob": "whether",
     "dass": "that [że]",
@@ -405,6 +410,7 @@ ADJECTIVES_DICT = {
     "viel": "much / many",
     "wenig": "little (few)",
     "gut": "good",
+    "böse": "evil / angry [zły]",
     "nett": "nice",
     "toll": "fantastic",
     "wunderbar": "wonderful",
@@ -437,6 +443,7 @@ ADJECTIVES_DICT = {
     "hart": "hard",
     "glatt": "smooth",
     "rau": "rough",
+    "uneben": "bumpy",
     "flach": "flat / shallow",
     "tief": "deep",
     "lang": "long",
@@ -462,11 +469,18 @@ ADJECTIVES_DICT = {
     "glücklich": "lucky / happy",
     "zufrieden": "satisfied",
     "traurig": "sad",
+    "wütend": "enraged",
+    "müde": "tired",
+    "begeistert": "excited (enthusiastic)",
+    "einsam": "lonely",
+    "stolz": "proud",
+    "besorgt": "worried",
     "schön": "beautiful",
     "hässlich": "ugly",
     "arm": "poor",
     "reich": "rich",
     "teuer": "expensive",
+    "bar": "(in) cash",
     "billig": "cheap",
     "frei": "free",
     "hell": "bright",
@@ -489,13 +503,14 @@ ADJECTIVES_DICT = {
     "bekannt": "known / famous",
     "fremd": "foreign (unfamiliar) / someone else's",
     "ausländisch": "foreign (country)",
+    "öffentlich": "public",
     "tot": "dead",
     "gerade": "straight / even (number)",
     "unmöglich": "impossible",
     "sicher": "safe / sure",
     "fertig / bereit": "ready",
     "ähnlich": "similar",
-    "gleich": "same / equal",
+    "gleich": "same / equal / shortly",
     "verschieden / unterschiedlich": "different (varied)",
     "andere": "different (other)",
     "dringend": "urgent",
@@ -527,13 +542,13 @@ ADJECTIVES_DICT = {
     "grau": "grey",
     "scharf": "spicy / sharp",
     "süß": "sweet",
-    "lecker": "tasty",
+    "lecker / köstlich": "delicious",
     "frisch": "fresh",
     "stinkend": "stinky",
     "duftend": "fragrant",
     "salzig": "salty",
     "bitter": "bitter",
-    "sauer": "sour",
+    "sauer": "sour / pissed off",
     "roh": "raw"}
 
 NOUNS_DICT = {
@@ -580,6 +595,8 @@ NOUNS_DICT = {
     "die Zahl / die Zahlen": "the number [liczba]",
     "die Nummer / die Nummern": "the number [numer]",
     "der Grad": "the degree (temperature / angle)",
+    "die Laune / die Launen": "the mood",
+    "die Angst / die Ängste": "the fear",
     "die Art / die Arten": "the type / the manner",
     "das Ziel / die Ziele": "the goal / the aim",
     "die Aufgabe / die Aufgaben": "the task / the responsibility",
@@ -661,7 +678,7 @@ NOUNS_DICT = {
     "die Auflaufform / die Auflaufformen": "the baking dish",
     "der Handmixer / die Handmixer": "the hand mixer",
     "der Ventilator / die Ventilatoren": "the ventilator",
-    "der Wasserkocher / die Wasserkocher": "the kettle",
+    "der Wasserkocher / die Wasserkocher": "the electric kettle",
     "der Ofen / die Öfen": "the oven",
     "der Herd / die Herde": "the stove",
     "der Kühlschrank / die Kühlschränke": "the fridge",
@@ -707,6 +724,7 @@ NOUNS_DICT = {
     "die Seite / die Seiten": "the side / the page",
     "das Bett / die Betten": "the bed",
     "das Kopfkissen / die Kopfkissen": "the pillow",
+    "die Ecke / die Ecken": "the corner",
     "das Haus / die Häuser": "the house",
     "die Straße / die Straßen": "the street",
     "die Stadt / die Städte": "the town",
@@ -739,6 +757,8 @@ NOUNS_DICT = {
     "das Frühstück / die Frühstücke": "the breakfast",
     "das Mittagessen / die Mittagessen": "the lunch",
     "das Abendessen / die Abendessen": "the supper / the dinner",
+    "der Hunger": "the hunger",
+    "der Durst": "the thirst",
     "das Brot / die Brote": "the bread",
     "der Reis": "the rice",
     "die Nudel / die Nudeln": "the noodle",
@@ -913,8 +933,8 @@ TIPS = (
     tall, so he could not fit) whilst so is an adverb (e.g. He was so tall and handsome).""",
     """Both wenn and als mean 'when'. Als is used for the past (certainty), whilst wenn is used for
     the future, present, theoretical pasts, and wishes (uncertainty). Wenn thus also simultaneously
-    means 'if', but note that the word 'if' in English carries a very large number of connotations,
-    which are split across different words in German.""",
+    means 'if', but note that the multi-purpose English 'if' can also be translated as falls or ob,
+    depending on the circumstance.""",
     """Both endlich and schließlich mean 'finally', but endlich expresses emotional agitation and
     emphasises the time/effort spent, whilst schließlich is a neutral term comparable to 'lastly /
     ultimately'.""",
@@ -1069,14 +1089,29 @@ TIPS = (
     """Futur I is the easiest tense to remember, made by combining the infinitive (i.e. most basic)
     form of the verb with werden conjugated in Präsens. This leaves no room for irregularities. The
     same holds true for Konjunktiv II Futur I (hypothetical future), except werden is replaced with
-    würden ('would' in English), conjugated as: würde, würdest, würde, würden, würdet, würden.""",
+    würden ('would' in English), conjugated as: würde, würdest, würde, würden, würdet, würden. Note
+    that in spoken German, Futur I is often replaced by Präsens (e.g. 'Nächsten Sommer fahre ich ans
+    Meer').""",
     """Unlike other tenses, Imperativ exists only for du, wir, ihr, and Sie. For plural persons, it
     simply copies the Präsens form of the verb, but for du it also removes the 'st' suffix and
     (sometimes) replaces it with 'e'. Stem changes are also copied, but not those that add an
     umlaut. As could be expected, sein is fully irregular: seien Sie / seien wir / seid (ihr) /
     sei (du). Moreover, the six modal verbs do not possess an Imperativ form. Finally, in Imperativ
     the verb goes before the personal pronoun, with ihr & du pronouns often omitted, and any
-    separable prefix goes to the end of the sentence.""",
+    separable prefix goes to the end of the sentence. This means that for plural persons, a sentence
+    in Imperative is indistinguishable from a question, requiring a question / exclamation mark (in
+    writing) or special intonation (in speech) to tell them apart.""",
+    """In English the passive voice is formed with the aid of 'to be' and switching the positions of
+    the subject and direct object. For example, 'The dog was chasing the car' becomes 'The car was
+    being chased by the dog'. In German the helper verb is instead werden, conjugated according to
+    person & tense, and what used to be the main verb of the sentence switches to its Perfekt form
+    (e.g. Der Hund jagt das Auto -> Das Auto wird von dem Hund gejagt). As German has flexible word
+    order, the new direct object is identified by either von (for living beings / organisations) or
+    durch (for inanimate things). Only sentences with transitive verbs can be converted into passive
+    voice, due to the requirement of a direct object. However, the passive voice is rare in spoken
+    German, with people preferring to instead use the indefinite pronoun 'man' (e.g. 'Das hatte man
+    mir schon gesagt' -> 'I had already been told that') or the verb 'sich lassen' ('Die Fliege
+    lässt sich nicht fangen' -> 'The fly can't be caught').""",
     # Nouns
     """Plural nouns are formed in many ways, the most common of which are: no change, 'e' suffix,
     'e' suffix plus umlaut, 'en/n' suffix, 'er' suffix plus umlaut, or 's' suffix. Statistically
@@ -1186,4 +1221,6 @@ TIPS = (
     """Schlecht is 'bad' in the sense of not being outright good - it could still be neutral or
     negative. In contract, schlimm carries a strong negative connotation. For example, there exists
     no such thing as a good wound, so to call a bad wound schlecht would be incorrect - schlimm is
-    the word of choice here.""")
+    the word of choice here.""",
+    """Although both words mean 'delicious', köstlich is formal and fancy-sounding, whilst lecker is
+    informal.""")

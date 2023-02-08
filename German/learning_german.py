@@ -22,14 +22,17 @@ from bs4 import BeautifulSoup
 from german_language import VERBS_DICT, ADVERBS_DICT, NOUNS_DICT, ADJECTIVES_DICT, TIPS, \
     DECLENSION_AFFIXES, DECLENSION_DICT, DECLENSION_ORDER, PREPOSITIONS_DICT
 
+CORE_VERBS = ("dürfen", "können", "mögen", "müssen", "wollen", "sollen", "werden", "haben", "sein",
+              "machen", "gehen", "geben", "sehen")
 CONJUGATION_CATEGORIES = ("Präsens", "Präteritum", "Perfekt", "Plusquamperfekt", "Futur I",
                           "Futur II", "Imperativ")
 # Needs to be the same as found on https://pl.pons.com/odmiana-czasownikow/niemiecki
 PRONOUNS = ("ich", "du", "er/sie/es", "wir", "ihr", "sie")
 
 # Replaces all whitespace characters with (at most) single consecutive space. Also removes trailing
-# and leading spaces and ensures that slashes are flanked by exactly one space on each side.
-trim = lambda string: sub(r"\s+", " ", string.replace("/", " / ").strip())
+# and leading spaces. Can't ensures that slashes are flanked by one space on each side, because that
+# would cause problems with "er/sie/es" during verb conjugation.
+trim = lambda string: sub(r"\s+", " ", string.strip())
 
 ####################################################################################################
 
@@ -54,6 +57,7 @@ class Starting_layout():
         self.plural_nouns = tk.BooleanVar()
         tk.Checkbutton(text="Enable plural noun forms.", variable=self.plural_nouns).pack()
         tk.Button(text="Verb conjugation", command=lambda: test_conjugation(get_cats())).pack()
+        tk.Button(text="Core verbs", command=lambda: test_conjugation(get_cats(), "core")).pack()
         tk.Label(text="Toggle which verb conjugations to enable.").pack()
 
         self.cats, self.cat_buttons = dict(), dict()
@@ -215,6 +219,8 @@ def conjugate_verb(verb):
             category = tense.find("h3").text if tense.find("h3") else mood_name
             for person in tense.find_all("tr"): # Table rows
                 phrase = " ".join(word.text for word in person.find_all("td")) # Table cells
+                # Removing poetic & outdated versions of words
+                phrase = sub(r" / poet\.lubprzest\..+", "", phrase)
                 conjugations[category].append(phrase)
     return conjugations
 
@@ -230,7 +236,9 @@ def test_conjugation(categories, verbs="all"): #pylint: disable=inconsistent-ret
         return False
     if verbs == "all":
         verbs = list(chain(*[key.split(" / ") for key in VERBS_DICT]))
-        shuffle(verbs)
+    elif verbs == "core":
+        verbs = list(CORE_VERBS)
+    shuffle(verbs)
     for verb in verbs:
         conjugations = conjugate_verb(verb)
         if not conjugations:
@@ -403,14 +411,14 @@ def test_declension():
 if __name__ == "__main__":
     chdir(dirname(abspath(__file__)))
     window = tk.Tk()
-    window.geometry("900x800")
+    window.geometry("900x850")
     window.option_add("*font", "size 19") # Changing the default font size
     Starting_layout()
     mixer.init() # This is necessary for playing audio files
     memory = Memory()
     window.mainloop()
 
-#TODO: translate sentences, core verb revision
+#TODO: translate sentences, show how many mistakes during translation
 
 ####################################################################################################
 
