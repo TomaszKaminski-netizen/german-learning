@@ -7,6 +7,7 @@ from os import chdir, _exit
 from random import shuffle
 from collections import ChainMap, defaultdict
 from functools import partial
+from statistics import mean, StatisticsError
 from itertools import permutations, chain, count, cycle
 from datetime import datetime
 from glob import glob
@@ -129,10 +130,19 @@ class Memory():
                 self.memory.update(json.load(file))
         # The .json file gets updated only when the GUI window is closed.
         window.protocol("WM_DELETE_WINDOW", self.save_to_file)
+        # For storing how many correct (1) and wrong (0) answers were given in the current attempt.
+        self.current_attempt = []
 
     @staticmethod
     def track_new_word():
         return {"date added": datetime.now().strftime(r"%Y-%m-%d"), "ans_corr": [], "ans_wrng": []}
+
+    @property
+    def current_accuracy(self):
+        try:
+            return round(mean(self.current_attempt) * 100)
+        except StatisticsError:
+            return "N/A"
 
     def record(self, german, correct):
         outcome = "ans_corr" if correct else "ans_wrng"
@@ -302,15 +312,18 @@ def translate(vocab, direction, conjugate=tuple(), plural_nouns=True):
             answer_pieces = answer_pieces[0:1] # Just the single form of the noun
         rearranged = permutations(answer_pieces, len(answer_pieces))
         right_answers = [" / ".join(item) for item in rearranged]
-        layout.prompt_label.configure(text=f"Translate '{words[1]}'\n{next(countdown)} words left")
+        layout.prompt_label.configure(text=f"Translate '{words[1]}'\n{next(countdown)} words left" +
+                                           f"\nYour current accuracy is {memory.current_accuracy}%")
         window.wait_variable(layout.wait_var)
 
         if trim(layout.answer.get()) in right_answers:
             layout.feedback_label.configure(text="Correct.")
             memory.record(words[0 if direction == "eng_to_ger" else 1], True)
+            memory.current_attempt.append(1)
         else:
             layout.feedback_label.configure(text=f"Wrong, the right answer is '{right_answers[0]}'")
             memory.record(words[0 if direction == "eng_to_ger" else 1], False)
+            memory.current_attempt.append(0)
 
         for item in answer_pieces:
             sound_name = abspath(f"vicki-{item.replace(' ', '_')}.mp3")
@@ -418,7 +431,7 @@ if __name__ == "__main__":
     memory = Memory()
     window.mainloop()
 
-#TODO: translate sentences, show how many mistakes during translation
+#TODO: translate sentences
 
 ####################################################################################################
 
