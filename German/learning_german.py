@@ -24,7 +24,7 @@ from german_language import VERBS_DICT, ADVERBS_DICT, NOUNS_DICT, ADJECTIVES_DIC
     DECLENSION_AFFIXES, DECLENSION_DICT, DECLENSION_ORDER, PREPOSITIONS_DICT
 
 CORE_VERBS = ("dürfen", "können", "mögen", "müssen", "wollen", "sollen", "werden", "haben", "sein",
-              "machen", "gehen", "geben", "sehen")
+              "machen", "gehen", "fahren", "geben", "sehen")
 CONJUGATION_CATEGORIES = ("Präsens", "Präteritum", "Perfekt", "Plusquamperfekt", "Futur I",
                           "Futur II", "Imperativ")
 # Needs to be the same as found on https://pl.pons.com/odmiana-czasownikow/niemiecki
@@ -148,7 +148,7 @@ class Memory():
         outcome = "ans_corr" if correct else "ans_wrng"
         self.memory[german][outcome].append(int(datetime.now().timestamp()))
 
-    def get_accuracy(self, words, day_limit=31):
+    def get_accuracy(self, words, day_limit=93):
         # Date beyond which correct and incorrect answers do not count for the accuracy measurement.
         cutoff = int(datetime.now().timestamp()) - day_limit * 60 * 60 * 24
         try:
@@ -328,10 +328,12 @@ def translate(vocab, direction, conjugate=tuple(), plural_nouns=True):
         for item in answer_pieces:
             sound_name = abspath(f"vicki-{item.replace(' ', '_')}.mp3")
             if isfile(sound_name):
-                mixer.Sound(sound_name).play()
-                # Sound().play does not stop code execution for the duration of the audio file, so a
-                # sufficiently long sleep period needs to be implemented here.
-                sleep(1)
+                mixer.music.load(sound_name)
+                mixer.music.play()
+                # The mixer does not stop code execution for the duration of the audio file, so a
+                # sufficiently long sleep period needs to be implemented here. This step used to
+                # also work with mixer.sound(sound_name).play(), but by 8th April 2023 it stopped.
+                sleep(1.1)
         window.wait_variable(layout.wait_var)
 
         if (words[0] in VERBS_DICT) and conjugate:

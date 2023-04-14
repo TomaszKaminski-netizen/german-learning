@@ -41,12 +41,12 @@ VERBS_DICT = {
     "erwarten": "to expect",
     "versprechen": "to promise",
     "empfehlen": "to recommend",
-    "antworten": "to answer",
+    "antworten / beantworten": "to answer",
     "lehren / unterrichten": "to teach",
     "erklären": "to explain",
     "beschreiben": "to describe",
     "raten": "to advise / to guess",
-    "melden": "to report",
+    "melden / berichten": "to report",
     "vergleichen": "to compare",
     "zustimmen": "to agree",
     "helfen": "to help",
@@ -234,6 +234,7 @@ VERBS_DICT = {
     "bilden": "to form",
     "verbessern": "to improve",
     "zerstören": "to destroy",
+    "stören": "to bother / to disrupt",
     "sich interessieren": "to be interested in",
     "träumen": "to dream",
     "lieben": "to love",
@@ -250,14 +251,14 @@ VERBS_DICT = {
     "verlieren": "to lose",
     "gewinnen": "to win",
     "schaffen": "to manage (to succeed) / to create",
+    "klappen": "to work out (to succeed)",
     "verpassen": "to miss (a bus / an event)",
     "verfehlen": "to miss (a throw)",
     "erreichen": "to achieve / to reach",
     "vorhaben": "to intend",
     "sich entscheiden": "to decide",
     "entwerfen": "to design / to draft",
-    "befolgen": "to follow (rules / orders)",
-    "folgen": "to follow (physically / temporally)",
+    "folgen / befolgen": "to follow",
     "befehlen": "to command",
     "führen": "to lead",
     "fehlen": "to be missing [brakować]",
@@ -290,7 +291,7 @@ ADVERBS_DICT = {
     "her": "(to) here",
     "weit": "far",
     "nahe": "near",
-    "noch": "yet / still [wciąż]",
+    "noch": "yet / still [nadal]",
     "jetzt": "now",
     "heute": "today",
     "gestern": "yesterday",
@@ -311,8 +312,9 @@ ADVERBS_DICT = {
     "manchmal": "sometimes",
     "meistens": "mostly (time)",
     "hauptsächlich": "mostly (mainly)",
-    "sofort": "immediately",
     "plötzlich": "suddenly",
+    "sofort": "immediately (at once)",
+    "direkt / unmittelbar": "directly",
     "vielleicht": "perhaps",
     "endlich / schließlich": "finally",
     "wahrscheinlich": "probably",
@@ -320,6 +322,7 @@ ADVERBS_DICT = {
     "genug": "enough",
     "wieder": "again",
     "hingegen": "on the other hand",
+    "überhaupt": "in general / at all [w ogóle]",
     "sogar / selbst": "even [nawet]",
     "selbst": "(one)self",
     "nie / niemals": "never",
@@ -341,13 +344,14 @@ ADVERBS_DICT = {
     "tatsächlich / eigentlich": "actually",
     "wirklich": "really / truly",
     "leider": "unfortunately",
-    "trotzdem / dennoch": "nevertheless",
+    "trotzdem / sowieso": "anyway [i tak]",
     "zufällig": "by chance / coincidentally",
     "wenn / als": "when",
     "falls": "in case (if)",
     "obwohl": "although",
     "ob": "whether",
     "dass": "that [że]",
+    "damit": "so that / in order to",
     "denn / weil": "because",
     "oder": "or",
     "aber": "but",
@@ -415,6 +419,8 @@ ADJECTIVES_DICT = {
     "toll": "fantastic",
     "wunderbar": "wonderful",
     "schlecht / schlimm": "bad",
+    "mittelmäßig": "mediocre",
+    "durchschnittlich": "average (typical)",
     "einfach": "simple / easy",
     "leicht": "light / easy",
     "schwer": "difficult / heavy",
@@ -431,6 +437,7 @@ ADJECTIVES_DICT = {
     "langsam": "slow",
     "klug": "smart",
     "dumm": "stupid",
+    "behindert": "disabled",
     "langweilig": "boring",
     "aufregend": "exciting",
     "nass": "wet",
@@ -460,6 +467,7 @@ ADJECTIVES_DICT = {
     "ruhig": "quiet / calm",
     "still": "silent / still",
     "leise": "not loud",
+    "höflich": "polite",
     "stark": "strong",
     "schwach": "weak",
     "kaputt / gebrochen": "broken",
@@ -475,6 +483,7 @@ ADJECTIVES_DICT = {
     "einsam": "lonely",
     "stolz": "proud",
     "besorgt": "worried",
+    "peinlich": "embarrassing",
     "schön": "beautiful",
     "hässlich": "ugly",
     "arm": "poor",
@@ -876,13 +885,25 @@ TIPS = (
     of 'I watch my children', because those are two diffrent things.""",
     """Sich anziehen means to put on clothes, whereas sich kleiden is about dressing with a
     particular fashing style.""",
+    """Both melden and berichten mean 'to report', but melden is for simple reports that mainly
+    serve to make the recipient aware of something (e.g. reporting a fire, an airline announcing the
+    time of departure, a company reporting record profits). Note that specifically for reporting
+    crimes, the verb anzeigen is used instead. In contrast, berichten is about in-depth reports,
+    such as those made by journalists or analysts.""",
     """Verhandeln is about negotiating in general, whereas aushandeln focuses on completing the
     negotiation [wynegocjować].""",
-    """Both benutzen and nutzen mean 'to use', but benutzen is connotation-free [używać], whilst
-    nutzen emphasizes the benefits that come from the usage [korzystać].""",
     """Both bieten and anbieten mean 'to offer', but anbieten is for a particular concrete offer
     between people (think of a commercial deal), whereas bieten is a broader term (e.g. Life offers
-    many opportunities to those who look for them.).""",
+    many opportunities to those who look for them).""",
+    """Both benutzen and nutzen mean 'to use', but benutzen is connotation-free [używać], whilst
+    nutzen emphasizes the benefits that come from the usage [korzystać].""",
+    """Both befolgen and folgen mean 'to follow', but befolgen concerns itself with rules / orders /
+    advice, whilst folgen is about physically or temporally following something.""",
+    """Both beantworten and antworten mean 'to answer', but you antworten people and beantworten
+    questions. However, by combining antworten with the preposition auf it too can refer to
+    answering questions (e.g. Ich antworte dir auf die Frage).""",
+    """Enden is something that happens to the subject (e.g. Der Deutschkurs endet um 17:00), whilst
+    beenden is done to an object (e.g. Ich beende mein Studium bald).""",
     """Both wählen and auswählen mean 'to choose / select / pick', but wählen is used in a
     non-specific manner (e.g. When going on holiday I choose mountains over the sea), whereas
     auswählen is about choosing a particular option from a limited set of choices (e.g. I always
@@ -896,8 +917,6 @@ TIPS = (
     which are sometimes separable and sometimes non-separable: durch, über, um, unter, wieder.""",
     """Heißen is used when referring to the true names of people / objects, whereas kennen is for
     nicknames and aliases. For example, 'Ich heiße Katharina, aber du kannst mich Kathi nennen'.""",
-    """Enden is something that happens to the subject (e.g. Der Deutschkurs endet um 17:00), whilst
-    beenden is done to an object (e.g. Ich beende mein Studium bald).""",
     """Kündigen is for cancelling contracts that you have already signed, whereas stornieren is for
     cancelling reservations and planned contracts.""",
     """Stellen, setzen, and legen are the active (and transitive) counterparts to the passive
@@ -930,7 +949,13 @@ TIPS = (
     "Wider and weider are pronounced exactly the same.",
     # Adverbs
     """Both also and so mean 'so', but also is a conjunction that connects clauses (e.g. He was too
-    tall, so he could not fit) whilst so is an adverb (e.g. He was so tall and handsome).""",
+    tall, so he could not fit) whilst so is an adverb with two fuctions - being an intensifier (e.g.
+    He was so tall and handsome) or a synonym for 'this way' / 'like that' (e.g. I think so too.
+    Hold it like that. I met your mother this way.).""",
+    """Other than being a da-word, damit can also mean 'so that', in the sense of describing an
+    intended outcome. Sodass / so dass (both forms are accepted) is also listed in dictionaries as
+    translating to 'so that' or 'such that', but I feel it is more accurate to instead view it as
+    synonymous with the German conjunction 'also' or the Polish 'tak że' / 'tak więc'.""",
     """Both wenn and als mean 'when'. Als is used for the past (certainty), whilst wenn is used for
     the future, present, theoretical pasts, and wishes (uncertainty). Wenn thus also simultaneously
     means 'if', but note that the multi-purpose English 'if' can also be translated as falls or ob,
@@ -954,7 +979,7 @@ TIPS = (
     stronger emphasis (like 'never ever').""",
     """Whilst they both mean 'actually', tatsächlich emphasizes that a statement really is true,
     whilst eigentlich is a kind of diminisher - in Polish it translates well to 'właściwie', which
-    indicates a degree of inaccuracy /falsehood or the (possibility of) changing someone's mind.""",
+    indicates a degree of inaccuracy/falsehood or the (possibility of) changing someone's mind.""",
     """The adverb zwar is used in two different ways. Firstly, it can alert the reader/listener that
     information is coming that will put parameters / limits on what is being stated (e.g. That is
     admittedly a good thought, but it is not a new one -> Das ist zwar ein guter, aber kein neuer
@@ -972,12 +997,29 @@ TIPS = (
     Secondly, 'by myself' is not synonymous to 'alone' in German - 'Ich mache es allein' -> 'I will
     do it alone (away from other people)' and 'Ich mache es selbst' -> 'I will do it myself (the
     rest of you don't need to help)'.""",
+    """In English the word 'anyway' is employed in five distinct ways, all of which have distinct
+    German counterparts. First is the contradictory anyway, such as 'I know I should not, but I will
+    do it anyway'. This type of 'anyway' is synonymous with 'nevertheless'/'regardless', all three
+    of which translate to trotzdem in German. Second is the aligned anyway, such as 'I was thinking
+    about coming anyway, but now I definitely will'. It could be replaced with 'already' in English
+    (and in German), but its direct equivalent is sowieso. Third is the questioning anyway, such as
+    'What are all these boxes for anyway?'. In English the same meaning could be conveyed by the
+    multi-purpose 'even' (e.g. Who even are all these boxes for?), but in German only the adverb
+    überhaupt is used, best translating to 'at all'/'in general'. Note that this illustrates how the
+    Polish 'nawet' is broader in meaning than the German selbst/sogar, as 'nawet' can sometimes
+    substitute 'w ogóle'. Fourth is the limiting anyway, such as 'It is difficult, for me anyway'. A
+    less colloquial-sounding alternative here is 'at least', and that is what German employs too,
+    via terms like zumindest/jedenfalls. Last is the conversational anyway, meant to change the flow
+    of the conversation to a different topic (e.g. Cool story. Anyway, like I was saying...). Here
+    German utilises a wide variety of phrases, including 'jedenfalls', 'wie auch immer', 'aber ja',
+    'naja', or simply nothing at all - this pattern of speech is not as popular as in English.""",
     # Miscellanous
     """Ordinal numbers (first, second, etc.) are created from cardinal numbers (one, two) by adding
     the ending 'te' to them for numbers from 1 to 19, and 'ste' for numbers from 20 upwards. There
     are four exceptions: erste (1st), dritte (3rd), siebte (7th), achte (8th). Be careful - instead
     of using st/rd/th, in German you denote ordinal numbers by putting a full stop after them (e.g.
-    Der 1. Mai ist ein Feiertag in Deutschland.).""",
+    Der 1. Mai ist ein Feiertag in Deutschland). Additionally, ordinal numbers are adjectives, so
+    they undergo declension.""",
     """German is a head-final language, meaning that the more important a piece of information is,
     the later in a clause/sentence is appears. This is why German verbs are found at the end, as
     best illustrated by subordinate clauses like ', weil ich mein Handy vor morgen aufladen muss'.
@@ -1034,7 +1076,8 @@ TIPS = (
     after/before 14' -> 'Ich gehe nach/vor 14'). Secondly, they can be conjuctions, connecting two
     clauses (e.g. 'I want to start after/before he starts' -> 'Ich will anfangen, nachdem/bevor er
     anfängt'). Lastly, they can be temporal adverbs, themselves denoting a time period (e.g. 'I will
-    sleep aftewards/beforehands' -> 'Ich werde danach/davor schlafen').""",
+    sleep aftewards/beforehands' -> 'Ich werde danach/davor schlafen'). Note that danach & davor are
+    not acting as da-words in this case.""",
     """There are two ways of telling the time in German. The first (more formal) method is to
     specify the exact hour and exact minute, separated by the noun Uhr (e.g. 'It is 19:34' -> 'Es
     ist 19 Uhr 34'). The second system uses the preposition um for full hours (e.g. Es ist um 8),
@@ -1090,8 +1133,8 @@ TIPS = (
     form of the verb with werden conjugated in Präsens. This leaves no room for irregularities. The
     same holds true for Konjunktiv II Futur I (hypothetical future), except werden is replaced with
     würden ('would' in English), conjugated as: würde, würdest, würde, würden, würdet, würden. Note
-    that in spoken German, Futur I is often replaced by Präsens (e.g. 'Nächsten Sommer fahre ich ans
-    Meer').""",
+    that in spoken German, Futur I is usually replaced by Präsens (e.g. 'Nächsten Sommer fahre ich
+    ans Meer').""",
     """Unlike other tenses, Imperativ exists only for du, wir, ihr, and Sie. For plural persons, it
     simply copies the Präsens form of the verb, but for du it also removes the 'st' suffix and
     (sometimes) replaces it with 'e'. Stem changes are also copied, but not those that add an
@@ -1156,9 +1199,9 @@ TIPS = (
     viel Geld' -> 'Äpfel kosten viel Geld'. The same situation occurs in Polish - 'Jabłka kosztują
     mnie dużo pieniędzy' -> 'Jabłka kosztują dużo pieniędzy'.""",
     """Sein, werden (in the sense of becoming), and bleiben (in the sense of remaining something /
-    someone rather than somewhere) are unusual verbs in that they can employ double Nominative, e.g.
+    someone rather than somewhere) are unusual verbs in that they can employ double Nominativ, e.g.
     'Der Gärtner ist der Mörder'. That is because such sentences do not actually have an object -
-    they just feature the same subject twice, under different names.""",
+    they just feature the subject twice, under different names.""",
     """The indefinite pronoun 'man' corresponds to the English 'one', as used in 'One makes cake
     with quark' -> 'Man macht den Kuchen mit Quark'. However, that is only its Nominativ form - in
     Akkusativ it is einen (e.g. 'The weather makes one happy' -> 'Das Wetter macht einen fröhlich')
@@ -1166,7 +1209,7 @@ TIPS = (
     Angst'). The same is true for the indefinite pronouns jemand (jemanden/jemandem) and niemand
     (niemanden/niemandem), but not for etwas and nichts.""",
     # Prepositions
-    """Dativ always appears after some prepositions and Akkusative after others. However, certain
+    """Dativ always appears after some prepositions and Akkusativ after others. However, certain
     prepositions can take either case: auf, über, unter, vor, hinter, neben, an, zwischen, in. The
     choice here is based on whether we are describing directed movement (e.g. Ich setze mich in den
     Stuhl, Akkusativ) or not (Ich sitze in dem Stuhl, Dativ). This rule goes against the idea that
@@ -1182,7 +1225,7 @@ TIPS = (
     """When forming questions in English using the dedicated question words, prepositions appear at
     end of the sentence (e.g. What are you dreaming of?), whilst in German they move to the very
     beginning (e.g. Von was träumst du?). Moreover, 'was' can fuse with those prepositions, forming
-    terms like: wovon, woran, womit, worauf.""",
+    'wo-words' like: wovon, woran, womit, worauf, wobei.""",
     """In colloquial German, the Genitiv case is usually replaced by Dativ plus von. However, such
     von-phrases have ambiguous meaning - von meinem Vater could stand for either 'of my father' or
     'from my father'. If one wants to avoid possible confusion, the use of the Genitiv des Vaters
