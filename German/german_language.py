@@ -41,10 +41,12 @@ VERBS_DICT = {
     "erwarten": "to expect",
     "versprechen": "to promise",
     "empfehlen": "to recommend",
+    "überzeugen": "to convince",
     "antworten / beantworten": "to answer",
     "lehren / unterrichten": "to teach",
     "erklären": "to explain",
     "beschreiben": "to describe",
+    "darstellen": "to represent (to be) / to depict",
     "raten": "to advise / to guess",
     "melden / berichten": "to report",
     "vergleichen": "to compare",
@@ -60,10 +62,12 @@ VERBS_DICT = {
     "erlauben": "to allow / to permit",
     "lassen": "to let / to leave",
     "sich verlassen": "to rely",
+    "pflegen": "to care for (to maintain) / to have a habit (of)",
     "behandeln": "to treat",
     "misshandeln": "to mistreat",
     "missbrauchen": "to abuse / to misuse",
     "lügen": "to lie (falshood)",
+    "täuschen": "to deceive",
     "verraten": "to betray",
     "hören / zuhören": "to hear / to listen",
     "sprechen": "to speak",
@@ -142,7 +146,8 @@ VERBS_DICT = {
     "spenden": "to donate",
     "kündigen / stornieren": "to cancel (a contract)",
     "dienen": "to serve",
-    "handeln": "to act / to trade",
+    "tauschen": "to swap / to exchange",
+    "handeln": "to trade / to be about (story) / to act",
     "verhandeln / aushandeln": "to negotiate",
     "suchen": "to search",
     "entdecken": "to discover",
@@ -192,8 +197,7 @@ VERBS_DICT = {
     "absagen": "to call off",
     "besuchen": "to visit / to attend",
     "einladen": "to invite",
-    "treffen": "to meet",
-    "sich treffen": "to meet up",
+    "treffen": "to hit (a target) / to meet",
     "feiern": "to celebrate",
     "kochen": "to cook",
     "gießen": "to pour",
@@ -233,11 +237,13 @@ VERBS_DICT = {
     "bauen": "to build",
     "bilden": "to form",
     "verbessern": "to improve",
+    "schlagen": "to beat / to punch",
     "zerstören": "to destroy",
     "stören": "to bother / to disrupt",
     "sich interessieren": "to be interested in",
     "träumen": "to dream",
     "lieben": "to love",
+    "küssen": "to kiss",
     "hassen": "to hate",
     "nerven": "to annoy",
     "sich fühlen": "to feel [czuć się]",
@@ -278,6 +284,7 @@ ADVERBS_DICT = {
     "nicht": "not",
     "als": "than",
     "dann": "then",
+    "damals": "back then",
     "fast": "almost / nearly",
     "etwa": "roughly / approximately",
     "bisschen": "(a) bit [trochę]",
@@ -292,6 +299,7 @@ ADVERBS_DICT = {
     "weit": "far",
     "nahe": "near",
     "noch": "yet / still [nadal]",
+    "jemals": "ever [kiedykolwiek]",
     "jetzt": "now",
     "heute": "today",
     "gestern": "yesterday",
@@ -302,7 +310,7 @@ ADVERBS_DICT = {
     "bald": "soon",
     "sobald": "as soon as (once)",
     "auch": "too (also)",
-    "nur": "only (just)",
+    "nur / bloß": "only (just)",
     "genau": "exactly / accurate",
     "ziemlich": "pretty (quite)",
     "unbedingt": "absolutely / necessarily",
@@ -353,6 +361,7 @@ ADVERBS_DICT = {
     "dass": "that [że]",
     "damit": "so that / in order to",
     "denn / weil": "because",
+    "nämlich": "namely",
     "oder": "or",
     "aber": "but",
     "sondern": "but rather",
@@ -377,6 +386,13 @@ ADVERBS_DICT = {
     "warum / weshalb / wieso": "why?"}
 
 PREPOSITIONS_DICT = {
+    # Akkusativ
+    "ohne": "without",
+    "wider / gegen": "against",
+    "bis": "until",
+    "durch": "through / via",
+    "für": "for",
+    "um": "around",
     # Dativ / Akkusativ
     "über": "above / over",
     "unter": "under / among",
@@ -399,14 +415,7 @@ PREPOSITIONS_DICT = {
     "aus": "from / out of (material)",
     "von": "from / of (belonging)",
     "zu": "toward / too (excessively)",
-    "nach": "toward / after",
-    # Akkusativ
-    "ohne": "without",
-    "wider / gegen": "against",
-    "bis": "until",
-    "durch": "through / via",
-    "für": "for",
-    "um": "around"}
+    "nach": "toward / after"}
 
 ADJECTIVES_DICT = {
     "groß": "big",
@@ -423,7 +432,8 @@ ADJECTIVES_DICT = {
     "durchschnittlich": "average (typical)",
     "einfach": "simple / easy",
     "leicht": "light / easy",
-    "schwer": "difficult / heavy",
+    "schwer": "heavy / difficult",
+    "schwierig": "difficult",
     "kalt": "cold",
     "heiß": "hot",
     "warm": "warm",
@@ -441,6 +451,7 @@ ADJECTIVES_DICT = {
     "langweilig": "boring",
     "aufregend": "exciting",
     "nass": "wet",
+    "feucht": "humid / moist",
     "trocken": "dry",
     "sauber": "clean",
     "dreckig": "dirty",
@@ -457,8 +468,11 @@ ADJECTIVES_DICT = {
     "breit": "wide / broad",
     "schmal": "narrow",
     "eng": "tight",
-    "dick": "thick / fat",
+    "dick": "thick (size) / fat",
+    "dicht": "dense / impermeable",
     "dünn": "thin",
+    "locker": "loose",
+    "fest": "fixed (not changing) / solid (matter) / firm",
     "niedrig": "low",
     "hoch": "high",
     "voll": "full",
@@ -495,10 +509,11 @@ ADJECTIVES_DICT = {
     "hell": "bright",
     "dunkel": "dark",
     "klar / deutlich": "clear",
+    "vorsichtig": "careful / cautious",
     "gefährlich": "dangerous",
     "giftig": "poisonous",
     "essbar": "edible",
-    "falsch": "false",
+    "falsch": "false / incorrect",
     "richtig": "right / correct",
     "echt": "genuine",
     "künstlich" :"artificial",
@@ -506,15 +521,18 @@ ADJECTIVES_DICT = {
     "verheiratet": "married",
     "getrennt": "separate",
     "gemeinsam": "common (joint)",
+    "häufig": "common (frequent)",
     "männlich": "masculine",
     "weiblich": "feminine",
     "beliebt": "popular (well-liked)",
     "bekannt": "known / famous",
     "fremd": "foreign (unfamiliar) / someone else's",
     "ausländisch": "foreign (country)",
+    "polnisch": "Polish",
+    "deutsch": "German",
     "öffentlich": "public",
     "tot": "dead",
-    "gerade": "straight / even (number)",
+    "gerade": "even (number) / straight",
     "unmöglich": "impossible",
     "sicher": "safe / sure",
     "fertig / bereit": "ready",
@@ -524,6 +542,7 @@ ADJECTIVES_DICT = {
     "andere": "different (other)",
     "dringend": "urgent",
     "wichtig": "important",
+    "ernst": "serious",
     "streng": "strict",
     "umgangssprachlich": "colloquial",
     "bequem": "comfortable",
@@ -531,10 +550,11 @@ ADJECTIVES_DICT = {
     "einzig": "(the) only",
     "eigen": "(one's) own",
     "überraschend": "surprising",
+    "verdächtig": "suspicious (causing suspicion)",
     "komisch": "funny (strange)",
     "lustig": "funny (humorous)",
     "gültig": "valid (ticket)",
-    "notwendig": "necessary",
+    "notwendig / nötig": "necessary",
     "zusätzlich": "additional",
     "beide": "both",
     "täglich": "daily",
@@ -552,6 +572,7 @@ ADJECTIVES_DICT = {
     "scharf": "spicy / sharp",
     "süß": "sweet",
     "lecker / köstlich": "delicious",
+    "sättigend": "filling (meal)",
     "frisch": "fresh",
     "stinkend": "stinky",
     "duftend": "fragrant",
@@ -610,6 +631,7 @@ NOUNS_DICT = {
     "das Ziel / die Ziele": "the goal / the aim",
     "die Aufgabe / die Aufgaben": "the task / the responsibility",
     "das Beispiel / die Beispiele": "the example",
+    "der Vorteil / die Vorteile": "the advantage",
     "der Körper / die Körper": "the body",
     "der Kopf / die Köpfe": "the head",
     "der Arm / die Arme": "the arm",
@@ -658,11 +680,15 @@ NOUNS_DICT = {
     "der Laubbaum / die Laubbäume": "the deciduous tree",
     "das Blatt / die Blätter": "the leaf / the sheet",
     "das Tier / die Tiere": "the animal",
+    "der Vogel / die Vögel": "the bird",
     "die Pflanze / die Pflanzen": "the plant",
     "die Blume / die Blumen": "the flower",
     "der Himmel / die Himmel": "the sky / the heaven",
     "die Sonne / die Sonnen": "the sun / the sunlight",
+    "die Erde / die Erden": "the earth (planet / soil)",
+    "der Mond / die Monde": "the moon",
     "das Wetter / die Wetter": "the weather",
+    "die Wolke / die Wolken": "the cloud",
     "das Besteck / die Bestecke": "the cutlery",
     "das Geschirr": "the dishes (tableware)",
     "das Gericht / die Gerichte": "the dish (meal)",
@@ -705,6 +731,7 @@ NOUNS_DICT = {
     "der Wäscheständer / die Wäscheständer": "the clothes horse",
     "der Föhn / die Föhne": "the hair dryer",
     "der Schwamm / die Schwämme": "the sponge",
+    "die Zahnbürste / die Zahnbürsten": "the toothbrush",
     "der Spiegel / die Spiegel": "the mirror",
     "der Tisch / die Tische": "the table",
     "der Stuhl / die Stühle": "the chair",
@@ -729,6 +756,7 @@ NOUNS_DICT = {
     "die Glühbirne / die Glühbirnen": "the lightbulb (incandescent)",
     "der Bleistift / die Bleistifte": "the pencil",
     "der Kugelschreiber / die Kugelschreiber": "the ballpoint pen",
+    "die Schere / die Scheren": "the scissors",
     "das Buch / die Bücher": "the book",
     "die Seite / die Seiten": "the side / the page",
     "das Bett / die Betten": "the bed",
@@ -742,11 +770,12 @@ NOUNS_DICT = {
     "das Schlafzimmer / die Schlafzimmer": "the bedroom",
     "der Garten / die Gärten": "the garden",
     "die Schublade / die Schubladen": "the drawer",
+    "die Kommode / die Kommoden": "the chest of drawers",
     "der Mülleimer / die Mülleimer": "the bin",
     "der Müllsack / die Müllsäcke": "the bin bag",
     "der Rucksack / die Rucksäcke": "the backpack",
     "das Handy / die Handys": "the mobile phone",
-    "die Brille": "the eyeglasses",
+    "die Brille / die Brillen": "the eyeglasses",
     "die Kleidung": "the clothes",
     "der Gürtel / die Gürtel": "the belt",
     "die Socke / die Socken": "the sock",
@@ -915,7 +944,7 @@ TIPS = (
     mitnehmen -> Ich nehme den Ball mit). These are: ab, an, auf, aus, ein, los, mit, nach, vor, zu.
     Other prefixes are non-separable: be, ent, emp, er, ge, miss, ver, zer. There are also prefixes
     which are sometimes separable and sometimes non-separable: durch, über, um, unter, wieder.""",
-    """Heißen is used when referring to the true names of people / objects, whereas kennen is for
+    """Heißen is used when referring to the true names of people / objects, whereas nennen is for
     nicknames and aliases. For example, 'Ich heiße Katharina, aber du kannst mich Kathi nennen'.""",
     """Kündigen is for cancelling contracts that you have already signed, whereas stornieren is for
     cancelling reservations and planned contracts.""",
@@ -965,11 +994,18 @@ TIPS = (
     ultimately'.""",
     """Ob means 'whether' and dass means 'that', in the sense of 'I didn't know that it would rain'.
     The former is thus used in questions and the latter in statements.""",
-    """Both denn and weil mean 'because', with denn also having other meanings. The difference
-    between them is that denn does not affect the sentence structure, whilst weil makes the verb
-    move to the end of the clause: 'Sie geht jeden tag spazieren, denn sie hat einen Hund' vs 'Sie
-    geht jeden tag spazieren, weil sie einen Hund hat'. Additionally, sentences can not begin with
-    denn, but can with weil.""",
+    """Both denn and weil mean 'because', the difference being that that denn connects two main
+    clauses, whereas weil only appears at the start of subordinate clauses. This distinction can be
+    understood by translating denn as 'and the reason for that is:'. It explains why denn can not
+    begin a sentence - 'I ate pizza, and the reason for that is: I was hungry' vs 'And the reason
+    for that is: I was hungry, I ate pizza'. It also explains why denn can not answer questions -
+    'Why did you eat pizza? And the reason for that is: I was hungry'. Weil is thus far more popular
+    as 'because' than denn. However, denn is useful in sentences with multiple clauses, such as
+    'Maria was angry that the train was late because she was delayed'. Is Maria angry at herself for
+    being late to her job as a train driver or is she being delayed by a late train? Denn removes
+    this ambiguity, as it can only refer to main clauses (i.e. Maria was angry). Denn is also a very
+    common modal particle in questions, where it acts as filler to make them feel less harsh -
+    compare 'Why?' to 'Oh, why?' or 'Are you inviting me?' to 'So, are you inviting me then?'.""",
     """Bereits is more common in writing, whilst schon is more common in speech. Schon is also often
     used as a modal particle, in the case which it disperses doubt / gives reassurance. For example:
     'Bist du verletzt? Nein, geht schon' -> 'Are you hurt? No, I am ok', or 'Hat dir der alte Job
@@ -988,6 +1024,9 @@ TIPS = (
     Urlaub in den Süden, und zwar nach Italien).""",
     """Besides its colloquial use as a way to agree with somebody, genau is also an ordinary
     adjective with the meaning 'exact / accurate'.""",
+    """Besides translating directly to 'namely', putting nämlich into the middle of a clause acts as
+    if 'because' was placed at its beginning, e.g. 'Ich gehe schlafen. Ich bin nämlich müde' -> 'I
+    am going to sleep. Because I am tired.'.""",
     """In German there is no equivalent to the English suffix 'ly' (e.g. slow -> slowly). Rather,
     German adjectives often also serve as adverbs, without needing to undergo any modification.""",
     """Wer, wen, wem, and wessen are all the same pronoun, conjugated in the four cases: Nominativ,
@@ -1019,7 +1058,8 @@ TIPS = (
     are four exceptions: erste (1st), dritte (3rd), siebte (7th), achte (8th). Be careful - instead
     of using st/rd/th, in German you denote ordinal numbers by putting a full stop after them (e.g.
     Der 1. Mai ist ein Feiertag in Deutschland). Additionally, ordinal numbers are adjectives, so
-    they undergo declension.""",
+    they undergo declension. In contrast, adverbs like 'once/twice/thrice' are easy to form by just
+    adding -mal to the end of the corresponding cardinal number, e.g. einmal, zweimal, dreimal.""",
     """German is a head-final language, meaning that the more important a piece of information is,
     the later in a clause/sentence is appears. This is why German verbs are found at the end, as
     best illustrated by subordinate clauses like ', weil ich mein Handy vor morgen aufladen muss'.
@@ -1030,6 +1070,19 @@ TIPS = (
     ich mein Handy vor morgen aufladen'. Shifting the primary verb to position 1 turns the sentence
     into question without requring question words (wo, wer, was, etc.) - 'Muss ich mein Handy vor
     morgen aufladen?'.""",
+    """In English there are two ways of connecting two verbs in a single clause. The first is to
+    just do so directly (e.g. I can call you tomorrow) and the other uses 'to' as a connector (e.g.
+    I tried to call you yesterday). In German there are three ways of achieving the same effect.
+    Modal verbs, werden, sein, gehen, kommen, hören, sehen, and some others connect directly (e.g.
+    Ich gehe heute tanzen). Those that can't must instead use either 'zu' or 'um zu' as a connector.
+    Which option is correct depends on what question does the second verb answer. If it is 'what?',
+    then 'zu' should be employed (e.g. Sometimes I forget what? To dance -> Manchmal vergesse ich
+    zu tanzen). If the question is intead 'why? / what for?', then 'um zu' is needed (e.g. Why am I
+    practicing? To dance in a competition -> Ich übe, um bei einem Wettbewerb zu tanzen). In both
+    cases, if the second verb features a separable prefix then the 'zu' is inserted between said
+    prefix and the verb (e.g. I often forget to call my boss -> Ich vergesse oft, meinen Chef
+    anzurufen). Note that it is also possible to just use a subordinate clause for the second verb
+    (e.g. Ich übe, damit ich den nächsten Wettbewerb gewinne).""",
     """When talking about inanimate objects using personal pronouns (er/sie/es), you must use
     'da-words'. For example, 'Ich träume von ihr (die Party)' is incorrect and 'Ich träume davon
     (die Party)' is correct. Davon is made from the prefix 'da' + preposition 'von'. Other examples
@@ -1231,9 +1284,11 @@ TIPS = (
     'from my father'. If one wants to avoid possible confusion, the use of the Genitiv des Vaters
     (of my father) is preferable.""",
     "Gegen and wider both mean 'against', but wider is far less popular and sounds antiquated.",
-    """Both zu and nach mean 'toward', with nach being used when talking about going to countries or
-    cities, using cardinal directions, or going left / right. However, nach does not work with the
-    few countries that take an article, e.g. Wir fliegen in die Schweiz.""",
+    """Both zu and nach mean 'toward', with nach being used in combination with geopolitical names
+    (countries, cities, islands, etc.), cardinal and spatial directions (South, right, forward, up,
+    etc.), or going home. However, nach does not work with the few countries that take an article,
+    e.g. Wir fliegen in die Schweiz. Zu is used in all other circumstances, and is thus the more
+    popular term.""",
     """Both aus and von mean 'from', but aus is utilised when coming from places that one can enter
     (buildings, venues, countries), whereas von is reserved for people, activities, and causal
     relationships (e.g. My skin is dry from all the washing up -> Meine Haut ist trocken vom vielen
@@ -1255,6 +1310,11 @@ TIPS = (
     barking). In German predicate adjectives do not undergo declension, but their 3rd degree needs
     to be precedded by the word 'am'. Declension suffixes are added after the 2nd degree 'er' suffix
     and replace the 'en' in the '(e)sten' 3rd degree suffix.""",
+    """Adjectives can be easily formed from verbs in one of two ways. Partizip I adds a 'd' at the
+    end of the infinitive form of the verb (followed by the appropriate adjective-specific suffix),
+    and it concerns currently ongoing activities, e.g. fahrende Bus -> moving bus. Partizip II takes
+    the Perfekt form of the verb and it implies that the action has finished, e.g. gefahrte Bus ->
+    departed bus.""",
     """Fertig implies that a task has been completed (i.e. finished), whereas bereit implies that a
     new task can now begin (i.e. preparations are complete).""",
     "Gebrochen means 'physically broken', whilst kaputt refers to a state of not being functional.",
