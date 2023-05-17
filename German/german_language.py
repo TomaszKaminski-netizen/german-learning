@@ -542,7 +542,7 @@ ADJECTIVES_DICT = {
     "andere": "different (other)",
     "dringend": "urgent",
     "wichtig": "important",
-    "ernst": "serious",
+    "ernst": "serious / earnest",
     "streng": "strict",
     "umgangssprachlich": "colloquial",
     "bequem": "comfortable",
