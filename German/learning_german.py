@@ -3,18 +3,19 @@ Linux. Developed with Python 3.7.9."""
 #pylint: disable=multiple-statements
 
 from os.path import isfile, abspath, dirname
-from os import chdir, _exit
+from os import chdir, _exit, remove
 from random import shuffle
 from collections import ChainMap, defaultdict
 from functools import partial
 from statistics import mean, StatisticsError
-from itertools import permutations, chain, count, cycle
+from itertools import permutations, chain, cycle
 from datetime import datetime
 from glob import glob
 from re import sub, search
 import tkinter as tk
 from time import sleep
 import json
+import pickle
 
 from pygame import mixer #* The playsound library did not work with special German characters
 import requests
@@ -29,6 +30,8 @@ CONJUGATION_CATEGORIES = ("Präsens", "Präteritum", "Perfekt", "Plusquamperfekt
                           "Futur II", "Imperativ")
 # Needs to be the same as found on https://pl.pons.com/odmiana-czasownikow/niemiecki
 PRONOUNS = ("ich", "du", "er/sie/es", "wir", "ihr", "sie")
+# Name of file used for storing an interrupted session
+TEMP_FILE = "temp.pickle"
 
 # Replaces all whitespace characters with (at most) single consecutive space. Also removes trailing
 # and leading spaces. Can't ensures that slashes are flanked by one space on each side, because that
@@ -46,17 +49,18 @@ class Starting_layout():
         tk.Button(text="Listening", command=test_listening).pack()
         tk.Button(text="Pronouns and articles", command=test_declension).pack()
 
-        tk.Button(text="German to English", command=lambda:
-                  translate(all_vocab, "ger_to_eng")).pack()
-        tk.Button(text="English to German", command=lambda:
-                  translate(all_vocab, "eng_to_ger", get_cats(), self.plural_nouns.get())).pack()
+        background = "green" if isfile(TEMP_FILE) else window.cget("background") # default colour
+        tk.Button(text="Resume previous attempt", background=background, command=lambda:
+                  translate("Resume previous attempt")).pack()
+        tk.Button(text="All vocabulary", command=lambda:
+                  translate(all_vocab, get_cats(), self.plurals.get())).pack()
         tk.Button(text="Adjectives", command=lambda:
-                  translate([ADJECTIVES_DICT], "eng_to_ger")).pack()
+                  translate([ADJECTIVES_DICT])).pack()
         tk.Button(text="Nouns", command=lambda:
-                  translate([NOUNS_DICT], "eng_to_ger", tuple(), self.plural_nouns.get())).pack()
+                  translate([NOUNS_DICT], tuple(), self.plurals.get())).pack()
 
-        self.plural_nouns = tk.BooleanVar()
-        tk.Checkbutton(text="Enable plural noun forms.", variable=self.plural_nouns).pack()
+        self.plurals = tk.BooleanVar()
+        tk.Checkbutton(text="Enable plural noun forms.", variable=self.plurals).pack()
         tk.Button(text="Verb conjugation", command=lambda: test_conjugation(get_cats())).pack()
         tk.Button(text="Core verbs", command=lambda: test_conjugation(get_cats(), "core")).pack()
         tk.Label(text="Toggle which verb conjugations to enable.").pack()
@@ -78,12 +82,11 @@ class Starting_layout():
 class Exercise_layout():
     """The customizable widget layout for various language exercises."""
     #* Note that using 'answer_type=tk.Entry()' as a default argument caused problems.
-    def __init__(self, enter_or_click, answer_type, ger_char=True, extra_button=False):
+    def __init__(self, enter_or_click, answer_type, extra_button=False):
         """
         Args:
             enter_or_click (str): _description_
             answer_type (tkinter object): _description_
-            ger_char (bool, optional): _description_. Defaults to True.
             extra_button (bool, optional): _description_. Defaults to False.
         """
         # Clearing the previous layout.
@@ -110,14 +113,13 @@ class Exercise_layout():
             self.button_next.pack()
 
         # Adding buttons for German characters.
-        if ger_char:
-            horizontal = tk.Frame(window)
-            horizontal.pack()
-            for char in "ÄÖÜäüöß":
-                # Need to use partial instead of lambda, to avoid the cell-var-from-loop problem.
-                tk.Button(horizontal, text=char,
-                          command=partial(self.answer.insert, tk.INSERT, char)
-                          ).pack(side=tk.RIGHT)
+        horizontal = tk.Frame(window)
+        horizontal.pack()
+        for char in "ÄÖÜäüöß":
+            # Need to use partial instead of lambda, to avoid the cell-var-from-loop problem.
+            tk.Button(horizontal, text=char,
+                      command=partial(self.answer.insert, tk.INSERT, char)
+                      ).pack(side=tk.RIGHT)
 
 
 class Memory():
@@ -128,8 +130,6 @@ class Memory():
         if isfile("memory.json"):
             with open("memory.json", "r", encoding="utf-8") as file:
                 self.memory.update(json.load(file))
-        # The .json file gets updated only when the GUI window is closed.
-        window.protocol("WM_DELETE_WINDOW", self.save_to_file)
         # For storing how many correct (1) and wrong (0) answers were given in the current attempt.
         self.current_attempt = []
 
@@ -165,7 +165,14 @@ class Memory():
         except ValueError:
             return 0
 
-    def save_to_file(self):
+    def save_to_file(self, interrupted_attempt=None):
+        #pylint: disable=attribute-defined-outside-init
+        # Enabling the resumption of an interrupted attempt.
+        if interrupted_attempt is not None:
+            self.interrupted_attempt = interrupted_attempt
+            with open(TEMP_FILE, "wb") as file:
+                pickle.dump(self, file)
+
         with open("memory.json", "w", encoding="utf-8") as file:
             json.dump(self.memory, file, ensure_ascii=False, indent=4)
         window.destroy()
@@ -282,48 +289,55 @@ def test_conjugation(categories, verbs="all"): #pylint: disable=inconsistent-ret
         layout.prompt_label.configure(text="All finished.")
 
 
-def translate(vocab, direction, conjugate=tuple(), plural_nouns=True):
+def translate(vocab, conjugate=tuple(), plurals=True):
     """_summary_
 
     Args:
-        vocab (list): _description_
-        direction (str): _description_
+        vocab (list or str): _description_
         conjugate (tuple, optional): _description_
-        plural_nouns (bool, optional): _description_
+        plurals (bool, optional): _description_
     """
     # Setting up the prompts and answers
-    vocab = list(ChainMap(*vocab).items())
-    shuffle(vocab)
-    # Placing words answered correctly a long time ago earlier.
-    vocab = sorted(vocab, key=memory.get_last_correct)
-    # Placing words with better answer accuracy earlier.
-    vocab = sorted(vocab, key=memory.get_accuracy)
-    if direction == "ger_to_eng":
-        # Removing round & square brackets and everything inside them. Also flipping the word order.
-        vocab = [(sub(r"\s*[\[\(].+[\]\)]\s*", "", item[1]), item[0]) for item in vocab]
-    countdown = count(len(vocab), step=-1)
+    if vocab != "Resume previous attempt":
+        memory = Memory()
+        vocab = list(ChainMap(*vocab).items())
+        shuffle(vocab)
+        # Placing words answered correctly a long time ago earlier.
+        vocab = sorted(vocab, key=memory.get_last_correct)
+        # Placing words with better answer accuracy earlier.
+        vocab = sorted(vocab, key=memory.get_accuracy)
+    else:
+        try:
+            with open(TEMP_FILE, "rb") as file:
+                memory = pickle.load(file)
+        except FileNotFoundError:
+            return None # Go back to the main menu
+        (vocab, conjugate, plurals, memory.current_attempt) = memory.interrupted_attempt
+        remove(TEMP_FILE)
+    # The memory.json file gets updated only when the GUI window is closed.
+    window.protocol("WM_DELETE_WINDOW", memory.save_to_file)
 
-    for words in vocab:
-        layout = Exercise_layout("enter", tk.Entry(width=38),
-                                 ger_char=bool(direction == "eng_to_ger"))
+    while len(vocab) > 0:
+        ger, eng = vocab[0]
+        extra_button = tk.Button(text="Save attempt for later and quit.",
+                                 command=lambda: memory.save_to_file([vocab, conjugate, plurals,
+                                                                      memory.current_attempt]))
+        layout = Exercise_layout("enter", tk.Entry(width=38), extra_button=extra_button)
         # Complex as to deal with answers that contain more than two words, separated by "/".
-        answer_pieces = words[0].split(" / ")
-        if (words[0] in NOUNS_DICT) and not plural_nouns:
+        answer_pieces = ger.split(" / ")
+        if (ger in NOUNS_DICT) and not plurals:
             answer_pieces = answer_pieces[0:1] # Just the single form of the noun
         rearranged = permutations(answer_pieces, len(answer_pieces))
         right_answers = [" / ".join(item) for item in rearranged]
-        layout.prompt_label.configure(text=f"Translate '{words[1]}'\n{next(countdown)} words left" +
-                                           f"\nYour current accuracy is {memory.current_accuracy}%")
+        layout.prompt_label.configure(text=f"Translate '{eng}'\n{len(vocab)} words left\n" +
+                                           f"Your current accuracy is {memory.current_accuracy}%")
         window.wait_variable(layout.wait_var)
 
-        if trim(layout.answer.get()) in right_answers:
-            layout.feedback_label.configure(text="Correct.")
-            memory.record(words[0 if direction == "eng_to_ger" else 1], True)
-            memory.current_attempt.append(1)
-        else:
-            layout.feedback_label.configure(text=f"Wrong, the right answer is '{right_answers[0]}'")
-            memory.record(words[0 if direction == "eng_to_ger" else 1], False)
-            memory.current_attempt.append(0)
+        right_wrong = bool(trim(layout.answer.get()) in right_answers)
+        memory.record(ger, right_wrong)
+        memory.current_attempt.append(int(right_wrong)) # 1 or 0
+        layout.feedback_label.configure(text="Correct" if right_wrong else
+                                             f"Wrong, the right answer is '{right_answers[0]}'")
 
         for item in answer_pieces:
             sound_name = abspath(f"vicki-{item.replace(' ', '_')}.mp3")
@@ -334,9 +348,11 @@ def translate(vocab, direction, conjugate=tuple(), plural_nouns=True):
                 # sufficiently long sleep period needs to be implemented here. This step used to
                 # also work with mixer.sound(sound_name).play(), but by 8th April 2023 it stopped.
                 sleep(1.1)
+        # Progressively removing entries from the vocab list.
+        vocab.pop(0)
         window.wait_variable(layout.wait_var)
 
-        if (words[0] in VERBS_DICT) and conjugate:
+        if (ger in VERBS_DICT) and conjugate:
             test_conjugation(conjugate, answer_pieces)
 
     layout.prompt_label.configure(text="All finished.")
@@ -430,10 +446,7 @@ if __name__ == "__main__":
     window.option_add("*font", "size 19") # Changing the default font size
     Starting_layout()
     mixer.init() # This is necessary for playing audio files
-    memory = Memory()
     window.mainloop()
-
-#TODO: Add a way to save your current session for later.
 
 ####################################################################################################
 
