@@ -455,7 +455,7 @@ if __name__ == "__main__":
     #from os import rename
     #all_files = glob("C:\\Users\\daiwe\\Downloads\\vicki-*.mp3")
     #all_files = sorted(all_files, key=lambda x: int(search(r"vicki-(\d+)\.mp3", x).group(1)))
-    #names = iter(["überzeugen", "darstellen", "pflegen", "täuschen", "tauschen", "schlagen", "küssen", "damals", "jemals", "bloß", "nämlich", "schwierig", "feucht", "dicht", "locker", "fest", "vorsichtig", "häufig", "polnisch", "deutsch", "ernst", "verdächtig", "nötig", "sättigend", "der Vorteil", "die Vorteile", "der Vogel", "die Vögel", "die Erde", "die Erden", "der Mond", "die Monde", "die Wolke", "die Wolken", "die Zahnbürste", "die Zahnbürsten", "die Schere", "die Scheren", "die Kommode", "die Kommoden", "die Brillen"])
+    #names = iter(["schützen", "zwingen", "sich gewöhnen", "stehlen",  "verstecken", "verbergen", "verschwinden", "kleben", "graben", "leiden", "nun", "pünktlich", "normalerweise", "ausnahmsweise", "vermutlich", "einander", "glücklicherweise", "entlang", "ab", "doppelt", "klebrig", "beschäftigt", "froh", "wertvoll", "wert", "üblich", "unsichtbar", "mild", "die Betonung", "die Betonungen", "der Stern", "die Sterne", "das Flugzeug", "die Flugzeuge", "das Fahrrad", "die Fahrräder", "die Steckdose", "die Steckdosen"])
     #for file in all_files:
     #    part_name = "\\".join(file.split("\\")[:-1])
     #    rename(file, f'{part_name}\\vicki-{next(names).replace(" ", "_")}.mp3')
