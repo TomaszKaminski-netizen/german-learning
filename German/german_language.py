@@ -18,12 +18,13 @@ VERBS_DICT = {
     "wissen": "to know (a fact)",
     "abhängen": "to depend",
     "kennen": "to be familiar with",
+    "verwirren / verwechseln": "to confuse",
     "erkennen": "to recognise",
     "zugeben": "to admit (a fact)",
     "heißen": "to be named",
     "lernen": "to learn",
     "umlernen": "to retrain",
-    "studieren": "to study",
+    "studieren": "to study (at university)",
     "verstehen": "to understand",
     "fragen": "to ask (a question)",
     "sich fragen": "to wonder (to ponder)",
@@ -51,9 +52,11 @@ VERBS_DICT = {
     "beschreiben": "to describe",
     "darstellen": "to represent (to be) / to depict",
     "raten": "to advise / to guess",
+    "schätzen": "to estimate",
     "melden / berichten": "to report",
     "vergleichen": "to compare",
     "prüfen": "to test",
+    "beweisen": "to prove",
     "bestimmen": "to determine",
     "zustimmen": "to agree",
     "helfen": "to help",
@@ -97,15 +100,18 @@ VERBS_DICT = {
     "erzählen": "to tell / to narrate",
     "sehen": "to see",
     "aussehen": "to look (like)",
-    "schauen": "to look (somewhere)",
+    "schauen / gucken": "to look (somewhere)",
     "anschauen / sich ansehen": "to watch / to look at",
+    "übersehen": "to overlook (to not see)",
     "beobachten": "to observe",
     "aufnehmen": "to record (media) / to take in",
     "bemerken": "to notice",
-    "zeichnen": "to draw",
+    "auffallen": "to stand out (to be noticeable)",
+    "zeichnen": "to draw (picture)",
+    "unterstreichen": "to underline",
     "zeigen": "to show",
     "verstecken / verbergen": "to hide (to conceal)",
-    "machen": "to make / to do",
+    "machen / unternehmen": "to make / to do",
     "tun": "to do",
     "duzen": "to address with the familiar 'du'",
     "nennen": "to call (to name)",
@@ -113,6 +119,7 @@ VERBS_DICT = {
     "anrufen": "to phone",
     "bleiben": "to stay / to remain",
     "gehen": "to go",
+    "vorbeigehen": "to go by / to pass by",
     "laufen": "to walk / to run",
     "rennen": "to run",
     "fahren": "to drive",
@@ -139,6 +146,7 @@ VERBS_DICT = {
     "enttäuschen": "to disappoint",
     "passen": "to fit / to suit",
     "senden / schicken": "to send",
+    "liefern": "to deliver (items)",
     "tragen": "to carry / to wear",
     "legen": "to lay",
     "stellen": "to (make something) stand",
@@ -152,10 +160,13 @@ VERBS_DICT = {
     "einkaufen": "to shop",
     "verkaufen": "to sell",
     "bezahlen": "to pay",
+    "sich leisten": "to afford",
     "zählen": "to count",
     "rechnen": "to calculate / to expect",
     "kosten": "to cost",
     "leihen": "to loan / to borrow [pożyczać]",
+    "vermieten": "to rent out",
+    "schulden / verdanken": "to owe",
     "verdienen": "to earn / to deserve",
     "sparen": "to save (money / time)",
     "ausgeben / verbringen": "to spend",
@@ -168,15 +179,18 @@ VERBS_DICT = {
     "verhandeln / aushandeln": "to negotiate",
     "suchen": "to search",
     "entdecken": "to discover",
+    "untersuchen / forschen": "to research / to investigate",
     "finden": "to find",
     "erfinden": "to invent",
     "verbinden": "to connect / to bandage",
+    "trennen": "to separate",
     "regnen": "to rain",
     "schneien": "to snow",
     "scheinen": "to shine (to emit light) / to seem",
     "sammeln": "to gather",
     "sich befinden": "to be located",
-    "stattfinden": "to take place (to occur)",
+    "vorkommen": "to occur (to be present)",
+    "stattfinden": "to take place",
     "verschwinden": "to disappear",
     "arbeiten": "to work",
     "wohnen": "to live (to reside)",
@@ -201,10 +215,11 @@ VERBS_DICT = {
     "sich ausziehen": "to get undressed",
     "sich rasieren": "to shave oneself",
     "wachsen": "to grow [rosnąć]",
-    "zunehmen": "to increase (to go up) / to gain weight",
-    "abnehmen": "to decrease (to go down) / to lose weight / to take off (an item)",
+    "zunehmen": "to increase [zwiększać się] / to gain weight",
+    "abnehmen": "to decrease [zmniejszać się] / to lose weight / to take off (an item)",
     "fallen": "to fall",
-    "steigen": "to climb / to rise",
+    "steigen": "to rise / to climb",
+    "klettern": "to climb (involves hands)",
     "umsteigen": "to transfer (vehicles)",
     "einsteigen / aufsteigen": "to get on (vehicle)",
     "aussteigen / absteigen": "to get off (vehicle)",
@@ -224,7 +239,7 @@ VERBS_DICT = {
     "treffen": "to hit (a target) / to meet",
     "feiern": "to celebrate",
     "kochen": "to cook",
-    "gießen": "to pour",
+    "gießen": "to water (plants) / to pour",
     "rühren": "to stir",
     "mischen": "to mix",
     "schälen": "to peel",
@@ -250,6 +265,7 @@ VERBS_DICT = {
     "laden": "to load",
     "hochladen": "to upload",
     "herunterladen": "to download",
+    "löschen": "to delete",
     "aufladen": "to charge (battery)",
     "drucken": "to print",
     "schließen / zumachen": "to close",
@@ -259,16 +275,19 @@ VERBS_DICT = {
     "drücken": "to press / to push",
     "ziehen": "to pull (something) / to relocate (oneself)",
     "heben": "to lift / to raise",
+    "drehen / wenden": "to turn (something)",
     "fassen / greifen": "to grab / to grasp",
     "graben": "to dig",
     "bauen": "to build",
     "bilden": "to form",
     "verbessern": "to improve",
-    "ändern": "to change (to alter)",
+    "ändern / wechseln": "to change",
+    "entwickeln": "to develop",
     "schlagen": "to beat / to punch",
     "zerstören": "to destroy",
+    "verletzen": "to injure",
     "stören": "to bother / to disrupt",
-    "sich interessieren": "to be interested in",
+    "sich interessieren": "to be interested (in)",
     "träumen": "to dream",
     "lieben": "to love",
     "küssen": "to kiss",
@@ -280,18 +299,18 @@ VERBS_DICT = {
     "leiden": "to suffer",
     "sich freuen": "to be happy about / to look forward to",
     "lachen": "to laugh",
-    "versuchen": "to try (a task)",
-    "probieren": "to try (a thing)",
+    "versuchen / probieren": "to try",
     "aufgeben": "to give up",
     "streiten": "to quarrel",
     "kämpfen": "to fight",
     "verlieren": "to lose",
     "gewinnen": "to win",
+    "bestehen": "to pass (exam) / to insist (on)",
     "belohnen": "to reward",
     "schaffen": "to manage (to succeed) / to create",
     "klappen": "to work out (to succeed)",
-    "verpassen": "to miss (a bus / an event)",
-    "verfehlen": "to miss (a throw)",
+    "verschwenden": "to waste",
+    "verpassen / verfehlen": "to miss",
     "erreichen": "to achieve / to reach",
     "ausreichen": "to be sufficient",
     "sich lohnen": "to be worth it",
@@ -301,6 +320,7 @@ VERBS_DICT = {
     "folgen / befolgen": "to follow",
     "befehlen": "to command",
     "führen": "to lead",
+    "leiten": "to conduct (to channel)",
     "fehlen": "to be missing [brakować]",
     "betreffen": "to concern / to affect",
     "hoffen": "to hope",
@@ -310,7 +330,8 @@ VERBS_DICT = {
     "beginnen / anfangen": "to begin",
     "halten": "to hold / to halt",
     "anhalten": "to stop (physically)",
-    "passieren": "to happen / to pass",
+    "abbrechen": "to abort / to break off",
+    "passieren": "to happen",
     "wählen / auswählen": "to choose / to select"}
 
 # Also includes conjunctions and some pronouns
@@ -334,11 +355,12 @@ ADVERBS_DICT = {
     "dann": "then",
     "damals": "back then",
     "fast": "almost / nearly",
-    "etwa": "roughly / approximately",
+    "ungefähr / etwa": "roughly / approximately",
     "bisschen": "(a) bit [trochę]",
     "paar": "(a) few [parę]",
     "so / also": "so",
     "weit": "far",
+    "entfernt": "remote / distant",
     "nahe": "near",
     "noch": "yet / still [nadal]",
     "jemals": "ever [kiedykolwiek]",
@@ -361,11 +383,13 @@ ADVERBS_DICT = {
     "deshalb / deswegen": "therefore",
     "außerdem": "besides / moreover",
     "immer": "always",
+    "ständig / dauernd": "constantly",
     "manchmal": "sometimes",
     "normalerweise": "usually (normally)",
     "ausnahmsweise": "as an exception / for once",
+    "vorübergehend": "temporarily",
     "meistens": "mostly (time)",
-    "hauptsächlich": "mostly (mainly)",
+    "hauptsächlich": "mainly / chiefly",
     "plötzlich": "suddenly",
     "sofort": "immediately (at once)",
     "direkt / unmittelbar": "directly",
@@ -373,6 +397,7 @@ ADVERBS_DICT = {
     "endlich / schließlich": "finally",
     "wahrscheinlich": "probably",
     "vermutlich": "presumably",
+    "angeblich": "supposedly",
     "gern": "gladly",
     "genug": "enough",
     "wieder": "again",
@@ -384,6 +409,7 @@ ADVERBS_DICT = {
     "selbst": "(one)self",
     "einander": "each other",
     "nie / niemals": "never",
+    "nirgends / nirgendwo": "nowhere",
     "bereits / schon": "already",
     "davor / vorher": "beforehand",
     "bevor": "before [zanim]",
@@ -429,6 +455,7 @@ ADVERBS_DICT = {
     "je nach": "depending on (based on)",
     "außer / bis auf": "except",
     "was für": "what kind of",
+    "wie wäre es": "how about (proposal)",
     "etwas": "something",
     "nichts": "nothing",
     "man": "one (impersonal you)",
@@ -510,11 +537,13 @@ ADJECTIVES_DICT = {
     "kurz": "short",
     "schnell": "fast",
     "langsam": "slow",
-    "klug": "smart",
+    "klug / schlau": "smart",
     "dumm": "stupid",
     "behindert": "disabled",
     "langweilig": "boring",
     "aufregend": "exciting",
+    "unheimlich": "creepy / incredibly",
+    "neugierig": "curious (interested)",
     "nass": "wet",
     "feucht": "humid / moist",
     "trocken": "dry",
@@ -522,9 +551,11 @@ ADJECTIVES_DICT = {
     "sauber": "clean",
     "dreckig": "dirty",
     "faul": "lazy / rotten",
+    "fleißig": "diligent / hard-working",
     "beschäftigt": "employed / busy (person)",
     "weich": "soft",
     "brüchig": "brittle / crumbling",
+    "knusprig": "crispy / crunchy",
     "hart": "hard",
     "glatt": "smooth",
     "rau": "rough",
@@ -538,6 +569,7 @@ ADJECTIVES_DICT = {
     "dick": "thick (size) / fat",
     "dicht": "dense / impermeable",
     "dünn": "thin",
+    "schlank": "slim (body / budget)",
     "locker": "loose",
     "fest": "fixed (not changing) / solid (matter) / firm",
     "niedrig": "low",
@@ -560,10 +592,12 @@ ADJECTIVES_DICT = {
     "zufrieden": "satisfied",
     "traurig": "sad",
     "wütend": "enraged",
+    "verrückt / wahnsinnig": "crazy",
     "müde": "tired",
     "begeistert": "excited (enthusiastic)",
     "einsam": "lonely",
     "stolz": "proud",
+    "eifersüchtig": "jealous",
     "besorgt": "worried",
     "peinlich": "embarrassing",
     "schön": "beautiful",
@@ -594,12 +628,12 @@ ADJECTIVES_DICT = {
     "ledig": "single (unmarried)",
     "verheiratet": "married",
     "getrennt": "separate",
-    "gemeinsam": "common (joint)",
-    "häufig": "common (frequent)",
+    "gemeinsam / häufig": "common",
     "üblich": "usual / customary",
     "männlich": "masculine",
     "weiblich": "feminine",
     "beliebt": "popular (well-liked)",
+    "erfolgreich": "successful",
     "bekannt": "known / famous",
     "fremd": "foreign (unfamiliar) / someone else's",
     "ausländisch": "foreign (country)",
@@ -612,6 +646,7 @@ ADJECTIVES_DICT = {
     "unmöglich": "impossible",
     "sicher": "safe / sure",
     "fertig / bereit": "ready",
+    "bestimmt": "certain (particular) / certainly (most likely)",
     "ähnlich": "similar",
     "gleich": "same / equal / shortly",
     "verschieden / unterschiedlich": "different (varied)",
@@ -628,8 +663,7 @@ ADJECTIVES_DICT = {
     "eigen": "(one's) own",
     "überraschend": "surprising",
     "verdächtig": "suspicious (causing suspicion)",
-    "komisch": "funny (strange)",
-    "lustig": "funny (humorous)",
+    "komisch / lustig": "funny",
     "gültig": "valid (ticket)",
     "notwendig / nötig": "necessary",
     "zusätzlich": "additional",
@@ -702,12 +736,17 @@ NOUNS_DICT = {
     "der Reisepass / die Reisepässe": "the passport",
     "der Ausweis / die Ausweise": "the identity card",
     "das Geld / die Gelder": "the money",
+    "der Vertrag / die Verträge": "the contract",
+    "der Schatz / die Schätze": "the treasure / the darling",
+    "die Schuld": "the fault (the blame)",
+    "die Schulden": "the debt",
     "das Einkommen / die Einkommen": "the income",
     "der Preis / die Preise": "the price / the prize",
     "der Laden / die Läden": "the shop",
     "das Hotel / die Hotels": "the hotel",
     "die Schlange / die Schlangen": "the queue / the snake",
     "der Satz / die Sätze": "the sentence (grammar)",
+    "die Klammer / die Klammern": "the bracket / the clip (clamp)",
     "die Betonung / die Betonungen": "the emphasis (pronunciation)",
     "die Hälfte / die Hälften": "the half",
     "die Ziffer / die Ziffern": "the digit (maths)",
@@ -715,14 +754,17 @@ NOUNS_DICT = {
     "die Nummer / die Nummern": "the number [numer]",
     "der Grad": "the degree (temperature / angle)",
     "das Gramm / die Gramme": "the gram",
-    "die Laune / die Launen": "the mood",
+    "der Witz / die Witze": "the joke",
+    "die Laune / die Launen": "the (personal) mood",
     "die Angst / die Ängste": "the fear",
     "der Sinn / die Sinne": "the sense",
     "der Grund / die Gründe": "the reason (cause) / the ground",
     "der Zweck / die Zwecke": "the purpose",
     "die Absicht / die Absichten": "the intention",
     "der Versehen / die Versehen": "the oversight (mistake)",
+    "der Zweifel / die Zweifel" : "the doubt",
     "das Ziel / die Ziele": "the goal / the aim",
+    "das Verhalten / die Verhalten": "the behaviour",
     "die Art / die Arten": "the type / the manner",
     "die Aufgabe / die Aufgaben": "the task / the responsibility",
     "das Beispiel / die Beispiele": "the example",
@@ -756,6 +798,7 @@ NOUNS_DICT = {
     "der Schenkel / die Schenkel": "the thigh",
     "die Zunge / die Zungen": "the tongue",
     "der Zahn / die Zähne": "the tooth",
+    "der Krebs / die Krebse": "the cancer / the crustacean",
     "das Meer / die Meere": "the sea",
     "der See / die Seen": "the lake",
     "der Fluss / die Flüsse": "the river / the flow",
@@ -782,6 +825,7 @@ NOUNS_DICT = {
     "der Vogel / die Vögel": "the bird",
     "die Pflanze / die Pflanzen": "the plant",
     "die Blume / die Blumen": "the flower",
+    "die Luft": "the air",
     "der Himmel / die Himmel": "the sky / the heaven",
     "die Sonne / die Sonnen": "the sun / the sunlight",
     "der Stern / die Sterne": "the star",
@@ -813,7 +857,7 @@ NOUNS_DICT = {
     "der Kochtopf / die Kochtöpfe": "the pot",
     "die Pfanne / die Pfannen": "the pan",
     "das Backblech / die Backbleche": "the baking sheet",
-    "die Auflaufform / die Auflaufformen": "the baking dish",
+    "die Auflaufform / die Auflaufformen": "the baking form",
     "der Handmixer / die Handmixer": "the hand mixer",
     "der Ventilator / die Ventilatoren": "the ventilator",
     "der Wasserkocher / die Wasserkocher": "the electric kettle",
@@ -825,7 +869,6 @@ NOUNS_DICT = {
     "der Korb / die Körbe": "the basket",
     "die Seife / die Seifen": "the soap",
     "das Handtuch / die Handtücher": "the body towel",
-    "das Papiertuch / die Papiertücher": "the paper towel",
     "das Toilettenpapier / die Toilettenpapiere": "the toilet paper",
     "die Waschmaschine / die Waschmaschinen": "the (clothes) washing machine",
     "die Spülmaschine / die Spülmaschinen": "the dishwasher",
@@ -841,12 +884,14 @@ NOUNS_DICT = {
     "der Tisch / die Tische": "the table",
     "der Stuhl / die Stühle": "the chair",
     "das Gerät / die Geräte": "the device",
+    "der Schirm / die Schirme": "the umbrella / the screen",
     "das Möbelstück / die Möbel": "the furniture",
     "die Tür / die Türen": "the door",
     "der Schlüssel / die Schlüssel": "the key",
     "das Schloss / die Schlösser": "the lock / the castle",
     "die Treppe / die Treppen": "the flight of stairs / the staircase",
     "der Boden / die Böden": "the floor (surface)",
+    "der Flur / die Flure": "the hallway (residential)",
     "das Erdgeschoss / die Erdgeschosse": "the ground floor",
     "die Etage / die Etagen": "the floor (storey)",
     "der Keller / die Keller": "the cellar",
@@ -953,16 +998,15 @@ NOUNS_DICT = {
     "die Butter": "the butter",
     "das Spiegelei / die Spiegeleier": "the fried egg",
     "das Rührei / die Rühreier": "the scrambled egg",
-    "der Käse / die Käse": "the cheese",
     "der Hüttenkäse / die Hüttenkäse": "the cottage cheese",
     "der Schinken / die Schinken": "the ham",
     "die Wurst / die Würste": "the sausage",
     "die Garnele / die Garnelen": "the shrimp",
-    "das Schweinefleisch": "the pork",
-    "das Rindfleisch": "the beef",
-    "das Hühnerfleisch": "the chicken",
-    "das Putenfleisch": "the turkey",
-    "das Lammfleisch": "the lamb",
+    "das Schweinefleisch": "the pork (meat)",
+    "das Rindfleisch": "the beef (meat)",
+    "das Hühnerfleisch": "the chicken (meat)",
+    "das Putenfleisch": "the turkey (meat)",
+    "das Lammfleisch": "the lamb (meat)",
     "der Fisch / die Fische": "the fish",
     "die Nuss / die Nüsse": "the nut",
     "die Schokolade / die Schokoladen": "the chocolate",
@@ -1023,7 +1067,8 @@ TIPS = (
     there is no possible confusion with the actual meaning of 'to look / see'. For example, in
     English you can 'watch a movie' or 'watch your children'. You can say 'I saw a movie', because a
     movie is always something you watch, but you wouldn't say 'I saw my children' with the meaning
-    of 'I watch my children', because those are two diffrent things.""",
+    of 'I watch my children', because those are two diffrent things. Gucken and angucken are
+    regional alternatives to schauen and anschauen.""",
     """Sich anziehen means to put on clothes, whereas sich kleiden is about dressing with a
     particular fashing style.""",
     """Both sich fühlen and sich anfühlen mean 'to feel', but sich fühlen is about the internal
@@ -1031,6 +1076,10 @@ TIPS = (
     refers to the perceptions that objects/people give off (e.g. The table feels smooth -> Der Tisch
     fühlt sich glatt an). Fühlen without sich is synonymous with spüren, but the latter is far more
     commonly used.""",
+    """Both verpassen and verfehlen mean 'to miss', but verpassen is about failing to catch a bus or
+    attend an event (i.e. it passed you by), while verfehlen refers to missing a target (either a
+    physical one or an abstract goal). Notably, neither verb can be used to talk about emotionally
+    missing something/someone or the state of being missing, as that is conveyed by fehlen.""",
     """Both melden and berichten mean 'to report', but melden is for simple reports that mainly
     serve to make the recipient aware of something (e.g. reporting a fire, an airline announcing the
     time of departure, a company reporting record profits). Note that specifically for reporting
@@ -1038,14 +1087,23 @@ TIPS = (
     such as those made by journalists or analysts.""",
     """Verhandeln is about negotiating in general, whereas aushandeln focuses on completing the
     negotiation [wynegocjować].""",
+    """Machen is the main German word for 'to do', with tun and unternehmen fulfilling niche roles.
+    Tun is less hands-on and more abstract, whilst unternehmen refers to doing big/special things
+    (e.g. a major project at work or a celebration on the weekend).""",
     """Both bieten and anbieten mean 'to offer', but anbieten is for a particular concrete offer
     between people (think of a commercial deal), whereas bieten is a broader term (e.g. Life offers
     many opportunities to those who look for them).""",
+    """Both untersuchen and forschen mean 'to research / to investigate', but untersuchen is a broad
+    multi-purpose term, whereas forschen is focused on scientific research.""",
+    """Both verwirren and verwechseln mean 'to confuse', but verwechseln is about confusing one
+    particular thing for another, whilst verwirren is about general mental confusion.""",
     """Both sich erinnern and sich merken mean 'to remember', but sich erinnern is purely about
     recalling already-known facts, whilst sich merken is about memorizing new facts.""",
     """Benutzen, nutzen, and verwenden all mean 'to use', but benutzen is connotation-free [używać],
     whilst nutzen emphasizes the benefits that come from the usage [korzystać]. Verwenden is a more
     fancy and less physical alternative to benutzen, similar to 'to utilize' in English.""",
+    """Both drehen and wenden mean 'to turn', but drehen is about rotation (e.g. spinning a crank by
+    hand) whereas wenden is about switching from one side to another (e.g. flipping a pancake).""",
     """Both befolgen and folgen mean 'to follow', but befolgen concerns itself with rules / orders /
     advice, whilst folgen is about physically or temporally following something.""",
     """Both beantworten and antworten mean 'to answer', but you antworten people and beantworten
@@ -1059,6 +1117,14 @@ TIPS = (
     having your expectation be fulfilled (e.g. I hope to get a payrise). In contrast, rechnen (with
     the preposition 'mit') is about including something in your calculations about the future (e.g.
     You have to be prepared for rain on your trip).""",
+    """Both ändern and wechseln mean 'to change', but ändern is about alteration (e.g. changing a
+    car by painting it), whereas wechseln is about replacement (e.g. changing a car by getting a new
+    one).""",
+    """Both versuchen and probieren mean 'to try', but versuchen concerns itself with tasks and
+    activities, whilst probieren is about physical items.""",
+    """Both schulden and verdanken mean 'to owe', but schulden is reserved for obligations where an
+    actual repayment is expected (e.g. You owe me money), whereas verdanken is about the casual
+    relationship of having benefitted from something (e.g. I owe my life to him).""",
     """Both verstecken and verbergen mean 'to hide', but verstecken emphasizes the physical act of
     putting something in a hidden place, whereas verbergen is more abstract (e.g. hiding information
     or emotions). Verstecken is the more common term and verbergen can sometimes sound formal or
@@ -1165,9 +1231,12 @@ TIPS = (
     ambiguity, as it can only refer to main clauses (i.e. Maria was angry). Denn is also a very
     common modal particle in questions, where it acts as filler to make them feel less harsh -
     compare 'Why?' to 'Oh, why?' or 'Are you inviting me?' to 'So, are you inviting me then?'.""",
+    """Mal is a very common modal particle, making requests sound softer. This applies both to
+    actual Imperativ sentences (e.g. Komm mal her) and requests phrased as questions (e.g. Kannst du
+    mir mal das Salz geben?).""",
     """Bereits is more common in writing, whilst schon is more common in speech. Schon is also often
     used as a modal particle, in the case which it disperses doubt / gives reassurance (e.g. Bist du
-    verletzt? Nein, geht schon -> Are you hurt? No, I am ok).""",
+    verletzt? Nein, geht schon -> Are you injured? No, I am ok).""",
     """Nie and niemals both mean never and are largely interchangeable, with niemals carrying
     stronger emphasis (like 'never ever').""",
     """Although they both mean 'actually', tatsächlich emphasizes that a statement really is true,
@@ -1187,6 +1256,7 @@ TIPS = (
     am going to sleep. Because I am tired.'.""",
     """Besides its colloquial use as a way to agree with somebody, genau is also an ordinary
     adjective with the meaning 'exact / accurate'.""",
+    "In colloquial German unheimlich can mean 'very'/'incredibly'.",
     """In German there is no equivalent to the English suffix 'ly' (e.g. slow -> slowly). Rather,
     German adjectives often also serve as adverbs, without needing to undergo any modification.""",
     """Wer, wen, wem, and wessen are all the same pronoun, conjugated in the four cases: Nominativ,
@@ -1266,6 +1336,10 @@ TIPS = (
     irgendwer - someone. Irgendwas carries a connotation of vagueness when compared to etwas - it is
     like a mix of something + anything. The same meaning difference exists between irgendwer and
     jemand.""",
+    """German question words can be combined with 'auch immer' to form phrases equivalent to English
+    words like 'whatever', 'wherever', 'whenever', etc.""",
+    """Some common German abbreviations are: usw. -> und so weiter, d.h. -> das heißt, z. B. -> zum
+    Beispiel, ca. -> circa, and bzw. -> beziehungsweise.""",
     """Je and desto are used together the same way as 'the' in 'The longer more you work, the more
     money you will earn' -> 'Je länger Sie arbeiten, desto mehr Geld werden Sie verdienen'.""",
     """So and wie are used in combination just like 'as' in 'I like eating pizza almost as much as
@@ -1355,10 +1429,8 @@ TIPS = (
     tapezieren). However, these are verbs adapted from Latin/French - when it comes to Germanic
     verbs like 'zieren', 'schmieren', 'gieren', you do get the 'ge'.""",
     """Perfekt is used mostly in conversational contexts and Präteritum is used mostly in writing.
-    For this reason, the 2nd person forms (du, ihr, Sie) are very uncommon in Präteritum and sound
-    strange to the ear of a native speaker - it is odd to narrate directly to a person what he or
-    she did at some past time. An exception are the 6 modal verbs, sein, and haben, for which
-    Präteritum is preferred over Perfekt even in spoken German.""",
+    An exception are the 6 modal verbs, sein, and haben, for which Präteritum is preferred over
+    Perfekt even in spoken German.""",
     """To form the equivalent of English Present/Past Continuous, add the word 'gerade' to Präsens /
     Präteritum. For example 'I am studying German' is 'Ich lerne gerade Deutsch' and 'I was studying
     German' is 'Ich lernte gerade Deutsch'. However, when combined with Perfekt, 'gerade' instead
@@ -1379,7 +1451,7 @@ TIPS = (
     sei (du). Moreover, the six modal verbs do not possess an Imperativ form. Finally, in Imperativ
     the verb goes before the personal pronoun, with ihr & du pronouns often omitted, and any
     separable prefix goes to the end of the sentence. This means that for plural persons, a sentence
-    in Imperative is indistinguishable from a question, requiring a question / exclamation mark (in
+    in Imperativ is indistinguishable from a question, requiring a question / exclamation mark (in
     writing) or special intonation (in speech) to tell them apart.""",
     """In English the passive voice is formed with the aid of 'to be' and switching the positions of
     the subject and direct object. For example, 'The dog was chasing the car' becomes 'The car was
@@ -1411,6 +1483,8 @@ TIPS = (
     rice / mustard, German uses the terms Buttersorten / Milchsorten / Reissorten / Senfsorten.""",
     """Unlike in English and Polish, in German eyeglasses, pants, and scissors are not referred to
     as 'pairs' when present as single objects.""",
+    """The singular form of Besteck refers to a set of utensils meant for a single person, whereas
+    the plural form Bestecke is used when talking about cutlery for multiple people.""",
     """Plural nouns in the Dativ case are modified through the addition of 'n' at the end, unless
     they already end with 'n' or 's'.""",
     # Determiners
@@ -1516,12 +1590,23 @@ TIPS = (
     to '-like' (e.g. oil-like -> ölartig). More colloquially, the suffix 'mäßig' can also mean
     '-like' (e.g. Batman-like -> batmanmäßig) or '-wise' (e.g. money-wise -> geldmäßig), the former
     being an adjective and the latter an adverb.""",
-    """Fertig implies that a task has been completed (i.e. finished), whereas bereit implies that a
-    new task can now begin (i.e. preparations are complete).""",
-    "Gebrochen means 'physically broken', whilst kaputt refers to a state of not being functional.",
+    """Besides being an adjective (meaning 'remote'/'distant') and an adverb (meaning 'remotely'),
+    entfernt can also be used to describe how far away something is (e.g. 'The house lies 10km away
+    from the station' -> 'Das Haus liegt 10km vom Bahnhof entfernt'), where it corresponds to the
+    word 'away'.""",
     """Ganz translates to 'whole', both in the sense of 'intact' and 'entire'. It also serves as an
     adverb (meaning 'completely'), an intensifier for negative adjectives (meaning 'very'), and a
     diminisher for positive adjectives (meaning 'fairly').""",
+    """Fertig implies that a task has been completed (i.e. finished), whereas bereit implies that a
+    new task can now begin (i.e. preparations are complete).""",
+    """Lustig means 'funny' in a humorous way, whereas komisch is nowadays restricted to the 'odd' /
+    'strange' meaning of 'funny'.""",
+    """Gemeinsam means 'common' in the sense of a joint bank account or shared interest, whilst
+    häufig refers to being not rare.""",
+    "Gebrochen means 'physically broken', whilst kaputt refers to a state of not being functional.",
+    """Klug always carries a positive connotation and can be applied both to people & abstract
+    concepts (e.g. a smart decision). In constrast, schlau describes a more cunning type of
+    smartness / cleverness, and it can only refer to people.""",
     """Schlecht is 'bad' in the sense of not being outright good - it could still be neutral or
     negative. In contract, schlimm carries a strong negative connotation. For example, there exists
     no such thing as a good wound, so to call a bad wound schlecht would be incorrect - schlimm is
