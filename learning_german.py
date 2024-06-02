@@ -1,6 +1,7 @@
 """This script is for learning German. It should work both on Windows and
-Linux. Developed with Python 3.7.9."""
-#pylint: disable=multiple-statements
+Linux. Developed with Python 3.8.0, Requests 2.25.1, Beautifulsoup4 4.11.2,
+and PyGame 2.1.3."""
+#pylint: disable=multiple-statements, missing-function-docstring, unnecessary-lambda-assignment, too-few-public-methods
 
 from os.path import isfile, abspath, dirname
 from os import chdir, _exit, remove
@@ -40,7 +41,7 @@ trim = lambda string: sub(r"\s+", " ", string.strip())
 
 ####################################################################################################
 
-class Starting_layout():
+class StartingLayout():
     """The widget layout for the main menu."""
     def __init__(self):
         all_vocab = [VERBS_DICT, ADVERBS_DICT, NOUNS_DICT, ADJECTIVES_DICT, PREPOSITIONS_DICT]
@@ -49,7 +50,7 @@ class Starting_layout():
         tk.Button(text="Listening", command=test_listening).pack()
         tk.Button(text="Pronouns and articles", command=test_declension).pack()
 
-        background = "green" if isfile(TEMP_FILE) else window.cget("background") # default colour
+        background = "green" if isfile(TEMP_FILE) else window.cget("background") # default colour #pylint: disable=used-before-assignment
         tk.Button(text="Resume previous attempt", background=background, command=lambda:
                   translate("Resume previous attempt")).pack()
         tk.Button(text="All vocabulary", command=lambda:
@@ -79,7 +80,7 @@ class Starting_layout():
             return tuple(filter(bool, enabled_cats))
 
 
-class Exercise_layout():
+class ExerciseLayout():
     """The customizable widget layout for various language exercises."""
     #* Note that using 'answer_type=tk.Entry()' as a default argument caused problems.
     def __init__(self, enter_or_click, answer_type, extra_button=False):
@@ -242,7 +243,7 @@ def conjugate_verb(verb):
     return conjugations
 
 
-def test_conjugation(categories, verbs="all"): #pylint: disable=inconsistent-return-statements
+def test_conjugation(categories, verbs="all"):
     """_summary_
 
     Args:
@@ -264,7 +265,7 @@ def test_conjugation(categories, verbs="all"): #pylint: disable=inconsistent-ret
             if category not in categories:
                 continue
 
-            layout = Exercise_layout("click", tk.Text(height=len(right_answer), width=40))
+            layout = ExerciseLayout("click", tk.Text(height=len(right_answer), width=40))
             layout.prompt_label.configure(text=f"Conjugate '{verb}' in {category}")
             # Auto-filling pronouns for the Indikativ mood.
             for row in right_answer:
@@ -322,7 +323,7 @@ def translate(vocab, conjugate=tuple(), plurals=True):
         extra_button = tk.Button(text="Save attempt for later and quit.",
                                  command=lambda: memory.save_to_file([vocab, conjugate, plurals,
                                                                       memory.current_attempt]))
-        layout = Exercise_layout("enter", tk.Entry(width=38), extra_button=extra_button)
+        layout = ExerciseLayout("enter", tk.Entry(width=38), extra_button=extra_button)
         # Complex as to deal with answers that contain more than two words, separated by "/".
         answer_pieces = ger.split(" / ")
         if (ger in NOUNS_DICT) and not plurals:
@@ -340,7 +341,7 @@ def translate(vocab, conjugate=tuple(), plurals=True):
                                              f"Wrong, the right answer is '{right_answers[0]}'")
 
         for item in answer_pieces:
-            sound_name = abspath(f"vicki-{item.replace(' ', '_')}.mp3")
+            sound_name = abspath(f"voice_files\\vicki-{item.replace(' ', '_')}.mp3")
             if isfile(sound_name):
                 mixer.music.load(sound_name)
                 mixer.music.play()
@@ -362,12 +363,12 @@ def test_listening():
     """_summary_
     """
     all_vocab = ChainMap(VERBS_DICT, ADVERBS_DICT, NOUNS_DICT, ADJECTIVES_DICT, PREPOSITIONS_DICT)
-    audio_files = glob("vicki-*.mp3")
+    audio_files = glob("voice_files\\vicki-*.mp3")
     shuffle(audio_files)
     for audio_file in audio_files:
         sound = mixer.Sound(abspath(audio_file))
         extra_button = tk.Button(text="Click to hear the word again.", command=sound.play)
-        layout = Exercise_layout("enter", tk.Entry(), extra_button=extra_button)
+        layout = ExerciseLayout("enter", tk.Entry(), extra_button=extra_button)
         layout.prompt_label.configure(text="Write down the word you heard.")
         #TODO: Eliminate the popping sound. Can be done by fading the audio file out, 3ms is enough.
         sound.play()
@@ -413,7 +414,7 @@ def test_declension():
                         answer_piece = ger[0] + next(affixes)
                     right_answer.append("-" if "-" in answer_piece else answer_piece)
 
-        layout = Exercise_layout("click", tk.Text(height=3, width=35))
+        layout = ExerciseLayout("click", tk.Text(height=3, width=35))
         one_third = int(len(right_answer) / 3)
         if eng in ["personal pronouns", "reflexive pronouns"]:
             layout.prompt_label.configure(text=f"Declenate '{eng}'")
@@ -444,7 +445,7 @@ if __name__ == "__main__":
     window = tk.Tk()
     window.geometry("900x850")
     window.option_add("*font", "size 19") # Changing the default font size
-    Starting_layout()
+    StartingLayout()
     mixer.init() # This is necessary for playing audio files
     window.mainloop()
 
@@ -455,6 +456,7 @@ if __name__ == "__main__":
     #from os import rename
     #all_files = glob("C:\\Users\\daiwe\\Downloads\\vicki-*.mp3")
     #all_files = sorted(all_files, key=lambda x: int(search(r"vicki-(\d+)\.mp3", x).group(1)))
+    #pylint: disable=line-too-long
     #names = iter(["schützen", "zwingen", "sich gewöhnen", "stehlen",  "verstecken", "verbergen", "verschwinden", "kleben", "graben", "leiden", "nun", "pünktlich", "normalerweise", "ausnahmsweise", "vermutlich", "einander", "glücklicherweise", "entlang", "ab", "doppelt", "klebrig", "beschäftigt", "froh", "wertvoll", "wert", "üblich", "unsichtbar", "mild", "die Betonung", "die Betonungen", "der Stern", "die Sterne", "das Flugzeug", "die Flugzeuge", "das Fahrrad", "die Fahrräder", "die Steckdose", "die Steckdosen"])
     #for file in all_files:
     #    part_name = "\\".join(file.split("\\")[:-1])
