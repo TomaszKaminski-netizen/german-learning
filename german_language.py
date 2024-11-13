@@ -21,7 +21,7 @@ VERBS_DICT = {
     "verwirren / verwechseln": "to confuse",
     "erkennen": "to recognise",
     "zugeben": "to admit (a fact)",
-    "heißen": "to be named",
+    "heißen": "to be named / to mean",
     "lernen": "to learn",
     "umlernen": "to retrain",
     "studieren": "to study (at university)",
@@ -34,8 +34,7 @@ VERBS_DICT = {
     "vergessen": "to forget",
     "erinnern": "to remind",
     "sich erinnern / sich merken": "to remember",
-    "bedeuten": "to mean (to denote)",
-    "meinen": "to mean (to say)",
+    "bedeuten / meinen": "to mean",
     "glauben": "to believe",
     "merken": "to realise (a fact)",
     "achten / aufpassen": "to pay attention",
@@ -455,6 +454,7 @@ ADVERBS_DICT = {
     "so A wie B": "as A as B",
     "je A desto B": "the A the B",
     "je nach": "depending on (based on)",
+    "so lala": "so so",
     "außer / bis auf": "except",
     "was für": "what kind of",
     "wie wäre es": "how about (proposal)",
@@ -556,6 +556,7 @@ ADJECTIVES_DICT = {
     "fleißig": "diligent / hard-working",
     "beschäftigt": "employed / busy (person)",
     "weich": "soft",
+    "sanft": "gentle",
     "brüchig": "brittle / crumbling",
     "knusprig": "crispy / crunchy",
     "hart": "hard",
@@ -1060,7 +1061,6 @@ DECLENSION_DICT = {
 
 TIPS = (
     # Verbs
-    "When used in the sense of 'to do', machen and tun are often - but not always - replaceable.",
     """Unterrichten means teaching by low-level teachers (e.g. private tutors and higschool
     teachers), whereas lehren means teaching by high-level teachers (e.g. university professor).""",
     """Hören can mean both 'to listen' and 'to hear', but zuhören is always about attentive
@@ -1072,7 +1072,7 @@ TIPS = (
     of 'I watch my children', because those are two diffrent things. Gucken and angucken are
     regional alternatives to schauen and anschauen.""",
     """Sich anziehen means to put on clothes, whereas sich kleiden is about dressing with a
-    particular fashing style.""",
+    particular fashion style.""",
     """Both sich fühlen and sich anfühlen mean 'to feel', but sich fühlen is about the internal
     feelings of conscious beings (e.g. I feel bad -> Ich fühle mich schlecht), whereas sich anfühlen
     refers to the perceptions that objects/people give off (e.g. The table feels smooth -> Der Tisch
@@ -1089,6 +1089,11 @@ TIPS = (
     such as those made by journalists or analysts.""",
     """Verhandeln is about negotiating in general, whereas aushandeln focuses on completing the
     negotiation [wynegocjować].""",
+    """In German 'to mean' can be expressed via three different words: meinen, bedeuten, and heißen.
+    Meinen is about what someone has in mind (i.e. what did you mean by that?), while heißen and
+    bedeuten are about consequences (i.e. the train leaves soon, meaning that I must hurry) and the
+    dictionary-style meaning of words. Bedeuten also covers meaning in the sense of significance
+    (i.e. what does our relationship mean to you?).""",
     """Machen is the main German word for 'to do', with tun and unternehmen fulfilling niche roles.
     Tun is less hands-on and more abstract, whilst unternehmen refers to doing big/special things
     (e.g. a major project at work or a celebration on the weekend).""",
@@ -1457,15 +1462,15 @@ TIPS = (
     writing) or special intonation (in speech) to tell them apart.""",
     """In English the passive voice is formed with the aid of 'to be' and switching the positions of
     the subject and direct object. For example, 'The dog was chasing the car' becomes 'The car was
-    being chased by the dog'. In German the helper verb is instead werden, conjugated according to
-    person & tense, and what used to be the main verb of the sentence switches to its Perfekt form
-    (e.g. Der Hund jagt das Auto -> Das Auto wird von dem Hund gejagt). As German has flexible word
-    order, the new direct object is identified by either von (for living beings / organisations) or
-    durch (for inanimate things). Only sentences with transitive verbs can be converted into passive
-    voice, due to the requirement of a direct object. However, the passive voice is rare in spoken
-    German, with people preferring to instead use the indefinite pronoun 'man' (e.g. 'Das hatte man
-    mir schon gesagt' -> 'I had already been told that') or the verb 'sich lassen' ('Die Fliege
-    lässt sich nicht fangen' -> 'The fly can't be caught').""",
+    being chased by the dog'. In German the helper verb (for Vorgangspassiv) is instead werden,
+    conjugated according to person & tense, and what used to be the main verb of the sentence
+    switches to its Perfekt form (e.g. Der Hund jagt das Auto -> Das Auto wird von dem Hund gejagt).
+    As German has flexible word order, the new direct object is identified by either von (for living
+    beings / organisations) or durch (for inanimate things). Only sentences with transitive verbs
+    can be converted into passive voice, due to the requirement of a direct object. However, the
+    passive voice is rare in spoken German, with people preferring to instead use the indefinite
+    pronoun 'man' (e.g. 'Das hatte man mir schon gesagt' -> 'I had already been told that') or the
+    verb 'sich lassen' ('Die Fliege lässt sich nicht fangen' -> 'The fly can't be caught').""",
     # Nouns
     """Plural nouns are formed in many ways, the most common of which are: no change, 'e' suffix,
     'e' suffix plus umlaut, 'en/n' suffix, 'er' suffix plus umlaut, or 's' suffix. Statistically

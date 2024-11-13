@@ -149,7 +149,7 @@ class Memory():
         outcome = "ans_corr" if correct else "ans_wrng"
         self.memory[german][outcome].append(int(datetime.now().timestamp()))
 
-    def get_accuracy(self, words, day_limit=93):
+    def get_accuracy(self, words, day_limit=120):
         # Date beyond which correct and incorrect answers do not count for the accuracy measurement.
         cutoff = int(datetime.now().timestamp()) - day_limit * 60 * 60 * 24
         try:
@@ -315,6 +315,9 @@ def translate(vocab, conjugate=tuple(), plurals=True):
             return None # Go back to the main menu
         (vocab, conjugate, plurals, memory.current_attempt) = memory.interrupted_attempt
         remove(TEMP_FILE)
+    for key in vocab: # For analysis purposes only.
+        print(key[0], "\t", memory.get_accuracy(key), "\t",
+              datetime.fromtimestamp(memory.get_last_correct(key)).isoformat()[:10])
     # The memory.json file gets updated only when the GUI window is closed.
     window.protocol("WM_DELETE_WINDOW", memory.save_to_file)
 
@@ -451,7 +454,7 @@ if __name__ == "__main__":
 
 ####################################################################################################
 
-    # Use https://freetts.com/Home/GermanTTS for pronunciation sound files, Vicki voice
+    # Use https://freetts.com/Home/GermanTTS for pronunciation sound files, Vicki voice (now renamed to Heike Weber)
     # Use semicolons to separate words. Analyse > Label Sounds, then File > Export > Export Multiple
     #from os import rename
     #all_files = glob("C:\\Users\\daiwe\\Downloads\\vicki-*.mp3")
