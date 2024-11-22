@@ -50,7 +50,7 @@ class StartingLayout():
         tk.Button(text="Listening", command=test_listening).pack()
         tk.Button(text="Pronouns and articles", command=test_declension).pack()
 
-        background = "green" if isfile(TEMP_FILE) else window.cget("background") # default colour #pylint: disable=used-before-assignment
+        background = "green" if isfile(TEMP_FILE) else window.cget("background") # default colour #pylint: disable=possibly-used-before-assignment
         tk.Button(text="Resume previous attempt", background=background, command=lambda:
                   translate("Resume previous attempt")).pack()
         tk.Button(text="All vocabulary", command=lambda:
@@ -86,9 +86,12 @@ class ExerciseLayout():
     def __init__(self, enter_or_click, answer_type, extra_button=False):
         """
         Args:
-            enter_or_click (str): _description_
-            answer_type (tkinter object): _description_
-            extra_button (bool, optional): _description_. Defaults to False.
+            enter_or_click (str): whether to continue/progress through the GUI
+                    via the Enter key ("enter") or a left mouse click ("click")
+            answer_type (tkinter object): either a single-line or multi-line
+                    text box object
+            extra_button (tkinter object, optional): an additional button
+                    needed for certain exercises. Defaults to False.
         """
         # Clearing the previous layout.
         for widget in window.winfo_children():
@@ -112,6 +115,8 @@ class ExerciseLayout():
         elif enter_or_click == "click": # By clicking a GUI button.
             self.button_next = tk.Button(text="Submit answer", command=lambda: self.wait_var.set(1))
             self.button_next.pack()
+        else:
+            print(f"Incorrect enter_or_click argument value - '{enter_or_click}'.")
 
         # Adding buttons for German characters.
         horizontal = tk.Frame(window)
@@ -182,6 +187,7 @@ class Memory():
 ####################################################################################################
 
 def show_tips():
+    """For displaying tips and useful information about German."""
     for widget in window.winfo_children():
         widget.destroy()
     wait_var = tk.BooleanVar()
@@ -198,13 +204,14 @@ def show_tips():
 
 
 def conjugate_verb(verb):
-    """_summary_
+    """Using an online resource to determine the correct conjugations for a
+    single German verb.
 
     Args:
-        verb (str): _description_
+        verb (str): the verb to be conjugated
 
     Returns:
-        dict: _description_
+        dict: a dictionary of conjugated verb forms, or False
     """
     url_verb = verb.lower().replace("sich", "").strip()
     page = requests.get("https://pl.pons.com/odmiana-czasownikow/niemiecki/" + url_verb)
@@ -244,11 +251,14 @@ def conjugate_verb(verb):
 
 
 def test_conjugation(categories, verbs="all"):
-    """_summary_
+    """For testing grammatical conjugation of German nouns.
 
     Args:
-        categories (tuple): _description_
-        verbs (str, optional): _description_. Defaults to "all".
+        categories (tuple): which conjugation categories to test. See
+                CONJUGATION_CATEGORIES for more details.
+        verbs (str, optional): whether to test all verbs in the VERBS_DICT
+                ("all") or just the 14 core ones in CORE_VERBS ("core").
+                Defaults to "all".
     """
     if not categories:
         return False
@@ -256,6 +266,9 @@ def test_conjugation(categories, verbs="all"):
         verbs = list(chain(*[key.split(" / ") for key in VERBS_DICT]))
     elif verbs == "core":
         verbs = list(CORE_VERBS)
+    else:
+        print(f"Incorrect verbs argument value - '{verbs}'.")
+        return False
     shuffle(verbs)
     for verb in verbs:
         conjugations = conjugate_verb(verb)
@@ -286,17 +299,21 @@ def test_conjugation(categories, verbs="all"):
             layout.button_next.configure(text="Continue to next question.")
             window.wait_variable(layout.wait_var)
 
-    if len(verbs) > 1:
-        layout.prompt_label.configure(text="All finished.")
+    layout.prompt_label.configure(text="All finished.")
 
 
 def translate(vocab, conjugate=tuple(), plurals=True):
-    """_summary_
+    """For testing translation of English words to German.
 
     Args:
-        vocab (list or str): _description_
-        conjugate (tuple, optional): _description_
-        plurals (bool, optional): _description_
+        vocab (list or str): either "Resume previous attempt" or a list of
+                dictionaries with all the English-German word pairs to test
+        conjugate (tuple, optional): which verb conjugations to test, provided
+                as a tuple of strings. See CONJUGATION_CATEGORIES for more
+                details.
+        plurals (bool, optional): whether the user needs to also provide the
+                plural or just the singular form of German nouns. Defaults to
+                True.
     """
     # Setting up the prompts and answers
     if vocab != "Resume previous attempt":
@@ -363,8 +380,7 @@ def translate(vocab, conjugate=tuple(), plurals=True):
 
 
 def test_listening():
-    """_summary_
-    """
+    """For testing writing down German words after hearing them being spoken."""
     all_vocab = ChainMap(VERBS_DICT, ADVERBS_DICT, NOUNS_DICT, ADJECTIVES_DICT, PREPOSITIONS_DICT)
     audio_files = glob("voice_files\\vicki-*.mp3")
     shuffle(audio_files)
@@ -393,8 +409,7 @@ def test_listening():
 
 
 def test_declension():
-    """_summary_
-    """
+    """For testing grammatical declension of German pronouns and articles."""
     vocab = list(DECLENSION_DICT.items())
     # Always testing person pronouns (last item in DECLENSION_DICT) first.
     test_first = [vocab.pop(-2)]
@@ -454,13 +469,13 @@ if __name__ == "__main__":
 
 ####################################################################################################
 
-    # Use https://freetts.com/Home/GermanTTS for pronunciation sound files, Vicki voice (now renamed to Heike Weber)
+    # Use https://freetts.com/ for pronunciation sound files, Vicki voice (now called Heike Weber)
     # Use semicolons to separate words. Analyse > Label Sounds, then File > Export > Export Multiple
     #from os import rename
     #all_files = glob("C:\\Users\\daiwe\\Downloads\\vicki-*.mp3")
     #all_files = sorted(all_files, key=lambda x: int(search(r"vicki-(\d+)\.mp3", x).group(1)))
     #pylint: disable=line-too-long
-    #names = iter(["schützen", "zwingen", "sich gewöhnen", "stehlen",  "verstecken", "verbergen", "verschwinden", "kleben", "graben", "leiden", "nun", "pünktlich", "normalerweise", "ausnahmsweise", "vermutlich", "einander", "glücklicherweise", "entlang", "ab", "doppelt", "klebrig", "beschäftigt", "froh", "wertvoll", "wert", "üblich", "unsichtbar", "mild", "die Betonung", "die Betonungen", "der Stern", "die Sterne", "das Flugzeug", "die Flugzeuge", "das Fahrrad", "die Fahrräder", "die Steckdose", "die Steckdosen"])
+    #names = iter(["schützen", "zwingen", "sich gewöhnen", "stehlen",  "verstecken", "verbergen"])
     #for file in all_files:
     #    part_name = "\\".join(file.split("\\")[:-1])
     #    rename(file, f'{part_name}\\vicki-{next(names).replace(" ", "_")}.mp3')
