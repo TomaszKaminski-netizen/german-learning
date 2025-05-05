@@ -285,8 +285,10 @@ VERBS_DICT = {
     "ändern / wechseln": "to change",
     "entwickeln": "to develop",
     "schlagen": "to beat / to punch",
+    "angreifen": "to attack",
     "zerstören": "to destroy",
     "verletzen": "to injure",
+    "schaden / beschädigen": "to damage",
     "stören": "to bother / to disrupt",
     "sich interessieren": "to be interested (in)",
     "träumen": "to dream",
@@ -434,7 +436,7 @@ ADVERBS_DICT = {
     "zufällig": "by chance / coincidentally",
     "anders": "differently (than / from)",
     "sonst": "else / otherwise",
-    "stattdessen": "instead",
+    "stattdessen": "instead (of that)",
     "wenn / als": "when",
     "falls": "in case (if)",
     "obwohl": "although / even though",
@@ -455,6 +457,7 @@ ADVERBS_DICT = {
     "je A desto B": "the A the B",
     "je nach": "depending on (based on)",
     "so lala": "so so",
+    "schade": "(a) pity",
     "außer / bis auf": "except",
     "was für": "what kind of",
     "wie wäre es": "how about (proposal)",
@@ -746,6 +749,7 @@ NOUNS_DICT = {
     "das Einkommen / die Einkommen": "the income",
     "der Preis / die Preise": "the price / the prize",
     "die Werbung / die Werbungen": "the advertisement",
+    "die Gesellschaft / die Gesellschaften": "the society / the company",
     "der Laden / die Läden": "the shop",
     "das Hotel / die Hotels": "the hotel",
     "die Schlange / die Schlangen": "the queue / the snake",
@@ -849,7 +853,8 @@ NOUNS_DICT = {
     "das Paar / die Paar": "the pair",
     "die Gabel / die Gabeln": "the fork",
     "die Schüssel / die Schüsseln": "the bowl",
-    "der Teller / die Teller": "the plate",
+    "der Teller / die Teller": "the (dinner)plate",
+    "die Platte / die Platten": "the panel / the plate [płyta]",
     "der Pfannenwender / die Pfannenwender": "the spatula",
     "die Küchenwaage / die Küchenwaagen": "the kitchen scale",
     "das Schneidebrett / die Schneidebretter": "the cutting board",
@@ -1078,6 +1083,9 @@ TIPS = (
     refers to the perceptions that objects/people give off (e.g. The table feels smooth -> Der Tisch
     fühlt sich glatt an). Fühlen without sich is synonymous with spüren, but the latter is far more
     commonly used.""",
+    """Both schaden and beschädigen mean 'to damage', but schaden is about slow long-term damage
+    (e.g. smoking cigarettes), whilst beschädigen refers to immediate partial damage (e.g. chipping
+    a screen corner). In Polish these translate to szkodzić and uszkodzić, respectively.""",
     """Both verpassen and verfehlen mean 'to miss', but verpassen is about failing to catch a bus or
     attend an event (i.e. it passed you by), while verfehlen refers to missing a target (either a
     physical one or an abstract goal). Notably, neither verb can be used to talk about emotionally
@@ -1141,6 +1149,11 @@ TIPS = (
     external entity (e.g. a person turning on a computer).""",
     """Einsteigen & aussteigen are used for getting into / out of cars, trains, planes, and other
     such enclosed vehicles, whereas aufsteigen & absteigen are for getting onto / off bikes.""",
+    """In English 'to find' can be used as a synonym for 'to think' (e.g. I found the movie quite
+    boring). In German finden can be used the same way, and is often more idiomatic than denken.
+    For example, 'Ich fand das nicht gut' translates to 'In my opinion this is not good', whereas
+    'Ich dachte, das ist nicht gut' conveys the message of 'I was under the (potentially false)
+    impression that this is not good'.""",
     """Both wählen and auswählen mean 'to choose / select / pick', but wählen is used in a
     non-specific manner (e.g. When going on holiday I choose mountains over the sea), whereas
     auswählen is about choosing a particular option from a limited set of choices (e.g. I always
@@ -1247,7 +1260,7 @@ TIPS = (
     """Nie and niemals both mean never and are largely interchangeable, with niemals carrying
     stronger emphasis (like 'never ever').""",
     """Although they both mean 'actually', tatsächlich emphasizes that a statement really is true,
-    whilst eigentlich is a kind of diminisher - in Polish it translates well to 'właściwie', which
+    whilst eigentlich is a kind of diminisher - in Polish it translates well to właściwie, which
     indicates a degree of inaccuracy/falsehood or the (possibility of) changing someone's mind.""",
     """While they can both mean 'now', jetzt is purely a time expression, whereas nun often focuses
     more on the situation ('as things are now') and is also used as a modal particle (expressing
